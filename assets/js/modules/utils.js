@@ -14,7 +14,7 @@ export function initUtils() {
       const setSuccessText = () => {
         if (copyText) copyText.textContent = 'Copied!';
         setTimeout(() => {
-          if (copyText) copyText.textContent = 'Copy';
+          if (copyText) copyText.textContent = 'Copy Email';
         }, 2000);
       };
 

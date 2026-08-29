@@ -350,6 +350,7 @@
 .tool-chip-openai:hover, .tool-chip-chatgpt:hover { border-color: #10A37F; box-shadow: 0 4px 14px rgba(16, 163, 127, 0.25); }
 .tool-chip-gemini:hover { border-color: #8E24AA; box-shadow: 0 4px 14px rgba(142, 36, 170, 0.25); }
 .tool-chip-v0:hover { border-color: #888; box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15); }
+.tool-chip-v0:hover .tool-svg { fill: #000000; color: #000000; filter: grayscale(0%) opacity(1) brightness(0); }
 .tool-chip-perplexity:hover { border-color: #22D3EE; box-shadow: 0 4px 14px rgba(34, 211, 238, 0.15); }
 .tool-chip-midjourney:hover { border-color: #3B82F6; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.15); }
 .tool-chip-figma:hover { border-color: #A259FF; box-shadow: 0 4px 14px rgba(162, 89, 255, 0.15); }
@@ -1629,7 +1630,8 @@
   letter-spacing: 0.06em;
 }
 
-.btn-copy-cert {
+.btn-copy-cert,
+.copy-email-btn {
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 600;
@@ -1645,9 +1647,11 @@
   transition: all var(--transition-fast);
 }
 
-.btn-copy-cert:hover {
+.btn-copy-cert:hover,
+.copy-email-btn:hover {
   border-color: var(--accent-amber);
   color: var(--accent-amber);
+  background-color: var(--bg-secondary);
 }
 
 .cert-card-footer {
@@ -1749,23 +1753,7 @@
   font-size: 0.9rem;
 }
 
-.copy-email-btn {
-  color: var(--accent-amber);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 6px 10px;
-  border-radius: var(--radius-sm);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
-}
 
-.copy-email-btn:hover {
-  color: var(--accent-amber-hover);
-  background-color: var(--bg-secondary);
-}
 
 .col-title {
   font-family: var(--font-mono);
@@ -1796,6 +1784,13 @@
   align-items: center;
   font-size: 0.85rem;
   color: var(--text-muted);
+}
+
+.copyright-symbol {
+  font-size: 0.9em;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
 }
 
 .mono-coords {
