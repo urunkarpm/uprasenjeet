@@ -84,4 +84,50 @@ export function initNavigation() {
 
     sections.forEach(section => observer.observe(section));
   }
+
+  // Initialize Back to Top scroll behavior
+  initBackToTop();
+}
+
+function initBackToTop() {
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (!backToTopBtn) return;
+
+  const toggleVisibility = () => {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+
+    // Show when scrolled down past 300px or when nearing/reaching the bottom of the page
+    const isBottomReached = (windowHeight + scrollY) >= (documentHeight - 600) || scrollY > 300;
+
+    if (isBottomReached) {
+      backToTopBtn.classList.add('visible');
+      backToTopBtn.setAttribute('aria-hidden', 'false');
+    } else {
+      backToTopBtn.classList.remove('visible');
+      backToTopBtn.setAttribute('aria-hidden', 'true');
+    }
+  };
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        toggleVisibility();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Initial visibility check
+  toggleVisibility();
 }
