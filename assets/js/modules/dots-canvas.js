@@ -7,6 +7,7 @@ export function initDotsCanvas() {
   if (!canvas) return;
 
   document.body.style.backgroundImage = 'none';
+  document.body.classList.add('canvas-dots-active');
 
   canvas.style.willChange = 'transform';
   canvas.style.transform = 'translateZ(0)';
@@ -15,6 +16,8 @@ export function initDotsCanvas() {
   let width = 0;
   let height = 0;
   let dpr = window.devicePixelRatio || 1;
+  let lastWidth = 0;
+  let lastHeight = 0;
 
   const mouse = { x: -1000, y: -1000, active: false };
 
@@ -45,10 +48,11 @@ export function initDotsCanvas() {
   function buildDots() {
     dots = [];
     dpr = window.devicePixelRatio || 1;
-    width = window.innerWidth;
-    height = window.innerHeight;
+    width = window.innerWidth || document.documentElement.clientWidth;
+    height = window.innerHeight || document.documentElement.clientHeight;
 
     const step = width <= 768 ? gridStepMobile : gridStepDesktop;
+    const halfStep = step / 2;
 
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
@@ -60,10 +64,10 @@ export function initDotsCanvas() {
 
     for (let x = 0; x <= width + step; x += step) {
       for (let y = 0; y <= height + step; y += step) {
-        dots.push(createDot(x + 1.5,  y + 1.5,  0));
-        dots.push(createDot(x + 16.5, y + 1.5,  1));
-        dots.push(createDot(x + 1.5,  y + 16.5, 2));
-        dots.push(createDot(x + 16.5, y + 16.5, 3));
+        dots.push(createDot(x + 1.5,            y + 1.5,            0));
+        dots.push(createDot(x + halfStep + 1.5, y + 1.5,            1));
+        dots.push(createDot(x + 1.5,            y + halfStep + 1.5, 2));
+        dots.push(createDot(x + halfStep + 1.5, y + halfStep + 1.5, 3));
       }
     }
   }
@@ -266,11 +270,27 @@ export function initDotsCanvas() {
   }, { passive: true });
 
   window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
+    const currentWidth = window.innerWidth || document.documentElement.clientWidth;
+    const currentHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    if (currentWidth !== lastWidth || Math.abs(currentHeight - lastHeight) > 120) {
+      lastWidth = currentWidth;
+      lastHeight = currentHeight;
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        buildDots();
+        startLoop();
+      }, 150);
+    }
+  });
+
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+      lastWidth = window.innerWidth || document.documentElement.clientWidth;
+      lastHeight = window.innerHeight || document.documentElement.clientHeight;
       buildDots();
       startLoop();
-    }, 150);
+    }, 200);
   });
 
   const observer = new MutationObserver(() => {
@@ -279,6 +299,10 @@ export function initDotsCanvas() {
   });
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-  buildDots();
-  startLoop();
+  requestAnimationFrame(() => {
+    lastWidth = window.innerWidth || document.documentElement.clientWidth;
+    lastHeight = window.innerHeight || document.documentElement.clientHeight;
+    buildDots();
+    startLoop();
+  });
 }

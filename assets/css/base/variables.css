@@ -169,6 +169,10 @@ body::before {
   transform: translateZ(0);
 }
 
+body.canvas-dots-active::before {
+  display: none;
+}
+
 #bg-dots-canvas {
   position: fixed;
   top: 0;
