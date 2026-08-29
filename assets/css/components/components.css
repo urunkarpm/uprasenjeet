@@ -13,12 +13,45 @@
   z-index: 1;
 }
 
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background-color: var(--accent-amber);
+  color: #10141E;
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  z-index: 99999;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  transition: top 0.2s ease;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 3px solid var(--text-primary);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .draft-tag {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   margin-bottom: 12px;
   display: inline-block;
 }
@@ -105,12 +138,12 @@
 }
 
 .logo-symbol {
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   font-size: 0.9rem;
 }
 
 .accent-dot {
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   font-weight: 600;
 }
 
@@ -1998,7 +2031,7 @@
 
 /* Accessibility Keyboard Focus & Reduced Motion Styles */
 :focus-visible {
-  outline: 2px solid var(--accent-amber);
+  outline: 2px solid var(--focus-ring-color);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -2006,8 +2039,22 @@
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
-  outline: 2px solid var(--accent-amber);
+  outline: 2px solid var(--focus-ring-color);
   outline-offset: 3px;
+}
+
+/* Minimum Touch Target Sizes for Touch Devices (WCAG 2.2 AA) */
+@media (pointer: coarse) {
+  .theme-btn,
+  .mobile-menu-btn,
+  .btn-copy-cert,
+  .copy-email-btn {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

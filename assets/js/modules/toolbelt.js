@@ -17,6 +17,8 @@ export function initToolbelt() {
   let rafId = null;
 
   function startAutoScroll() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
     if (!rafId && isVisible && !document.hidden) {
       rafId = requestAnimationFrame(autoStep);
     }

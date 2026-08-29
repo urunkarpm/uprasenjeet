@@ -185,6 +185,11 @@ export function initDotsCanvas() {
   }
 
   function startLoop() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      render();
+      return;
+    }
     if (!isLoopRunning) {
       isLoopRunning = true;
       loop();
@@ -192,6 +197,12 @@ export function initDotsCanvas() {
   }
 
   function loop() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      isLoopRunning = false;
+      render();
+      return;
+    }
     const keepAnimating = updateDots();
     render();
 

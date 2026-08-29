@@ -56,6 +56,9 @@
 </head>
 <body>
 
+  <!-- Skip to Main Content Link for Keyboard & Screen Reader Users (WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Interactive Background Canvas for Hover Effect -->
   <canvas id="bg-dots-canvas" aria-hidden="true"></canvas>
 
@@ -63,7 +66,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a href="#" class="brand-logo">
-        <span class="logo-symbol">■</span>
+        <span class="logo-symbol" aria-hidden="true">■</span>
         <span class="logo-text">uprasenjeet<span class="accent-dot" id="header-ai-dot">.ai</span></span>
       </a>
 
@@ -79,19 +82,19 @@
 
       <div class="header-actions">
         <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark/light theme" title="Toggle Theme">
-          <i class="fa-solid fa-moon icon-dark"></i>
-          <i class="fa-solid fa-sun icon-light"></i>
+          <i class="fa-solid fa-moon icon-dark" aria-hidden="true"></i>
+          <i class="fa-solid fa-sun icon-light" aria-hidden="true"></i>
         </button>
         <a href="#contact" class="btn btn-primary contact-trigger">Contact</a>
-        <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation Menu">
-          <i class="fa-solid fa-bars icon-hamburger"></i>
-          <i class="fa-solid fa-xmark icon-close"></i>
+        <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="main-nav">
+          <i class="fa-solid fa-bars icon-hamburger" aria-hidden="true"></i>
+          <i class="fa-solid fa-xmark icon-close" aria-hidden="true"></i>
         </button>
       </div>
     </div>
   </header>
 
-  <main class="content-wrapper">
+  <main id="main-content" class="content-wrapper" tabindex="-1">
     
     <!-- Hero Section -->
     <section id="welcome" class="hero-section">
@@ -112,7 +115,7 @@
               Proof I Talk to Robots
             </a>
             <a href="#about" class="btn btn-secondary">
-              About me <i class="fa-solid fa-arrow-right"></i>
+              About me <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </a>
           </div>
         </div>
@@ -325,26 +328,26 @@
             <span>Kimi AI</span>
           </a>
 
-          <!-- Set 2 (Exact duplicate for smooth marquee loop) -->
-          <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-cursor">
+          <!-- Set 2 (Exact duplicate for smooth marquee loop - Excluded from keyboard focus & SR via aria-hidden and tabindex) -->
+          <a href="https://cursor.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-cursor" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M22.106 5.68L12.5.135a.998.998 0 00-.998 0L1.893 5.68a.84.84 0 00-.419.726v11.186c0 .3.16.577.42.727l9.607 5.547a.999.999 0 00.998 0l9.608-5.547a.84.84 0 00.42-.727V6.407a.84.84 0 00-.42-.726zm-.603 1.176L12.228 22.92c-.063.108-.228.064-.228-.061V12.34a.59.59 0 00-.295-.51l-9.11-5.26c-.107-.062-.063-.228.062-.228h18.55c.264 0 .428.286.296.514z"/>
             </svg>
             <span>Cursor AI</span>
           </a>
-          <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-claude">
+          <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-claude" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg tool-svg-anthropic" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M13.827 3.52h3.603L24 20h-3.603l-6.57-16.48zm-7.258 0h3.767L16.906 20h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/>
             </svg>
             <span>Claude 3.7</span>
           </a>
-          <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-chatgpt">
+          <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-chatgpt" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg tool-svg-chatgpt" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.946-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"/>
             </svg>
             <span>ChatGPT</span>
           </a>
-          <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-gemini">
+          <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-gemini" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg tool-svg-gemini" viewBox="0 0 24 24" width="18" height="18">
               <defs>
                 <linearGradient id="gemini-grad-3" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -357,68 +360,68 @@
             </svg>
             <span>Google Gemini</span>
           </a>
-          <a href="https://v0.dev" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-v0">
+          <a href="https://v0.dev" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-v0" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path clip-rule="evenodd" d="M14.252 8.25h5.624c.088 0 .176.006.26.018l-5.87 5.87a1.889 1.889 0 01-.019-.265V8.25h-2.25v5.623a4.124 4.124 0 004.125 4.125h5.624v-2.25h-5.624c-.09 0-.179-.006-.265-.018l5.874-5.875a1.9 1.9 0 01.02.27v5.623H24v-5.624A4.124 4.124 0 0019.876 6h-5.624v2.25zM0 7.5v.006l7.686 9.788c.924 1.176 2.813.523 2.813-.973V7.5H8.25v6.87L2.856 7.5H0z"/>
             </svg>
             <span>v0 by Vercel</span>
           </a>
-          <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-perplexity">
+          <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-perplexity" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z"/>
             </svg>
             <span>Perplexity AI</span>
           </a>
-          <a href="https://midjourney.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-midjourney">
+          <a href="https://midjourney.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-midjourney" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M22.369 17.676c-1.387 1.259-3.17 2.378-5.332 3.417.044.03.086.057.13.083l.018.01.019.012c.216.123.42.184.641.184.222 0 .426-.061.642-.184l.018-.011.019-.011c.14-.084.266-.178.492-.366l.178-.148c.279-.232.426-.342.625-.456.304-.174.612-.266.949-.266.337 0 .645.092.949.266l.023.014c.188.109.334.219.602.442l.178.148c.221.184.346.278.483.36l.028.017.018.01c.21.12.407.181.62.185h.022a.31.31 0 110 .618c-.337 0-.645-.092-.95-.266a3.137 3.137 0 01-.09-.054l-.022-.014-.022-.013-.02-.014a5.356 5.356 0 01-.49-.377l-.159-.132a3.836 3.836 0 00-.483-.36l-.027-.017-.019-.01a1.256 1.256 0 00-.641-.185c-.222 0-.426.061-.641.184l-.02.011-.018.011c-.14.084-.266.178-.492.366l-.158.132a5.125 5.125 0 01-.51.39l-.022.014-.022.014-.09.054a1.868 1.868 0 01-.95.266c-.337 0-.644-.092-.949-.266a3.137 3.137 0 01-.09-.054l-.022-.014-.022-.013-.026-.017a4.881 4.881 0 01-.425-.325.308.308 0 01-.12-.1l-.098-.081a3.836 3.836 0 00-.483-.36l-.028-.017-.018-.01a1.256 1.256 0 00-.641-.185c-.222 0-.426.061-.642.184l-.018.011-.019.011c-.14.084-.266.178-.492.366l-.158.132a5.125 5.125 0 01-.51.39l-.023.014-.022.014-.09.054A1.868 1.868 0 0112 22c-.337 0-.645-.092-.949-.266a3.137 3.137 0 01-.09-.054l-.022-.014-.022-.013-.021-.014a5.356 5.356 0 01-.49-.377l-.158-.132a3.836 3.836 0 00-.483-.36l-.028-.017-.018-.01a1.256 1.256 0 00-.642-.185c-.221 0-.425.061-.641.184l-.019.011-.018.011c-.141.084-.266.178-.492.366l-.158.132a5.125 5.125 0 01-.511.39l-.022.014-.022.014-.09.054a1.868 1.868 0 01-.986.264c-.746-.09-1.319-.38-1.89-.866l-.035-.03c-.047-.041-.118-.106-.192-.174l-.196-.181-.107-.1-.011-.01a1.531 1.531 0 00-.336-.253.313.313 0 00-.095-.03h-.005c-.119.022-.238.059-.361.11a.308.308 0 01-.077.061l-.008.005a.309.309 0 01-.126.034 5.66 5.66 0 00-.774.518l-.416.324-.055.043a6.542 6.542 0 01-.324.236c-.305.207-.552.315-.8.315a.31.31 0 01-.01-.618h.01c.09 0 .235-.062.438-.198l.04-.027c.077-.054.163-.117.27-.199l.385-.301.06-.047c.268-.206.506-.373.73-.505l-.633-1.21a.309.309 0 01.254-.451l20.287-1.305a.309.309 0 01.228.537zm-1.118.14L2.369 19.03l.423.809c.128-.045.256-.078.388-.1a.31.31 0 01.052-.005c.132 0 .26.032.386.093.153.073.294.179.483.35l.016.015.092.086.144.134.097.089c.065.06.125.114.16.144.485.418.948.658 1.554.736h.011a1.25 1.25 0 00.6-.172l.021-.011.019-.011.018-.011c.141-.084.266-.178.492-.366l.178-.148c.279-.232.426-.342.625-.456.305-.174.612-.266.95-.266.336 0 .644.092.948.266l.023.014c.188.109.335.219.603.442l.177.148c.222.184.346.278.484.36l.027.017.019.01c.215.124.42.185.641.185.222 0 .426-.061.641-.184l.019-.011.018-.011c.141-.084.267-.178.493-.366l.177-.148c.28-.232.427-.342.626-.456.304-.174.612-.266.949-.266.337 0 .644.092.949.266l.025.015c.187.109.334.22.603.443 1.867-.878 3.448-1.811 4.73-2.832l.02-.016zM3.653 2.026C6.073 3.06 8.69 4.941 10.8 7.258c2.46 2.7 4.109 5.828 4.637 9.149a.31.31 0 01-.421.335c-2.348-.945-4.54-1.258-6.59-1.02-1.739.2-3.337.792-4.816 1.703-.294.182-.62-.182-.405-.454 1.856-2.355 2.581-4.99 2.343-7.794-.195-2.292-1.031-4.61-2.284-6.709a.31.31 0 01.388-.442zM10.04 4.45c1.778.543 3.892 2.102 5.782 4.243 1.984 2.248 3.552 4.934 4.347 7.582a.31.31 0 01-.401.38l-.022-.01-.386-.154a10.594 10.594 0 00-.291-.112l-.016-.006c-.68-.247-1.199-.291-1.944-.101a.31.31 0 01-.375-.218C15.378 11.123 13.073 7.276 9.775 5c-.291-.201-.072-.653.266-.55zM4.273 2.996l.008.015c1.028 1.94 1.708 4.031 1.885 6.113.213 2.513-.31 4.906-1.673 7.092l-.02.031.003-.001c1.198-.581 2.47-.969 3.825-1.132l.055-.006c1.981-.23 4.083.029 6.309.837l.066.025-.007-.039c-.593-2.95-2.108-5.737-4.31-8.179l-.07-.078c-1.785-1.96-3.944-3.6-6.014-4.65l-.057-.028zm7.92 3.238l.048.048c2.237 2.295 3.885 5.431 4.974 9.191l.038.132.022-.004c.71-.133 1.284-.063 1.963.18l.027.01.066.024.046.018-.025-.073c-.811-2.307-2.208-4.62-3.936-6.594l-.058-.065c-1.02-1.155-2.103-2.132-3.15-2.856l-.015-.011z"/>
             </svg>
             <span>Midjourney</span>
           </a>
-          <a href="https://figma.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-figma">
+          <a href="https://figma.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-figma" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path clip-rule="evenodd" d="M6.082 8.241C4.83 7.441 4 6.057 4 4.483 4 2.007 6.05 0 8.578 0h7.844C18.95 0 21 2.007 21 4.483c0 1.574-.829 2.959-2.082 3.758C20.17 9.041 21 10.426 21 12c0 2.476-2.05 4.483-4.578 4.483h-.084A4.615 4.615 0 0113.24 15.3v4.176C13.24 21.98 11.145 24 8.599 24 6.076 24 4 21.998 4 19.517c0-1.574.829-2.959 2.082-3.758C4.829 14.959 4 13.574 4 12c0-1.574.829-2.959 2.082-3.759zM13.24 12c0 1.676 1.387 3.034 3.098 3.034h.084c1.711 0 3.099-1.358 3.099-3.034 0-1.676-1.388-3.034-3.1-3.034h-.083c-1.71 0-3.098 1.358-3.098 3.034zm-1.48-3.034H8.578C6.867 8.966 5.48 10.324 5.48 12c0 1.672 1.382 3.029 3.089 3.034H11.76V8.966zm-3.182 7.517h-.01c-1.707.005-3.089 1.362-3.089 3.034 0 1.67 1.403 3.034 3.12 3.034 1.74 0 3.161-1.381 3.161-3.075v-2.993H8.578zm3.182-8.966H8.578c-1.711 0-3.099-1.358-3.099-3.034 0-1.676 1.388-3.034 3.1-3.034h3.181v6.068zm4.662 0H13.24V1.45h3.182c1.711 0 3.099 1.358 3.099 3.034 0 1.676-1.388 3.034-3.1 3.034z"/>
             </svg>
             <span>Figma AI</span>
           </a>
-          <a href="https://vite.dev" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-react">
+          <a href="https://vite.dev" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-react" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 3.273c.963 0 1.745.782 1.745 1.745 0 .963-.782 1.746-1.745 1.746-.963 0-1.745-.783-1.745-1.746 0-.963.782-1.745 1.745-1.745zm7.391 12.392c-.636 1.096-1.848 1.956-3.327 2.417 1.258-1.572 1.83-3.415 1.575-4.997 1.436.425 2.115 1.378 1.752 2.58zm-14.782 0c-.363-1.202.316-2.155 1.752-2.58-.255 1.582.317 3.425 1.575 4.997-1.479-.461-2.691-1.321-3.327-2.417zM12 9.273a2.727 2.727 0 110 5.454 2.727 2.727 0 010-5.454z"/>
             </svg>
             <span>React & Vite</span>
           </a>
-          <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-supabase">
+          <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-supabase" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M21.362 9.354H12V.302L2.638 14.646H12v9.052l9.362-14.344z"/>
             </svg>
             <span>Supabase Vector</span>
           </a>
-          <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-github">
+          <a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-github" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
             </svg>
             <span>GitHub Copilot</span>
           </a>
-          <a href="https://deepseek.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-deepseek">
+          <a href="https://deepseek.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-deepseek" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M23.748 4.482c-.254-.124-.364.113-.512.234-.051.039-.094.09-.137.136-.372.397-.806.657-1.373.626-.829-.046-1.537.214-2.163.848-.133-.782-.575-1.248-1.247-1.548-.352-.156-.708-.311-.955-.65-.172-.241-.219-.51-.305-.774-.055-.16-.11-.323-.293-.35-.2-.031-.278.136-.356.276-.313.572-.434 1.202-.422 1.84.027 1.436.633 2.58 1.838 3.393.137.093.172.187.129.323-.082.28-.18.552-.266.833-.055.179-.137.217-.329.14a5.526 5.526 0 01-1.736-1.18c-.857-.828-1.631-1.742-2.597-2.458a11.365 11.365 0 00-.689-.471c-.985-.957.13-1.743.388-1.836.27-.098.093-.432-.779-.428-.872.004-1.67.295-2.687.684a3.055 3.055 0 01-.465.137 9.597 9.597 0 00-2.883-.102c-1.885.21-3.39 1.102-4.497 2.623C.082 8.606-.231 10.684.152 12.85c.403 2.284 1.569 4.175 3.36 5.653 1.858 1.533 3.997 2.284 6.438 2.14 1.482-.085 3.133-.284 4.994-1.86.47.234.962.327 1.78.397.63.059 1.236-.03 1.705-.128.735-.156.684-.837.419-.961-2.155-1.004-1.682-.595-2.113-.926 1.096-1.296 2.746-2.642 3.392-7.003.05-.347.007-.565 0-.845-.004-.17.035-.237.23-.256a4.173 4.173 0 001.545-.475c1.396-.763 1.96-2.015 2.093-3.517.02-.23-.004-.467-.247-.588zM11.581 18c-2.089-1.642-3.102-2.183-3.52-2.16-.392.024-.321.471-.235.763.09.288.207.486.371.739.114.167.192.416-.113.603-.673.416-1.842-.14-1.897-.167-1.361-.802-2.5-1.86-3.301-3.307-.774-1.393-1.224-2.887-1.298-4.482-.02-.386.093-.522.477-.592a4.696 4.696 0 011.529-.039c2.132.312 3.946 1.265 5.468 2.774.868.86 1.525 1.887 2.202 2.891.72 1.066 1.494 2.082 2.48 2.914.348.292.625.514.891.677-.802.09-2.14.11-3.054-.614zm1-6.44a.306.306 0 01.415-.287.302.302 0 01.2.288.306.306 0 01-.31.307.303.303 0 01-.304-.308zm3.11 1.596c-.2.081-.399.151-.59.16a1.245 1.245 0 01-.798-.254c-.274-.23-.47-.358-.552-.758a1.73 1.73 0 01.016-.588c.07-.327-.008-.537-.239-.727-.187-.156-.426-.199-.688-.199a.559.559 0 01-.254-.078c-.11-.054-.2-.19-.114-.358.028-.054.16-.186.192-.21.356-.202.767-.136 1.146.016.352.144.618.408 1.001.782.391.451.462.576.685.914.176.265.336.537.445.848.067.195-.019.354-.25.452z"/>
             </svg>
             <span>DeepSeek</span>
           </a>
-          <a href="https://chat.qwenlm.ai" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-qwen">
+          <a href="https://chat.qwenlm.ai" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-qwen" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M12.604 1.34c.393.69.784 1.382 1.174 2.075a.18.18 0 00.157.091h5.552c.174 0 .322.11.446.327l1.454 2.57c.19.337.24.478.024.837-.26.43-.513.864-.76 1.3l-.367.658c-.106.196-.223.28-.04.512l2.652 4.637c.172.301.111.494-.043.77-.437.785-.882 1.564-1.335 2.34-.159.272-.352.375-.68.37-.777-.016-1.552-.01-2.327.016a.099.099 0 00-.081.05 575.097 575.097 0 01-2.705 4.74c-.169.293-.38.363-.725.364-.997.003-2.002.004-3.017.002a.537.537 0 01-.465-.271l-1.335-2.323a.09.09 0 00-.083-.049H4.982c-.285.03-.553-.001-.805-.092l-1.603-2.77a.543.543 0 01-.002-.54l1.207-2.12a.198.198 0 000-.197 550.951 550.951 0 01-1.875-3.272l-.79-1.395c-.16-.31-.173-.496.095-.965.465-.813.927-1.625 1.387-2.436.132-.234.304-.334.584-.335a338.3 338.3 0 012.589-.001.124.124 0 00.107-.063l2.806-4.895a.488.488 0 01.422-.246c.524-.001 1.053 0 1.583-.006L11.704 1c.341-.003.724.032.9.34zm-3.432.403a.06.06 0 00-.052.03L6.254 6.788a.157.157 0 01-.135.078H3.253c-.056 0-.07.025-.041.074l5.81 10.156c.025.042.013.062-.034.063l-2.795.015a.218.218 0 00-.2.116l-1.32 2.31c-.044.078-.021.118.068.118l5.716.008c.046 0 .08.02.104.061l1.403 2.454c.046.081.092.082.139 0l5.006-8.76.783-1.382a.055.055 0 01.096 0l1.424 2.53a.122.122 0 00.107.062l2.763-.02a.04.04 0 00.035-.02.041.041 0 000-.04l-2.9-5.086a.108.108 0 010-.113l.293-.507 1.12-1.977c.024-.041.012-.062-.035-.062H9.2c-.059 0-.073-.026-.043-.077l1.434-2.505a.107.107 0 000-.114L9.225 1.774a.06.06 0 00-.053-.031zm6.29 8.02c.046 0 .058.02.034.06l-.832 1.465-2.613 4.585a.056.056 0 01-.05.029.058.058 0 01-.05-.029L8.498 9.841c-.02-.34-.01-.052.028-.054l.216-.012 6.722-.012z"/>
             </svg>
             <span>Qwen</span>
           </a>
-          <a href="https://kimi.moonshot.cn" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-kimi">
+          <a href="https://kimi.moonshot.cn" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-kimi" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M21.846 0a1.923 1.923 0 110 3.846H20.15a.226.226 0 01-.227-.226V1.923C19.923.861 20.784 0 21.846 0z"/>
               <path d="M11.065 11.199l7.257-7.2c.137-.136.06-.41-.116-.41H14.3a.164.164 0 00-.117.051l-7.82 7.756c-.122.12-.302.013-.302-.179V3.82c0-.127-.083-.23-.185-.23H3.186c-.103 0-.186.103-.186.23V19.77c0 .128.083.23.186.23h2.69c.103 0 .186-.102.186-.23v-3.25c0-.069.025-.135.069-.178l2.424-2.406a.158.158 0 01.205-.023l6.484 4.772a7.677 7.677 0 003.453 1.283c.108.012.2-.095.2-.23v-3.06c0-.117-.07-.212-.164-.227a5.028 5.028 0 01-2.027-.807l-5.613-4.064c-.117-.078-.132-.279-.028-.381z"/>
             </svg>
             <span>Kimi AI</span>
           </a>
-          <a href="https://firebase.google.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-firebase">
+          <a href="https://firebase.google.com" target="_blank" rel="noopener noreferrer" class="tool-chip tool-chip-firebase" aria-hidden="true" tabindex="-1">
             <svg class="tool-svg" viewBox="0 0 24 24" width="18" height="18">
               <path fill="#FFA000" d="M3.877 15.717L6.56 3.556A.75.75 0 0 1 7.97 3.43l2.839 6.786L3.877 15.717z"/>
               <path fill="#F57C00" d="M12.923 8.355l1.63-3.156a.75.75 0 0 1 1.348.032l4.209 10.441L12.923 8.355z"/>
@@ -445,7 +448,7 @@
           <div class="card-visual visual-pingpin">
             <div class="mockup-window">
               <div class="window-bar">
-                <span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span>
+                <span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span>
                 <span class="win-title">github.com/urunkarpm/pingpin</span>
               </div>
               <div class="window-content pingpin-visual-content">
@@ -453,8 +456,8 @@
                   <img src="assets/images/pingpin-logo.webp" alt="PingPin App Logo" class="pingpin-logo-img" loading="lazy" decoding="async" width="400" height="200" />
                   <div class="pingpin-overlay-gradient"></div>
                   <div class="pingpin-floating-badges">
-                    <span class="pingpin-badge"><i class="fa-solid fa-shield-halved"></i> 100% On-Device</span>
-                    <span class="pingpin-badge accent"><i class="fa-solid fa-wifi"></i> Wi-Fi Auto-Punch</span>
+                    <span class="pingpin-badge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 100% On-Device</span>
+                    <span class="pingpin-badge accent"><i class="fa-solid fa-wifi" aria-hidden="true"></i> Wi-Fi Auto-Punch</span>
                   </div>
                 </div>
               </div>
@@ -470,7 +473,7 @@
             <p class="project-desc">
               Automated, privacy-focused office attendance tracking for Android with local Wi-Fi detection, HR portal auto-punching, makeup WFO scheduling, and 100% on-device data privacy.
             </p>
-            <a href="https://github.com/urunkarpm/pingpin" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://github.com/urunkarpm/pingpin" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
           </div>
         </article>
 
@@ -479,7 +482,7 @@
           <div class="card-visual visual-logpaper">
             <div class="mockup-window">
               <div class="window-bar">
-                <span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span>
+                <span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span>
                 <span class="win-title">github.com/urunkarpm/logpaper</span>
               </div>
               <div class="window-content logpaper-visual-content">
@@ -487,8 +490,8 @@
                   <img src="assets/images/logpaper-logo.webp" alt="LogPaper App Logo" class="logpaper-logo-img" loading="lazy" decoding="async" width="400" height="200" />
                   <div class="logpaper-overlay-gradient"></div>
                   <div class="logpaper-floating-badges">
-                    <span class="logpaper-badge"><i class="fa-solid fa-terminal"></i> Logcat Stream</span>
-                    <span class="logpaper-badge accent"><i class="fa-solid fa-code"></i> Matrix Rain</span>
+                    <span class="logpaper-badge"><i class="fa-solid fa-terminal" aria-hidden="true"></i> Logcat Stream</span>
+                    <span class="logpaper-badge accent"><i class="fa-solid fa-code" aria-hidden="true"></i> Matrix Rain</span>
                   </div>
                 </div>
               </div>
@@ -504,7 +507,7 @@
             <p class="project-desc">
               Customisable Android Live Wallpaper transforming device home screens into a dynamic hacker terminal with real-time system logcat streams and an animated Matrix rain overlay.
             </p>
-            <a href="https://github.com/urunkarpm/logpaper" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://github.com/urunkarpm/logpaper" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
           </div>
         </article>
 
@@ -513,7 +516,7 @@
           <div class="card-visual visual-splixter">
             <div class="mockup-window">
               <div class="window-bar">
-                <span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span>
+                <span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span>
                 <span class="win-title">github.com/urunkarpm/Splixter</span>
               </div>
               <div class="window-content splixter-visual-content">
@@ -521,8 +524,8 @@
                   <img src="assets/images/splixter-axe.svg" alt="Splixter Axe Logo" class="splixter-logo-img" loading="lazy" decoding="async" width="80" height="80" />
                   <div class="splixter-overlay-gradient"></div>
                   <div class="splixter-floating-badges">
-                    <span class="splixter-badge"><i class="fa-solid fa-calculator"></i> Proportional Tax/Tip</span>
-                    <span class="splixter-badge accent"><i class="fa-solid fa-receipt"></i> GST/VAT Slicing</span>
+                    <span class="splixter-badge"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Proportional Tax/Tip</span>
+                    <span class="splixter-badge accent"><i class="fa-solid fa-receipt" aria-hidden="true"></i> GST/VAT Slicing</span>
                   </div>
                 </div>
               </div>
@@ -538,7 +541,7 @@
             <p class="project-desc">
               Modern Android app built with Kotlin & Jetpack Compose for fair group bill splitting, proportional tax/tip calculation, category GST/VAT slicing, and high-res receipt export.
             </p>
-            <a href="https://github.com/urunkarpm/Splixter" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://github.com/urunkarpm/Splixter" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
           </div>
         </article>
 
@@ -547,19 +550,19 @@
           <div class="card-visual visual-force-tether">
             <div class="mockup-window">
               <div class="window-bar">
-                <span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span>
+                <span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span>
                 <span class="win-title">github.com/urunkarpm/force-ethernet-tethering</span>
               </div>
               <div class="window-content tether-visual-content">
                 <div class="tether-hero-frame">
                   <div class="tether-icon-display">
-                    <i class="fa-solid fa-network-wired"></i>
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                     <span class="tether-speed-tag">200–700 Mbps</span>
                   </div>
                   <div class="tether-overlay-gradient"></div>
                   <div class="tether-floating-badges">
-                    <span class="tether-badge"><i class="fa-solid fa-bolt"></i> Auto USB-C Detect</span>
-                    <span class="tether-badge accent"><i class="fa-solid fa-wifi"></i> 5G Router Mode</span>
+                    <span class="tether-badge"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Auto USB-C Detect</span>
+                    <span class="tether-badge accent"><i class="fa-solid fa-wifi" aria-hidden="true"></i> 5G Router Mode</span>
                   </div>
                 </div>
               </div>
@@ -575,7 +578,7 @@
             <p class="project-desc">
               Specialized Android system utility that automates Ethernet tethering over USB-C dongles, converting 5G smartphones into low-cost high-speed home routers (200–700 Mbps).
             </p>
-            <a href="https://github.com/urunkarpm/force-ethernet-tethering" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://github.com/urunkarpm/force-ethernet-tethering" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
           </div>
         </article>
 
@@ -584,7 +587,7 @@
           <div class="card-visual visual-yukuza">
             <div class="mockup-window">
               <div class="window-bar">
-                <span class="win-dot"></span><span class="win-dot"></span><span class="win-dot"></span>
+                <span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span>
                 <span class="win-title">github.com/urunkarpm/yukuza-launcher</span>
               </div>
               <div class="window-content yukuza-visual-content">
@@ -592,8 +595,8 @@
                   <img src="assets/images/yukuza-banner.webp" alt="Yukuza Android TV Launcher" class="yukuza-logo-img" loading="lazy" decoding="async" width="600" height="300" />
                   <div class="yukuza-overlay-gradient"></div>
                   <div class="yukuza-floating-badges">
-                    <span class="yukuza-badge"><i class="fa-solid fa-tv"></i> Android TV Launcher</span>
-                    <span class="yukuza-badge accent"><i class="fa-solid fa-cloud-moon"></i> GPU Aurora & AQI</span>
+                    <span class="yukuza-badge"><i class="fa-solid fa-tv" aria-hidden="true"></i> Android TV Launcher</span>
+                    <span class="yukuza-badge accent"><i class="fa-solid fa-cloud-moon" aria-hidden="true"></i> GPU Aurora & AQI</span>
                   </div>
                 </div>
               </div>
@@ -609,7 +612,7 @@
             <p class="project-desc">
               Cinematic Android TV launcher built with Jetpack Compose featuring a GPU-composited animated aurora canvas, smart frequency app ordering, live weather/AQI widgets, and Now Playing controls.
             </p>
-            <a href="https://github.com/urunkarpm/yukuza-launcher" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="https://github.com/urunkarpm/yukuza-launcher" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
           </div>
         </article>
 
@@ -661,7 +664,7 @@
         <div class="about-skills-wrapper">
           
           <div class="skill-category">
-            <h3 class="skill-cat-title"><i class="fa-solid fa-vial-circle-check"></i> Quality Assurance &amp; Testing</h3>
+            <h3 class="skill-cat-title"><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i> Quality Assurance &amp; Testing</h3>
             <div class="skill-pills">
               <span class="skill-pill">Test Automation</span>
               <span class="skill-pill">Playwright + JS</span>
@@ -677,7 +680,7 @@
           </div>
 
           <div class="skill-category">
-            <h3 class="skill-cat-title"><i class="fa-solid fa-microchip"></i> AI &amp; Application Development</h3>
+            <h3 class="skill-cat-title"><i class="fa-solid fa-microchip" aria-hidden="true"></i> AI &amp; Application Development</h3>
             <div class="skill-pills">
               <span class="skill-pill">AntiGravity</span>
               <span class="skill-pill">ChatGPT, Gemini, Qwen &amp; Kimi</span>
@@ -706,7 +709,7 @@
 
       <!-- Official Certifications Sub-section -->
       <div class="certs-subsection-header">
-        <h3 class="certs-subsection-title"><i class="fa-solid fa-award"></i> Official Certifications</h3>
+        <h3 class="certs-subsection-title"><i class="fa-solid fa-award" aria-hidden="true"></i> Official Certifications</h3>
       </div>
 
       <div class="certs-grid certs-official-grid">
@@ -714,15 +717,15 @@
         <article class="cert-card cert-card-featured">
           <div class="cert-card-header">
             <div class="cert-badge-icon istqb-icon">
-              <i class="fa-solid fa-award"></i>
+              <i class="fa-solid fa-award" aria-hidden="true"></i>
             </div>
             <div class="cert-issuer-badge">
               <span class="issuer-name">ISTQB® Official Certification</span>
-              <span class="cert-status-pill"><i class="fa-solid fa-circle-check"></i> Verified</span>
+              <span class="cert-status-pill"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Verified</span>
             </div>
           </div>
           <div class="cert-card-body">
-            <h3 class="cert-title">ISTQB® Certified Tester Foundation Level (CTFL)</h3>
+            <h4 class="cert-title">ISTQB® Certified Tester Foundation Level (CTFL)</h4>
             <p class="cert-org">International Software Testing Qualifications Board</p>
             <p class="cert-desc">
               Standardized qualification covering the Software Testing Lifecycle, Test Design Techniques (Equivalence Partitioning, Boundary Value Analysis), Static Testing, Defect Management, and Risk-Based QA.
@@ -733,7 +736,7 @@
                 <span class="cert-id-number" id="istqb-cert-id">00613950</span>
               </div>
               <button class="btn-copy-cert" id="copy-istqb-btn" title="Copy Certificate Number">
-                <i class="fa-regular fa-copy"></i> <span id="copy-cert-text">Copy ID</span>
+                <i class="fa-regular fa-copy" aria-hidden="true"></i> <span id="copy-cert-text" aria-live="polite">Copy ID</span>
               </button>
             </div>
           </div>
@@ -750,7 +753,7 @@
 
       <!-- Core Technical Competencies Sub-section -->
       <div class="certs-subsection-header" style="margin-top: 36px;">
-        <h3 class="certs-subsection-title"><i class="fa-solid fa-layer-group"></i> Core Technical Competencies</h3>
+        <h3 class="certs-subsection-title"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Core Technical Competencies</h3>
       </div>
 
       <div class="certs-grid">
@@ -758,15 +761,15 @@
         <article class="cert-card">
           <div class="cert-card-header">
             <div class="cert-badge-icon playwright-icon">
-              <i class="fa-solid fa-vial-circle-check"></i>
+              <i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i>
             </div>
             <div class="cert-issuer-badge">
               <span class="issuer-name">Practical Proficiency</span>
-              <span class="cert-status-pill accent-blue"><i class="fa-solid fa-bolt"></i> Test Automation</span>
+              <span class="cert-status-pill accent-blue"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Test Automation</span>
             </div>
           </div>
           <div class="cert-card-body">
-            <h3 class="cert-title">Playwright &amp; E2E Test Automation</h3>
+            <h4 class="cert-title">Playwright &amp; E2E Test Automation</h4>
             <p class="cert-org">Web, Mobile &amp; API Automation Stack</p>
             <p class="cert-desc">
               End-to-End browser test automation with Playwright + JavaScript/TypeScript, parallel test execution, CI/CD pipeline integration, visual regression, and network mocking.
@@ -786,15 +789,15 @@
         <article class="cert-card">
           <div class="cert-card-header">
             <div class="cert-badge-icon api-icon">
-              <i class="fa-solid fa-shield-halved"></i>
+              <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
             </div>
             <div class="cert-issuer-badge">
               <span class="issuer-name">Domain Expertise</span>
-              <span class="cert-status-pill accent-green"><i class="fa-solid fa-shield-halved"></i> 6+ Yrs Exp</span>
+              <span class="cert-status-pill accent-green"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 6+ Yrs Exp</span>
             </div>
           </div>
           <div class="cert-card-body">
-            <h3 class="cert-title">Banking &amp; E-Commerce Quality Assurance</h3>
+            <h4 class="cert-title">Banking &amp; E-Commerce Quality Assurance</h4>
             <p class="cert-org">Enterprise Financial &amp; Retail Focus</p>
             <p class="cert-desc">
               Extensive hands-on QA expertise validating complex banking transactions, payment gateway integrations, security sanity checks, Postman API test suites, and WCAG accessibility compliance.
@@ -814,15 +817,15 @@
         <article class="cert-card">
           <div class="cert-card-header">
             <div class="cert-badge-icon ai-icon">
-              <i class="fa-solid fa-brain"></i>
+              <i class="fa-solid fa-brain" aria-hidden="true"></i>
             </div>
             <div class="cert-issuer-badge">
               <span class="issuer-name">AI Engineering</span>
-              <span class="cert-status-pill accent-purple"><i class="fa-solid fa-sparkles"></i> AI Workflows</span>
+              <span class="cert-status-pill accent-purple"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> AI Workflows</span>
             </div>
           </div>
           <div class="cert-card-body">
-            <h3 class="cert-title">AI-Driven App Architecture &amp; Workflows</h3>
+            <h4 class="cert-title">AI-Driven App Architecture &amp; Workflows</h4>
             <p class="cert-org">AntiGravity, Cursor, Claude &amp; Jetpack Compose</p>
             <p class="cert-desc">
               Rapid product building leveraging state-of-the-art AI coding tools, prompt engineering, vector search, on-device Android development (Kotlin/Jetpack), and automated system utilities.
@@ -848,7 +851,7 @@
       <div class="footer-grid">
         <div class="footer-col main-col">
           <div class="brand-logo">
-            <span class="logo-symbol">■</span>
+            <span class="logo-symbol" aria-hidden="true">■</span>
             <span class="logo-text">uprasenjeet<span class="accent-dot">.ai</span></span>
           </div>
           <p class="footer-bio">
@@ -857,7 +860,7 @@
           <div class="email-box">
             <span class="email-address">uprasenjeet@gmail.com</span>
             <button class="copy-email-btn" id="copy-email-btn" title="Copy Email">
-              <i class="fa-regular fa-copy"></i> <span id="copy-text">Copy</span>
+              <i class="fa-regular fa-copy" aria-hidden="true"></i> <span id="copy-text" aria-live="polite">Copy</span>
             </button>
           </div>
         </div>
@@ -865,7 +868,7 @@
         <div class="footer-col social-col">
           <h4 class="col-title">PROFILES</h4>
           <ul class="footer-links">
-            <li><a href="https://github.com/urunkarpm" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a></li>
+            <li><a href="https://github.com/urunkarpm" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
           </ul>
         </div>
       </div>
