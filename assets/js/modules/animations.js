@@ -19,6 +19,7 @@ export function initMagneticButtons() {
 
     el.addEventListener('mousemove', (e) => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(pointer: coarse)').matches) return;
       if (!rect) rect = el.getBoundingClientRect();
 
       const centerX = rect.left + rect.width / 2;
@@ -52,6 +53,7 @@ export function initCardTiltAndSpotlight() {
 
     card.addEventListener('mousemove', (e) => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(pointer: coarse)').matches) return;
       if (!rect) rect = card.getBoundingClientRect();
 
       const x = e.clientX - rect.left;

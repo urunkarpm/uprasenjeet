@@ -2037,6 +2037,36 @@
   opacity: 1;
 }
 
+/* Static Cards & Tiles on Mobile Devices & Touch Viewports */
+@media (max-width: 768px), (hover: none), (pointer: coarse) {
+  .project-card,
+  .cert-card,
+  .about-card,
+  .case-study-card,
+  .tool-chip {
+    transform: none !important;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast) !important;
+  }
+
+  .project-card:hover,
+  .cert-card:hover,
+  .about-card:hover,
+  .case-study-card:hover,
+  .cert-card-featured:hover,
+  .tool-chip:hover {
+    transform: none !important;
+  }
+
+  .project-card:hover .pingpin-logo-img,
+  .project-card:hover .logpaper-logo-img,
+  .project-card:hover .splixter-logo-img,
+  .project-card:hover .tether-icon-display,
+  .project-card:hover .yukuza-logo-img,
+  .tool-chip:hover .tool-svg {
+    transform: none !important;
+  }
+}
+
 /* Accessibility Keyboard Focus & Reduced Motion Styles */
 :focus-visible {
   outline: 2px solid var(--focus-ring-color);
