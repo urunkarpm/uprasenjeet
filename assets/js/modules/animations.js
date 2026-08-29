@@ -144,10 +144,45 @@ export function initCounterMetrics() {
 }
 
 /**
+ * IntersectionObserver powered butter-smooth scroll reveal animations
+ */
+export function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  if (revealElements.length === 0) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -60px 0px',
+    threshold: 0.1
+  };
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => {
+    // Immediately reveal elements already near/in view on initial render
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 40) {
+      el.classList.add('is-revealed');
+    } else {
+      revealObserver.observe(el);
+    }
+  });
+}
+
+/**
  * Master initializer for all UI/UX animations
  */
 export function initAnimations() {
+  initScrollReveal();
   initMagneticButtons();
   initCardTiltAndSpotlight();
   initCounterMetrics();
 }
+
