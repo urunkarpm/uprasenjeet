@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Blueprint Studio - Professional Interactive Portfolio",
+  "description": "Portfolio of Prasenjeet Urunkar - QA Professional & AI App Builder",
   "scripts": {
     "dev": "npx serve .",
     "start": "npx serve ."
