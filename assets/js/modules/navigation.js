@@ -7,24 +7,20 @@ export function initNavigation() {
   const mainNav = document.getElementById('main-nav');
   const navLinks = document.querySelectorAll('.nav-link');
 
+  // Ensure static indicator spans exist once on initialization
+  navLinks.forEach(link => {
+    if (!link.querySelector('.nav-indicator')) {
+      const dot = document.createElement('span');
+      dot.className = 'nav-indicator';
+      link.appendChild(dot);
+    }
+  });
+
   function setActiveNav(sectionId) {
     if (!sectionId) return;
     navLinks.forEach(link => {
       const isTarget = link.getAttribute('data-section') === sectionId;
-      if (isTarget) {
-        if (!link.classList.contains('active')) {
-          link.classList.add('active');
-          if (!link.querySelector('.nav-indicator')) {
-            const dot = document.createElement('span');
-            dot.className = 'nav-indicator';
-            link.appendChild(dot);
-          }
-        }
-      } else {
-        link.classList.remove('active');
-        const indicator = link.querySelector('.nav-indicator');
-        if (indicator) indicator.remove();
-      }
+      link.classList.toggle('active', isTarget);
     });
   }
 

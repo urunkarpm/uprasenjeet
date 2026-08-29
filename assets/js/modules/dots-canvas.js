@@ -152,7 +152,7 @@ export function initDotsCanvas() {
       }
     }
 
-    return needsAnimation || mouse.active;
+    return needsAnimation;
   }
 
   function render() {
@@ -192,6 +192,7 @@ export function initDotsCanvas() {
   }
 
   function startLoop() {
+    if (document.hidden) return;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       render();
@@ -204,6 +205,10 @@ export function initDotsCanvas() {
   }
 
   function loop() {
+    if (document.hidden) {
+      isLoopRunning = false;
+      return;
+    }
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       isLoopRunning = false;
@@ -219,6 +224,12 @@ export function initDotsCanvas() {
       isLoopRunning = false;
     }
   }
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      startLoop();
+    }
+  });
 
   window.addEventListener('mousemove', (e) => {
     mouse.x = e.clientX;

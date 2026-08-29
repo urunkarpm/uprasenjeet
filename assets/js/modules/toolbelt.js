@@ -6,6 +6,17 @@ export function initToolbelt() {
   const banner = document.querySelector('.tool-belt-banner');
   if (!banner) return;
 
+  const track = banner.querySelector('.tool-belt-track');
+  if (track && track.children.length > 0) {
+    // If only one set of tool chips is present, dynamically clone for continuous marquee loop
+    const initialChips = Array.from(track.children);
+    if (initialChips.length <= 12) {
+      initialChips.forEach(chip => {
+        track.appendChild(chip.cloneNode(true));
+      });
+    }
+  }
+
   let isDown = false;
   let startX = 0;
   let scrollLeft = 0;

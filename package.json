@@ -6,7 +6,8 @@
   "description": "Portfolio of Prasenjeet Urunkar - QA Professional & AI App Builder",
   "scripts": {
     "dev": "npx serve .",
-    "start": "npx serve ."
+    "start": "npx serve .",
+    "test": "node scripts/test-sanity.js"
   },
   "keywords": [],
   "author": "uprasenjeet",
