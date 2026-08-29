@@ -20,14 +20,6 @@ export function initAiAnimator() {
   const headerAiDot = document.getElementById('header-ai-dot');
   let colorIndex = 0;
 
-  function getLuminance(hex) {
-    const c = hex.replace('#', '');
-    const r = parseInt(c.substring(0, 2), 16) / 255;
-    const g = parseInt(c.substring(2, 4), 16) / 255;
-    const b = parseInt(c.substring(4, 6), 16) / 255;
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  }
-
   let intervalId = null;
   let isElementVisible = true;
 
@@ -38,13 +30,10 @@ export function initAiAnimator() {
 
     if (aiWord) {
       aiWord.style.color = hex;
-      aiWord.style.textShadow = 'none';
-      aiWord.style.transition = 'color 0.4s ease';
     }
 
     if (headerAiDot) {
       headerAiDot.style.color = hex;
-      headerAiDot.style.transition = 'color 0.4s ease';
     }
 
     colorIndex = (colorIndex + 1) % aiBrandColors.length;
@@ -62,3 +51,4 @@ export function initAiAnimator() {
   updateAiColor();
   intervalId = setInterval(updateAiColor, 2000);
 }
+

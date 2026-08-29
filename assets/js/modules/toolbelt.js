@@ -67,15 +67,29 @@ export function initToolbelt() {
     }
   });
 
+  function checkAndWrapScroll(currentX) {
+    const halfWidth = banner.scrollWidth / 2;
+    if (banner.scrollLeft >= halfWidth) {
+      banner.scrollLeft -= halfWidth;
+      if (currentX !== undefined) {
+        startX = currentX;
+        scrollLeft = banner.scrollLeft;
+      }
+    } else if (banner.scrollLeft <= 0) {
+      banner.scrollLeft += halfWidth;
+      if (currentX !== undefined) {
+        startX = currentX;
+        scrollLeft = banner.scrollLeft;
+      }
+    }
+  }
+
   function autoStep() {
     rafId = null;
     if (!isVisible || document.hidden) return;
     if (!isHovered && !isDown) {
       banner.scrollLeft += autoScrollSpeed;
-      const halfWidth = banner.scrollWidth / 2;
-      if (banner.scrollLeft >= halfWidth) {
-        banner.scrollLeft -= halfWidth;
-      }
+      checkAndWrapScroll();
     }
     startAutoScroll();
   }
@@ -84,13 +98,7 @@ export function initToolbelt() {
     e.preventDefault();
     const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
     banner.scrollLeft += delta;
-
-    const halfWidth = banner.scrollWidth / 2;
-    if (banner.scrollLeft >= halfWidth) {
-      banner.scrollLeft -= halfWidth;
-    } else if (banner.scrollLeft <= 0) {
-      banner.scrollLeft += halfWidth;
-    }
+    checkAndWrapScroll();
   }, { passive: false });
 
   banner.addEventListener('mouseenter', () => { isHovered = true; });
@@ -122,17 +130,7 @@ export function initToolbelt() {
       isDragging = true;
     }
     banner.scrollLeft = scrollLeft - walk;
-
-    const halfWidth = banner.scrollWidth / 2;
-    if (banner.scrollLeft >= halfWidth) {
-      banner.scrollLeft -= halfWidth;
-      startX = e.pageX - banner.offsetLeft;
-      scrollLeft = banner.scrollLeft;
-    } else if (banner.scrollLeft <= 0) {
-      banner.scrollLeft += halfWidth;
-      startX = e.pageX - banner.offsetLeft;
-      scrollLeft = banner.scrollLeft;
-    }
+    checkAndWrapScroll(x);
   });
 
   // Touch Events for Mobile Dragging
@@ -157,17 +155,7 @@ export function initToolbelt() {
       isDragging = true;
     }
     banner.scrollLeft = scrollLeft - walk;
-
-    const halfWidth = banner.scrollWidth / 2;
-    if (banner.scrollLeft >= halfWidth) {
-      banner.scrollLeft -= halfWidth;
-      startX = e.touches[0].pageX - banner.offsetLeft;
-      scrollLeft = banner.scrollLeft;
-    } else if (banner.scrollLeft <= 0) {
-      banner.scrollLeft += halfWidth;
-      startX = e.touches[0].pageX - banner.offsetLeft;
-      scrollLeft = banner.scrollLeft;
-    }
+    checkAndWrapScroll(x);
   }, { passive: true });
 
   banner.querySelectorAll('.tool-chip').forEach(chip => {

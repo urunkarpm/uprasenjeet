@@ -92,7 +92,6 @@ export function initDotsCanvas() {
   let resizeTimeout = null;
 
   function updateDots() {
-    currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
     const palette = colorPalettes[currentTheme] || colorPalettes.dark;
     let needsAnimation = false;
 

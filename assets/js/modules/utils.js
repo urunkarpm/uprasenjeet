@@ -17,28 +17,29 @@ export function initUtils() {
     });
   }
 
+  function copyToClipboard(text, textElement, defaultText) {
+    const handleSuccess = () => {
+      if (textElement) textElement.textContent = 'Copied!';
+      setTimeout(() => {
+        if (textElement) textElement.textContent = defaultText;
+      }, 2000);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(handleSuccess)
+        .catch(() => fallbackCopyText(text, handleSuccess));
+    } else {
+      fallbackCopyText(text, handleSuccess);
+    }
+  }
+
   // Email Copy Button
   const copyBtn = document.getElementById('copy-email-btn');
   const copyText = document.getElementById('copy-text');
-
   if (copyBtn) {
     copyBtn.addEventListener('click', () => {
-      const email = 'uprasenjeet@gmail.com';
-      
-      const setSuccessText = () => {
-        if (copyText) copyText.textContent = 'Copied!';
-        setTimeout(() => {
-          if (copyText) copyText.textContent = 'Copy';
-        }, 2000);
-      };
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(email)
-          .then(setSuccessText)
-          .catch(() => fallbackCopyText(email, setSuccessText));
-      } else {
-        fallbackCopyText(email, setSuccessText);
-      }
+      copyToClipboard('uprasenjeet@gmail.com', copyText, 'Copy');
     });
   }
 
@@ -46,24 +47,10 @@ export function initUtils() {
   const copyCertBtn = document.getElementById('copy-istqb-btn');
   const copyCertText = document.getElementById('copy-cert-text');
   const certIdNum = document.getElementById('istqb-cert-id');
-
   if (copyCertBtn) {
     copyCertBtn.addEventListener('click', () => {
       const certId = certIdNum ? certIdNum.textContent.trim() : '00613950';
-      const setSuccess = () => {
-        if (copyCertText) copyCertText.textContent = 'Copied!';
-        setTimeout(() => {
-          if (copyCertText) copyCertText.textContent = 'Copy ID';
-        }, 2000);
-      };
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(certId)
-          .then(setSuccess)
-          .catch(() => fallbackCopyText(certId, setSuccess));
-      } else {
-        fallbackCopyText(certId, setSuccess);
-      }
+      copyToClipboard(certId, copyCertText, 'Copy ID');
     });
   }
 

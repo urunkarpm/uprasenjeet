@@ -14,21 +14,16 @@ export function initMagneticButtons() {
     let rect = null;
     let rafId = null;
 
-    const updateRect = () => { rect = el.getBoundingClientRect(); };
-
-    el.addEventListener('mouseenter', updateRect, { passive: true });
-    window.addEventListener('scroll', () => { if (rect) updateRect(); }, { passive: true });
+    el.addEventListener('mouseenter', () => { rect = el.getBoundingClientRect(); }, { passive: true });
 
     el.addEventListener('mousemove', (e) => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(pointer: coarse)').matches) return;
 
-      if (!rect) rect = el.getBoundingClientRect();
-
       if (!rafId) {
         rafId = requestAnimationFrame(() => {
           rafId = null;
-          if (!rect) return;
+          rect = el.getBoundingClientRect();
           const centerX = rect.left + rect.width / 2;
           const centerY = rect.top + rect.height / 2;
 
@@ -61,21 +56,16 @@ export function initCardTiltAndSpotlight() {
     let rect = null;
     let rafId = null;
 
-    const updateRect = () => { rect = card.getBoundingClientRect(); };
-
-    card.addEventListener('mouseenter', updateRect, { passive: true });
-    window.addEventListener('scroll', () => { if (rect) updateRect(); }, { passive: true });
+    card.addEventListener('mouseenter', () => { rect = card.getBoundingClientRect(); }, { passive: true });
 
     card.addEventListener('mousemove', (e) => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(pointer: coarse)').matches) return;
 
-      if (!rect) rect = card.getBoundingClientRect();
-
       if (!rafId) {
         rafId = requestAnimationFrame(() => {
           rafId = null;
-          if (!rect) return;
+          rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
 
