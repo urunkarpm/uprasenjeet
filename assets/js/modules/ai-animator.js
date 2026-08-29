@@ -28,7 +28,12 @@ export function initAiAnimator() {
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   }
 
+  let intervalId = null;
+  let isElementVisible = true;
+
   function updateAiColor() {
+    if (document.hidden || !isElementVisible) return;
+
     const hex = aiBrandColors[colorIndex];
 
     if (aiWord) {
@@ -45,6 +50,15 @@ export function initAiAnimator() {
     colorIndex = (colorIndex + 1) % aiBrandColors.length;
   }
 
+  if ('IntersectionObserver' in window && aiWord) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isElementVisible = entry.isIntersecting;
+      });
+    }, { threshold: 0.1 });
+    observer.observe(aiWord);
+  }
+
   updateAiColor();
-  setInterval(updateAiColor, 2000);
+  intervalId = setInterval(updateAiColor, 2000);
 }

@@ -13,23 +13,50 @@ export function initToolbelt() {
   let isDragging = false;
   const autoScrollSpeed = 0.6;
 
-  let isVisible = true;
+  let isVisible = false;
+  let rafId = null;
+
+  function startAutoScroll() {
+    if (!rafId && isVisible && !document.hidden) {
+      rafId = requestAnimationFrame(autoStep);
+    }
+  }
+
+  function stopAutoScroll() {
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
 
   if ('IntersectionObserver' in window) {
     const bannerObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        const wasVisible = isVisible;
         isVisible = entry.isIntersecting;
-        if (!wasVisible && isVisible) {
-          requestAnimationFrame(autoStep);
+        if (isVisible) {
+          startAutoScroll();
+        } else {
+          stopAutoScroll();
         }
       });
     }, { threshold: 0.05 });
     bannerObserver.observe(banner);
+  } else {
+    isVisible = true;
+    startAutoScroll();
   }
 
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoScroll();
+    } else {
+      startAutoScroll();
+    }
+  });
+
   function autoStep() {
-    if (!isVisible) return;
+    rafId = null;
+    if (!isVisible || document.hidden) return;
     if (!isHovered && !isDown) {
       banner.scrollLeft += autoScrollSpeed;
       const halfWidth = banner.scrollWidth / 2;
@@ -37,9 +64,8 @@ export function initToolbelt() {
         banner.scrollLeft -= halfWidth;
       }
     }
-    requestAnimationFrame(autoStep);
+    startAutoScroll();
   }
-  requestAnimationFrame(autoStep);
 
   banner.addEventListener('wheel', (e) => {
     e.preventDefault();

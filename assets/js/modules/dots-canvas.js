@@ -33,8 +33,10 @@ export function initDotsCanvas() {
   let currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
   let dots = [];
 
-  const gridStep = 30;
+  const gridStepDesktop = 30;
+  const gridStepMobile = 45;
   const hoverRadius = 120;
+  const hoverRadiusSq = hoverRadius * hoverRadius;
   const baseRadius = 1.25;
 
   function buildDots() {
@@ -42,6 +44,8 @@ export function initDotsCanvas() {
     dpr = window.devicePixelRatio || 1;
     width = window.innerWidth;
     height = window.innerHeight;
+
+    const step = width <= 768 ? gridStepMobile : gridStepDesktop;
 
     canvas.width = Math.floor(width * dpr);
     canvas.height = Math.floor(height * dpr);
@@ -51,8 +55,8 @@ export function initDotsCanvas() {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
 
-    for (let x = 0; x <= width + gridStep; x += gridStep) {
-      for (let y = 0; y <= height + gridStep; y += gridStep) {
+    for (let x = 0; x <= width + step; x += step) {
+      for (let y = 0; y <= height + step; y += step) {
         dots.push(createDot(x + 1.5,  y + 1.5,  0));
         dots.push(createDot(x + 16.5, y + 1.5,  1));
         dots.push(createDot(x + 1.5,  y + 16.5, 2));
@@ -89,12 +93,22 @@ export function initDotsCanvas() {
       const dot = dots[i];
       const baseColor = palette[dot.colorType];
 
+      let isWithinHover = false;
       let dist = 9999;
+
       if (mouse.active) {
-        dist = Math.hypot(dot.baseX - mouse.x, dot.baseY - mouse.y);
+        const dx = dot.baseX - mouse.x;
+        const dy = dot.baseY - mouse.y;
+        if (Math.abs(dx) < hoverRadius && Math.abs(dy) < hoverRadius) {
+          const distSq = dx * dx + dy * dy;
+          if (distSq < hoverRadiusSq) {
+            dist = Math.sqrt(distSq);
+            isWithinHover = true;
+          }
+        }
       }
 
-      if (mouse.active && dist < hoverRadius) {
+      if (isWithinHover) {
         const factor = 1 - dist / hoverRadius;
         const smoothFactor = factor * factor * (3 - 2 * factor);
 
@@ -138,33 +152,35 @@ export function initDotsCanvas() {
     ctx.clearRect(0, 0, width, height);
     const palette = colorPalettes[currentTheme] || colorPalettes.dark;
 
-    // Batch static unmodified dots
+    // Single-pass path grouping for static unmodified dots
+    const staticPaths = [new Path2D(), new Path2D(), new Path2D(), new Path2D()];
+    const displacedDots = [];
+
+    for (let i = 0; i < dots.length; i++) {
+      const dot = dots[i];
+      if (Math.abs(dot.x - dot.baseX) <= 0.05 && Math.abs(dot.y - dot.baseY) <= 0.05) {
+        const p = staticPaths[dot.colorType];
+        p.moveTo(dot.x + dot.currentRadius, dot.y);
+        p.arc(dot.x, dot.y, dot.currentRadius, 0, Math.PI * 2);
+      } else {
+        displacedDots.push(dot);
+      }
+    }
+
     for (let cIndex = 0; cIndex < 4; cIndex++) {
       const c = palette[cIndex];
-      ctx.beginPath();
-
-      for (let i = 0; i < dots.length; i++) {
-        const dot = dots[i];
-        if (dot.colorType === cIndex && Math.abs(dot.x - dot.baseX) <= 0.05 && Math.abs(dot.y - dot.baseY) <= 0.05) {
-          ctx.moveTo(dot.x + dot.currentRadius, dot.y);
-          ctx.arc(dot.x, dot.y, dot.currentRadius, 0, Math.PI * 2);
-        }
-      }
-
       ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${c.baseAlpha})`;
-      ctx.fill();
+      ctx.fill(staticPaths[cIndex]);
     }
 
     // Render displaced/hovered dots individually
-    for (let i = 0; i < dots.length; i++) {
-      const dot = dots[i];
-      if (Math.abs(dot.x - dot.baseX) > 0.05 || Math.abs(dot.y - dot.baseY) > 0.05) {
-        const c = palette[dot.colorType];
-        ctx.beginPath();
-        ctx.arc(dot.x, dot.y, dot.currentRadius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${dot.currentAlpha})`;
-        ctx.fill();
-      }
+    for (let i = 0; i < displacedDots.length; i++) {
+      const dot = displacedDots[i];
+      const c = palette[dot.colorType];
+      ctx.beginPath();
+      ctx.arc(dot.x, dot.y, dot.currentRadius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${dot.currentAlpha})`;
+      ctx.fill();
     }
   }
 

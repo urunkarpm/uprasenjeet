@@ -11,11 +11,16 @@ export function initMagneticButtons() {
 
   magneticElements.forEach(el => {
     el.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+    let rect = null;
+
+    el.addEventListener('mouseenter', () => {
+      rect = el.getBoundingClientRect();
+    });
 
     el.addEventListener('mousemove', (e) => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!rect) rect = el.getBoundingClientRect();
 
-      const rect = el.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
 
@@ -26,6 +31,7 @@ export function initMagneticButtons() {
     });
 
     el.addEventListener('mouseleave', () => {
+      rect = null;
       el.style.transform = 'translate3d(0px, 0px, 0) scale(1)';
     });
   });
@@ -38,10 +44,16 @@ export function initCardTiltAndSpotlight() {
   const cards = document.querySelectorAll('.project-card, .cert-card, .about-card, .case-study-card');
 
   cards.forEach(card => {
+    let rect = null;
+
+    card.addEventListener('mouseenter', () => {
+      rect = card.getBoundingClientRect();
+    });
+
     card.addEventListener('mousemove', (e) => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!rect) rect = card.getBoundingClientRect();
 
-      const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
@@ -57,6 +69,7 @@ export function initCardTiltAndSpotlight() {
     });
 
     card.addEventListener('mouseleave', () => {
+      rect = null;
       card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     });
   });
