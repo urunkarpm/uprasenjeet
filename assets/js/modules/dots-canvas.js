@@ -8,7 +8,10 @@ export function initDotsCanvas() {
 
   document.body.style.backgroundImage = 'none';
 
-  const ctx = canvas.getContext('2d');
+  canvas.style.willChange = 'transform';
+  canvas.style.transform = 'translateZ(0)';
+
+  const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true }) || canvas.getContext('2d');
   let width = 0;
   let height = 0;
   let dpr = window.devicePixelRatio || 1;
@@ -251,6 +254,16 @@ export function initDotsCanvas() {
     mouse.y = -1000;
     startLoop();
   });
+
+  let scrollTimeout = null;
+  window.addEventListener('scroll', () => {
+    if (!mouse.active) {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        startLoop();
+      }, 80);
+    }
+  }, { passive: true });
 
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);

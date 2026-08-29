@@ -9,6 +9,7 @@ import { initToolbelt } from './modules/toolbelt.js';
 import { initDotsCanvas } from './modules/dots-canvas.js';
 import { initUtils } from './modules/utils.js';
 import { initAnimations } from './modules/animations.js';
+import { initSmoothScroll } from './modules/smooth-scroll.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -18,4 +19,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initDotsCanvas();
   initUtils();
   initAnimations();
+  initSmoothScroll();
 });

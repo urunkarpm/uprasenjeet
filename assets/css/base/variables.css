@@ -135,7 +135,6 @@
 html {
   font-family: var(--font-sans);
   font-size: 16px;
-  scroll-behavior: smooth;
   scroll-padding-top: 20px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -146,6 +145,19 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
+  position: relative;
+  background-color: var(--bg-primary);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1;
   background-image: 
     radial-gradient(circle at 1.5px 1.5px, var(--prismatic-dot-1) 1.5px, transparent 0),
     radial-gradient(circle at 1.5px 1.5px, var(--prismatic-dot-2) 1.5px, transparent 0),
@@ -153,7 +165,8 @@ body {
     radial-gradient(circle at 1.5px 1.5px, var(--prismatic-dot-4) 1.5px, transparent 0);
   background-size: 30px 30px, 30px 30px, 30px 30px, 30px 30px;
   background-position: 0 0, 15px 0, 0 15px, 15px 15px;
-  background-attachment: fixed;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 #bg-dots-canvas {
@@ -164,6 +177,8 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 a {
