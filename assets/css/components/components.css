@@ -1634,6 +1634,7 @@
 }
 
 .btn-copy-cert,
+.btn-email-action,
 .copy-email-btn {
   font-family: var(--font-sans);
   font-size: 0.75rem;
@@ -1641,20 +1642,35 @@
   color: var(--text-primary);
   background: var(--bg-card);
   border: 1px solid var(--border-main);
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  text-decoration: none;
   transition: all var(--transition-fast);
 }
 
 .btn-copy-cert:hover,
+.btn-email-action:hover,
 .copy-email-btn:hover {
   border-color: var(--accent-amber);
   color: var(--accent-amber);
   background-color: var(--bg-secondary);
+}
+
+.send-email-btn {
+  background: var(--accent-amber);
+  color: #0d0f12;
+  border-color: var(--accent-amber);
+}
+
+.send-email-btn:hover {
+  background: #f5b740;
+  color: #0d0f12;
+  border-color: #f5b740;
+  transform: translateY(-1px);
 }
 
 .cert-card-footer {
@@ -1747,13 +1763,32 @@
 .email-box {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   padding: 10px 16px;
   background-color: var(--bg-card);
   border: 1px solid var(--border-main);
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
   font-size: 0.9rem;
+}
+
+.email-address-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color var(--transition-fast);
+}
+
+.email-address-link:hover {
+  color: var(--accent-amber);
+}
+
+.email-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 

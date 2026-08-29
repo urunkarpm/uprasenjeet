@@ -3,6 +3,20 @@
    ========================================================================== */
 
 export function initUtils() {
+  // Send Email Button Feedback
+  const sendBtn = document.getElementById('send-email-btn');
+  const sendText = document.getElementById('send-text');
+  if (sendBtn) {
+    sendBtn.addEventListener('click', () => {
+      if (sendText) {
+        sendText.textContent = 'Opening App...';
+        setTimeout(() => {
+          sendText.textContent = 'Send Email';
+        }, 2500);
+      }
+    });
+  }
+
   // Email Copy Button
   const copyBtn = document.getElementById('copy-email-btn');
   const copyText = document.getElementById('copy-text');
@@ -14,7 +28,7 @@ export function initUtils() {
       const setSuccessText = () => {
         if (copyText) copyText.textContent = 'Copied!';
         setTimeout(() => {
-          if (copyText) copyText.textContent = 'Copy Email';
+          if (copyText) copyText.textContent = 'Copy';
         }, 2000);
       };
 
