@@ -30,21 +30,16 @@ export function initAiAnimator() {
 
   function updateAiColor() {
     const hex = aiBrandColors[colorIndex];
-    const lum = getLuminance(hex);
 
     if (aiWord) {
       aiWord.style.color = hex;
-      if (lum < 0.15) {
-        aiWord.style.textShadow = '0 0 2px rgba(255, 255, 255, 0.9), 0 0 10px rgba(255, 255, 255, 0.4)';
-      } else if (lum > 0.85) {
-        aiWord.style.textShadow = '0 0 2px rgba(0, 0, 0, 0.9), 0 0 10px rgba(255, 255, 255, 0.5)';
-      } else {
-        aiWord.style.textShadow = `0 0 12px ${hex}77`;
-      }
+      aiWord.style.textShadow = 'none';
+      aiWord.style.transition = 'color 0.4s ease';
     }
 
     if (headerAiDot) {
       headerAiDot.style.color = hex;
+      headerAiDot.style.transition = 'color 0.4s ease';
     }
 
     colorIndex = (colorIndex + 1) % aiBrandColors.length;

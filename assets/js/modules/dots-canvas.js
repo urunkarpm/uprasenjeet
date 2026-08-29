@@ -63,8 +63,12 @@ export function initDotsCanvas() {
 
   function createDot(x, y, colorType) {
     return {
+      baseX: x,
+      baseY: y,
       x: x,
       y: y,
+      targetX: x,
+      targetY: y,
       colorType: colorType,
       currentRadius: baseRadius,
       targetRadius: baseRadius,
@@ -87,28 +91,41 @@ export function initDotsCanvas() {
 
       let dist = 9999;
       if (mouse.active) {
-        dist = Math.hypot(dot.x - mouse.x, dot.y - mouse.y);
+        dist = Math.hypot(dot.baseX - mouse.x, dot.baseY - mouse.y);
       }
 
       if (mouse.active && dist < hoverRadius) {
         const factor = 1 - dist / hoverRadius;
         const smoothFactor = factor * factor * (3 - 2 * factor);
 
-        dot.targetRadius = baseRadius + smoothFactor * 1.05;
-        dot.targetAlpha = Math.min(0.55, baseColor.baseAlpha + smoothFactor * 0.20);
+        const angle = Math.atan2(dot.baseY - mouse.y, dot.baseX - mouse.x);
+        const pushAmount = smoothFactor * 8;
+
+        dot.targetX = dot.baseX + Math.cos(angle) * pushAmount;
+        dot.targetY = dot.baseY + Math.sin(angle) * pushAmount;
+        dot.targetRadius = baseRadius + smoothFactor * 1.2;
+        dot.targetAlpha = Math.min(0.65, baseColor.baseAlpha + smoothFactor * 0.25);
       } else {
+        dot.targetX = dot.baseX;
+        dot.targetY = dot.baseY;
         dot.targetRadius = baseRadius;
         dot.targetAlpha = baseColor.baseAlpha;
       }
 
+      const diffX = dot.targetX - dot.x;
+      const diffY = dot.targetY - dot.y;
       const diffR = dot.targetRadius - dot.currentRadius;
       const diffA = dot.targetAlpha - dot.currentAlpha;
 
-      if (Math.abs(diffR) > 0.001 || Math.abs(diffA) > 0.001) {
-        dot.currentRadius += diffR * 0.18;
-        dot.currentAlpha += diffA * 0.18;
+      if (Math.abs(diffX) > 0.01 || Math.abs(diffY) > 0.01 || Math.abs(diffR) > 0.001 || Math.abs(diffA) > 0.001) {
+        dot.x += diffX * 0.16;
+        dot.y += diffY * 0.16;
+        dot.currentRadius += diffR * 0.16;
+        dot.currentAlpha += diffA * 0.16;
         needsAnimation = true;
       } else {
+        dot.x = dot.targetX;
+        dot.y = dot.targetY;
         dot.currentRadius = dot.targetRadius;
         dot.currentAlpha = dot.targetAlpha;
       }
@@ -121,14 +138,14 @@ export function initDotsCanvas() {
     ctx.clearRect(0, 0, width, height);
     const palette = colorPalettes[currentTheme] || colorPalettes.dark;
 
-    // Batch static dots by color index
+    // Batch static unmodified dots
     for (let cIndex = 0; cIndex < 4; cIndex++) {
       const c = palette[cIndex];
       ctx.beginPath();
 
       for (let i = 0; i < dots.length; i++) {
         const dot = dots[i];
-        if (dot.colorType === cIndex && Math.abs(dot.currentRadius - baseRadius) <= 0.01) {
+        if (dot.colorType === cIndex && Math.abs(dot.x - dot.baseX) <= 0.05 && Math.abs(dot.y - dot.baseY) <= 0.05) {
           ctx.moveTo(dot.x + dot.currentRadius, dot.y);
           ctx.arc(dot.x, dot.y, dot.currentRadius, 0, Math.PI * 2);
         }
@@ -138,10 +155,10 @@ export function initDotsCanvas() {
       ctx.fill();
     }
 
-    // Render active/hovered dots individually
+    // Render displaced/hovered dots individually
     for (let i = 0; i < dots.length; i++) {
       const dot = dots[i];
-      if (Math.abs(dot.currentRadius - baseRadius) > 0.01) {
+      if (Math.abs(dot.x - dot.baseX) > 0.05 || Math.abs(dot.y - dot.baseY) > 0.05) {
         const c = palette[dot.colorType];
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, dot.currentRadius, 0, Math.PI * 2);

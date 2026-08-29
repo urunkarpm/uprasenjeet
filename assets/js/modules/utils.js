@@ -28,6 +28,31 @@ export function initUtils() {
     });
   }
 
+  // ISTQB Certificate Copy Button
+  const copyCertBtn = document.getElementById('copy-istqb-btn');
+  const copyCertText = document.getElementById('copy-cert-text');
+  const certIdNum = document.getElementById('istqb-cert-id');
+
+  if (copyCertBtn) {
+    copyCertBtn.addEventListener('click', () => {
+      const certId = certIdNum ? certIdNum.textContent.trim() : '00613950';
+      const setSuccess = () => {
+        if (copyCertText) copyCertText.textContent = 'Copied!';
+        setTimeout(() => {
+          if (copyCertText) copyCertText.textContent = 'Copy ID';
+        }, 2000);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(certId)
+          .then(setSuccess)
+          .catch(() => fallbackCopyText(certId, setSuccess));
+      } else {
+        fallbackCopyText(certId, setSuccess);
+      }
+    });
+  }
+
   function fallbackCopyText(text, callback) {
     const textArea = document.createElement('textarea');
     textArea.value = text;

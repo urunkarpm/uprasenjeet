@@ -8,6 +8,7 @@ import { initAiAnimator } from './modules/ai-animator.js';
 import { initToolbelt } from './modules/toolbelt.js';
 import { initDotsCanvas } from './modules/dots-canvas.js';
 import { initUtils } from './modules/utils.js';
+import { initAnimations } from './modules/animations.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -16,4 +17,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initToolbelt();
   initDotsCanvas();
   initUtils();
+  initAnimations();
 });
