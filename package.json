@@ -1,0 +1,14 @@
+{
+  "name": "p0rtf0l10",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Blueprint Studio - Professional Interactive Portfolio",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  },
+  "keywords": [],
+  "author": "uprasenjeet",
+  "license": "MIT"
+}

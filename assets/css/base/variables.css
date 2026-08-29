@@ -1,0 +1,178 @@
+/* ==========================================================================
+   BLUEPRINT STUDIO — DESIGN TOKENS & BASE VARIABLES
+   ========================================================================== */
+
+:root {
+  /* Common Accents */
+  --accent-amber: #E5A737;
+  --accent-amber-light: #FCE8C3;
+  --accent-amber-dark: #B87D17;
+  --accent-amber-hover: #D49428;
+  --accent-green: #4ADE80;
+  --accent-purple: #C084FC;
+  --accent-blue: #60A5FA;
+
+  /* Fonts */
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Transition timings */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout Spacing */
+  --container-max: 1280px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+/* Dark Theme (Default) */
+[data-theme="dark"] {
+  --bg-primary: #090B10;
+  --bg-secondary: #10141E;
+  --bg-card: #151A27;
+  --bg-banner: #1A2131;
+  --bg-backdrop: rgba(9, 11, 16, 0.85);
+
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+
+  --border-main: #242D3F;
+  --border-light: #1A2130;
+  --border-dashed: rgba(229, 167, 55, 0.3);
+
+  --ruled-line: rgba(255, 255, 255, 0.03);
+  --grid-dot: rgba(255, 255, 255, 0.07);
+
+  /* Prismatic Dots (Amber, Purple, Blue, Green) */
+  --prismatic-dot-1: rgba(229, 167, 55, 0.45);
+  --prismatic-dot-2: rgba(192, 132, 252, 0.40);
+  --prismatic-dot-3: rgba(96, 165, 250, 0.40);
+  --prismatic-dot-4: rgba(74, 222, 128, 0.45);
+
+  --hatched-fill: repeating-linear-gradient(
+    45deg,
+    #E5A737,
+    #E5A737 6px,
+    #B87D17 6px,
+    #B87D17 12px
+  );
+
+  --hatched-grey: repeating-linear-gradient(
+    45deg,
+    #242D3F,
+    #242D3F 6px,
+    #151A27 6px,
+    #151A27 12px
+  );
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg-primary: #F5F2EC;
+  --bg-secondary: #EBE6DC;
+  --bg-card: #FFFFFF;
+  --bg-banner: #EAE3D5;
+  --bg-backdrop: rgba(245, 242, 236, 0.85);
+
+  --text-primary: #18191B;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+
+  --border-main: #DCD5C9;
+  --border-light: #E6E0D5;
+  --border-dashed: rgba(229, 167, 55, 0.4);
+
+  --ruled-line: rgba(0, 0, 0, 0.045);
+  --grid-dot: rgba(0, 0, 0, 0.08);
+
+  /* Prismatic Dots (Light Mode) */
+  --prismatic-dot-1: rgba(212, 148, 40, 0.40);
+  --prismatic-dot-2: rgba(168, 85, 247, 0.35);
+  --prismatic-dot-3: rgba(37, 99, 235, 0.35);
+  --prismatic-dot-4: rgba(22, 163, 74, 0.40);
+
+  --hatched-fill: repeating-linear-gradient(
+    45deg,
+    #E5A737,
+    #E5A737 6px,
+    #D49428 6px,
+    #D49428 12px
+  );
+
+  --hatched-grey: repeating-linear-gradient(
+    45deg,
+    #DCD5C9,
+    #DCD5C9 6px,
+    #EBE6DC 6px,
+    #EBE6DC 12px
+  );
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   RESET & GLOBAL BASE STYLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 20px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 1.5px 1.5px, var(--prismatic-dot-1) 1.5px, transparent 0),
+    radial-gradient(circle at 1.5px 1.5px, var(--prismatic-dot-2) 1.5px, transparent 0),
+    radial-gradient(circle at 1.5px 1.5px, var(--prismatic-dot-3) 1.5px, transparent 0),
+    radial-gradient(circle at 1.5px 1.5px, var(--prismatic-dot-4) 1.5px, transparent 0);
+  background-size: 30px 30px, 30px 30px, 30px 30px, 30px 30px;
+  background-position: 0 0, 15px 0, 0 15px, 15px 15px;
+  background-attachment: fixed;
+}
+
+#bg-dots-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+ul {
+  list-style: none;
+}
+
+button, input {
+  font-family: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}

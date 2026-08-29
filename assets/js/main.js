@@ -1,0 +1,19 @@
+/* ==========================================================================
+   BLUEPRINT STUDIO — MAIN APPLICATION ENTRY POINT
+   ========================================================================== */
+
+import { initTheme } from './modules/theme.js';
+import { initNavigation } from './modules/navigation.js';
+import { initAiAnimator } from './modules/ai-animator.js';
+import { initToolbelt } from './modules/toolbelt.js';
+import { initDotsCanvas } from './modules/dots-canvas.js';
+import { initUtils } from './modules/utils.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initNavigation();
+  initAiAnimator();
+  initToolbelt();
+  initDotsCanvas();
+  initUtils();
+});
