@@ -13,7 +13,7 @@
   --accent-blue: #60A5FA;
 
   /* Fonts */
-  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: 'Google Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'IBM Plex Mono', SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 
   /* Transition timings */

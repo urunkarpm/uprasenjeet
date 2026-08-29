@@ -1548,19 +1548,24 @@
 
   .nav-link {
     font-size: 1.05rem;
-    padding: 8px 0;
+    padding: 10px 0 10px 16px;
     border-bottom: 1px dashed var(--border-light);
     width: 100%;
+    position: relative;
   }
 
   .nav-link:last-child { border-bottom: none; }
 
   .nav-link.active .nav-indicator {
-    left: 0;
-    transform: none;
-    bottom: 2px;
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: auto;
     width: 6px;
     height: 6px;
+    background-color: var(--accent-amber);
+    border-radius: 50%;
   }
 
   .content-wrapper { padding: 0 16px; }
