@@ -27,7 +27,7 @@
   --radius-lg: 12px;
 }
 
-/* Dark Theme (Default) */
+/* Dark Theme */
 [data-theme="dark"] {
   --bg-primary: #090B10;
   --bg-secondary: #10141E;
@@ -78,7 +78,7 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-/* Light Theme */
+/* Light Theme (Default) */
 [data-theme="light"] {
   --bg-primary: #F5F2EC;
   --bg-secondary: #EBE6DC;

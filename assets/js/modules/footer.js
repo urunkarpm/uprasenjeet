@@ -108,7 +108,7 @@ function initDiagnosticsRunner() {
 
       // Test 2: Real-time WCAG 2.1 Accessibility & Asset Audit
       (() => {
-        const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const theme = document.documentElement.getAttribute('data-theme') || 'light';
         const images = Array.from(document.querySelectorAll('img'));
         const imagesWithAlt = images.filter(img => img.hasAttribute('alt') && img.getAttribute('alt').trim().length > 0);
         const skipLink = document.querySelector('.skip-link');

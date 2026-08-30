@@ -6,7 +6,7 @@ export function initTheme() {
   const themeToggle = document.getElementById('theme-toggle');
   const htmlElement = document.documentElement;
 
-  const savedTheme = localStorage.getItem('theme-pref') || 'dark';
+  const savedTheme = localStorage.getItem('theme-pref') || 'light';
   htmlElement.setAttribute('data-theme', savedTheme);
 
   if (themeToggle) {

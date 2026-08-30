@@ -36,7 +36,7 @@ export function initDotsCanvas() {
     ]
   };
 
-  let currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+  let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
   let dots = [];
 
   const gridStepDesktop = 30;
@@ -304,7 +304,7 @@ export function initDotsCanvas() {
   });
 
   const observer = new MutationObserver(() => {
-    currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
     startLoop();
   });
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
