@@ -11,6 +11,7 @@ import { initUtils } from './modules/utils.js';
 import { initAnimations } from './modules/animations.js';
 import { initSmoothScroll } from './modules/smooth-scroll.js';
 import { initFooter } from './modules/footer.js';
+import { initPingpinPopup } from './modules/pingpin-popup.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -22,4 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
   initSmoothScroll();
   initFooter();
+  initPingpinPopup();
 });
+

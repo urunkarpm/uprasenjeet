@@ -824,6 +824,219 @@
   background: rgba(229, 167, 55, 0.12);
 }
 
+/* ==========================================================================
+   PingPin & Holiday2API Dual-Tile Spotlight & Targeted Viewport Blur
+   ========================================================================== */
+
+/* Disable fixed overlay to guarantee zero layer tint over the tiles */
+.viewport-spotlight-overlay {
+  display: none !important;
+}
+
+/* Targeted Blurring of all other page elements when spotlight is active */
+body.spotlight-active header,
+body.spotlight-active section:not(#work),
+body.spotlight-active footer,
+body.spotlight-active .work-section .section-header,
+body.spotlight-active .project-card:not(#project-card-pingpin):not(#project-card-holiday-api) {
+  filter: blur(8px) opacity(0.3) !important;
+  -webkit-filter: blur(8px) opacity(0.3) !important;
+  pointer-events: none !important;
+  transition: filter 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* Spotlight Dual-Tile Elevation & Pop-Out (PingPin + Holiday2API) — 100% UNBLURRED & CRISP */
+body.spotlight-active #work {
+  position: relative;
+  z-index: 100;
+}
+
+body.spotlight-active #project-card-pingpin,
+body.spotlight-active #project-card-holiday-api,
+body.spotlight-active #project-card-pingpin *,
+body.spotlight-active #project-card-holiday-api * {
+  filter: none !important;
+  -webkit-filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.spotlight-active #project-card-pingpin,
+body.spotlight-active #project-card-holiday-api {
+  position: relative !important;
+  z-index: 500 !important;
+  opacity: 1 !important;
+  border-color: var(--accent-amber) !important;
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.9), 0 0 0 2px var(--accent-amber), 0 0 45px rgba(229, 167, 55, 0.45) !important;
+  transform: translateY(-8px) scale(1.02) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+[data-theme="light"] body.spotlight-active #project-card-pingpin,
+[data-theme="light"] body.spotlight-active #project-card-holiday-api {
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.25), 0 0 0 2px var(--accent-amber), 0 0 45px rgba(229, 167, 55, 0.35) !important;
+}
+
+/* In-House Tech Quick Popup (Rendered above everything in crisp focus) */
+.pingpin-tech-popup {
+  position: fixed;
+  z-index: 1000;
+  background: rgba(14, 18, 27, 0.98);
+  border: 1px solid rgba(229, 167, 55, 0.6);
+  border-radius: var(--radius-md);
+  padding: 15px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(229, 167, 55, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
+  pointer-events: none;
+}
+
+.pingpin-tech-popup.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+[data-theme="light"] .pingpin-tech-popup {
+  background: rgba(255, 255, 255, 0.99);
+  border-color: rgba(143, 91, 13, 0.5);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.3), 0 0 35px rgba(229, 167, 55, 0.3);
+}
+
+.tech-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tech-popup-badge {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--accent-amber-text);
+  background: rgba(229, 167, 55, 0.12);
+  border: 1px solid rgba(229, 167, 55, 0.3);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tech-popup-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pulse-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-green);
+  box-shadow: 0 0 6px var(--accent-green);
+  animation: pingpinPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes pingpinPulse {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 10px var(--accent-green);
+  }
+}
+
+.tech-popup-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tech-popup-title {
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tech-popup-title i {
+  color: var(--accent-amber);
+  font-size: 0.78rem;
+}
+
+.tech-popup-desc {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.tech-popup-desc strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.tech-popup-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.tech-chip {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+[data-theme="light"] .tech-chip {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .pingpin-tech-popup {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 10px 12px;
+    gap: 6px;
+  }
+  
+  .tech-popup-desc {
+    font-size: 0.72rem;
+  }
+}
+
 /* Custom Visual styling for LogPaper Card */
 .visual-logpaper {
   background: radial-gradient(ellipse at 50% 20%, rgba(74, 222, 128, 0.15) 0%, rgba(10, 15, 12, 0.98) 75%);
