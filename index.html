@@ -30,10 +30,18 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "uprasenjeet",
+    "name": "Prasenjeet Urunkar",
+    "alternateName": "uprasenjeet",
     "url": "https://uprasenjeet.ai",
     "email": "mailto:uprasenjeet@gmail.com",
     "jobTitle": "QA Professional & AI App Builder",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mumbai",
+      "postalCode": "400078",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    },
     "sameAs": [
       "https://github.com/urunkarpm"
     ]
@@ -445,7 +453,7 @@
         <!-- Column 1: Bio & Core Experience -->
         <div class="about-card reveal-on-scroll reveal-delay-1">
           <p class="about-bio-text">
-            I am a <strong>Quality Assurance Professional with 6+ years of experience</strong> testing, validating, and scaling web, mobile, and banking platforms. My core focus is ensuring flawless product behavior, high performance, and airtight security across complex user journeys.
+            I am <strong>Prasenjeet Urunkar</strong>, a <strong>Quality Assurance Professional with 6+ years of experience</strong> testing, validating, and scaling web, mobile, and banking platforms. My core focus is ensuring flawless product behavior, high performance, and airtight security across complex user journeys.
           </p>
           <p class="about-bio-text">
             Beyond testing, I actively build digital products using the power of <strong>AI-assisted development</strong>—converting concepts into real, published Android applications, automated network tools, and desktop utilities.
@@ -659,7 +667,101 @@
   <!-- Interactive Contact Footer -->
   <footer id="contact" class="site-footer">
     <div class="footer-inner reveal-on-scroll">
+      
+      <!-- Footer Top Interactive Status & Diagnostics Bar -->
+      <div class="footer-status-bar">
+        <div class="footer-status-pill">
+          <span class="status-pill-left">
+            <span class="status-pulse-dot" aria-hidden="true"></span>
+            <span class="status-label">STATUS:</span>
+          </span>
+          <span class="status-val">AVAILABLE FOR WORK</span>
+        </div>
+        <div class="footer-time-pill" title="Indian Standard Time (IST)">
+          <span class="time-pill-left">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+            <span class="time-label">LOCAL TIME:</span>
+          </span>
+          <span id="live-time-ist" class="live-clock-text">--:--:-- IST</span>
+        </div>
+        <button id="btn-run-diagnostics" class="btn-run-diagnostics" type="button" title="Execute real-time QA test suite on page" aria-label="Run QA Diagnostics Easter Egg">
+          <i class="fa-solid fa-flask-vial" aria-hidden="true"></i>
+          <span>Run QA Diagnostics</span>
+        </button>
+      </div>
+
+      <!-- Collapsible Interactive QA Diagnostics Terminal Panel -->
+      <div id="diagnostics-panel" class="diagnostics-panel" aria-hidden="true">
+        <div class="diag-header">
+          <div class="diag-header-title">
+            <span class="terminal-dots" aria-hidden="true">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </span>
+            <span class="diag-title-text">[QA-TERMINAL v2.4] — AUTOMATED SYSTEM HEALTH AUDIT</span>
+          </div>
+          <div class="diag-header-actions">
+            <button type="button" id="btn-rerun-diagnostics" class="diag-btn-action btn-rerun-diag" title="Re-run Diagnostics">
+              <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> <span>Re-run</span>
+            </button>
+            <button type="button" id="btn-close-diagnostics" class="diag-btn-action btn-close-diag" aria-label="Close Diagnostics Panel" title="Close Diagnostics">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="diag-body">
+          <div class="diag-progress-wrapper">
+            <div class="diag-progress-label">
+              <span id="diag-status-badge" class="diag-status-badge">READY TO EXECUTE</span>
+              <span id="diag-progress-percent" class="diag-progress-percent">0%</span>
+            </div>
+            <div class="diag-progress-track">
+              <div id="diag-progress-bar" class="diag-progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="diag-steps-grid">
+            <div class="diag-step-item" id="diag-step-1">
+              <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
+              <div class="step-details">
+                <span class="step-name">DOM &amp; Layout Integrity</span>
+                <span class="step-desc">Responsive CSS grid tokens &amp; layout stability</span>
+              </div>
+              <span class="step-badge">PASS</span>
+            </div>
+            <div class="diag-step-item" id="diag-step-2">
+              <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
+              <div class="step-details">
+                <span class="step-name">WCAG 2.1 Accessibility</span>
+                <span class="step-desc">4.5:1+ contrast ratios, ARIA landmarks &amp; keyboard navigation</span>
+              </div>
+              <span class="step-badge">PASS</span>
+            </div>
+            <div class="diag-step-item" id="diag-step-3">
+              <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
+              <div class="step-details">
+                <span class="step-name">State &amp; Event Listeners</span>
+                <span class="step-desc">Theme engine, smooth scroll momentum &amp; canvas rendering</span>
+              </div>
+              <span class="step-badge">PASS</span>
+            </div>
+            <div class="diag-step-item" id="diag-step-4">
+              <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
+              <div class="step-details">
+                <span class="step-name">AI Workflow Pipelines</span>
+                <span class="step-desc">Prompt orchestration &amp; multi-model toolchains</span>
+              </div>
+              <span class="step-badge">PASS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Footer Grid -->
       <div class="footer-grid">
+        <!-- Col 1: Brand & Direct Contact -->
         <div class="footer-col main-col">
           <div class="brand-logo">
             <span class="logo-symbol" aria-hidden="true">■</span>
@@ -683,14 +785,26 @@
           </div>
         </div>
 
+        <!-- Col 2: Profiles & Credentials -->
         <div class="footer-col social-col">
-          <h4 class="col-title">PROFILES</h4>
-          <ul class="footer-links">
-            <li><a href="https://github.com/urunkarpm" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub <span class="sr-only">(opens in a new tab)</span></a></li>
-          </ul>
+          <h4 class="col-title">PROFILES &amp; CREDENTIALS</h4>
+          <div class="footer-profile-badges">
+            <a href="https://github.com/urunkarpm" target="_blank" rel="noopener noreferrer" class="footer-profile-badge" title="View GitHub Profile">
+              <i class="fa-brands fa-github" aria-hidden="true"></i>
+              <span>GitHub @urunkarpm</span>
+              <i class="fa-solid fa-arrow-up-right-from-square badge-external" aria-hidden="true"></i>
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
+            <button type="button" class="footer-profile-badge footer-cert-badge" id="footer-copy-istqb" title="Copy ISTQB CTFL Certificate ID" aria-label="Copy ISTQB Certificate ID">
+              <i class="fa-solid fa-award" aria-hidden="true"></i>
+              <span>ISTQB: <strong class="cert-num">00613950</strong></span>
+              <span id="footer-copy-istqb-text" class="badge-action-tag">Copy ID</span>
+            </button>
+          </div>
         </div>
       </div>
 
+      <!-- Footer Bottom Bar -->
       <div class="footer-bottom">
         <div class="bottom-left">
           <span><span class="copyright-symbol">&copy;</span> <span id="year-span">2026</span> uprasenjeet.ai. Built with AI. Rigorously Tested &amp; Validated by Me.</span>

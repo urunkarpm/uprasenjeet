@@ -3,20 +3,6 @@
    ========================================================================== */
 
 export function initUtils() {
-  // Send Email Button Feedback
-  const sendBtn = document.getElementById('send-email-btn');
-  const sendText = document.getElementById('send-text');
-  if (sendBtn) {
-    sendBtn.addEventListener('click', () => {
-      if (sendText) {
-        sendText.textContent = 'Opening App...';
-        setTimeout(() => {
-          sendText.textContent = 'Send Email';
-        }, 2500);
-      }
-    });
-  }
-
   function copyToClipboard(text, textElement, defaultText) {
     const handleSuccess = () => {
       if (textElement) textElement.textContent = 'Copied!';
@@ -34,16 +20,7 @@ export function initUtils() {
     }
   }
 
-  // Email Copy Button
-  const copyBtn = document.getElementById('copy-email-btn');
-  const copyText = document.getElementById('copy-text');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      copyToClipboard('uprasenjeet@gmail.com', copyText, 'Copy');
-    });
-  }
-
-  // ISTQB Certificate Copy Button
+  // ISTQB Certificate Copy Button (Credentials Section)
   const copyCertBtn = document.getElementById('copy-istqb-btn');
   const copyCertText = document.getElementById('copy-cert-text');
   const certIdNum = document.getElementById('istqb-cert-id');
