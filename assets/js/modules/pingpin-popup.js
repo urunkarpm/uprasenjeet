@@ -4,7 +4,7 @@
 
 /**
  * Initializes the hover spotlight effect and in-house tech pop-up for the PingPin card.
- * - On desktop: Hovering over PingPin's visual brings both PingPin & Holiday2API into spotlight focus.
+ * - On desktop: Hovering over anywhere on the PingPin tile (or Holiday2API tile) brings both into spotlight focus.
  * - On mobile: Auto-triggers when PingPin's top reaches top of display, and auto-closes once scrolling
  *   crosses the end of the Holiday2API tile.
  */
@@ -14,14 +14,15 @@ export function initPingpinPopup() {
   const pingpinVisual = document.getElementById('pingpin-visual-trigger') || (pingpinCard && pingpinCard.querySelector('.visual-pingpin'));
   const popup = document.getElementById('pingpin-tech-popup');
 
-  if (!pingpinVisual || !popup) return;
+  if (!pingpinCard || !popup) return;
 
   let showTimeout = null;
   let hideTimeout = null;
   let isHovered = false;
 
   const updatePopupPosition = () => {
-    const rect = pingpinVisual.getBoundingClientRect();
+    const targetElement = pingpinVisual || pingpinCard;
+    const rect = targetElement.getBoundingClientRect();
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
@@ -46,7 +47,7 @@ export function initPingpinPopup() {
     showTimeout = setTimeout(() => {
       updatePopupPosition();
       document.body.classList.add('spotlight-active');
-      if (pingpinCard) pingpinCard.classList.add('spotlight-focused');
+      pingpinCard.classList.add('spotlight-focused');
       if (holidayApiCard) holidayApiCard.classList.add('spotlight-partner');
       popup.setAttribute('aria-hidden', 'false');
       popup.classList.add('visible');
@@ -59,20 +60,20 @@ export function initPingpinPopup() {
 
     hideTimeout = setTimeout(() => {
       document.body.classList.remove('spotlight-active');
-      if (pingpinCard) pingpinCard.classList.remove('spotlight-focused');
+      pingpinCard.classList.remove('spotlight-focused');
       if (holidayApiCard) holidayApiCard.classList.remove('spotlight-partner');
       popup.setAttribute('aria-hidden', 'true');
       popup.classList.remove('visible');
     }, 50);
   };
 
-  // Desktop Hover triggers
+  // Desktop Hover triggers across whole PingPin tile, Holiday2API tile, and popup
   const setupDesktopHover = () => {
     const isTouchOrMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
     if (isTouchOrMobile) return;
 
-    pingpinVisual.addEventListener('mouseenter', showSpotlight);
-    pingpinVisual.addEventListener('mouseleave', hideSpotlight);
+    pingpinCard.addEventListener('mouseenter', showSpotlight);
+    pingpinCard.addEventListener('mouseleave', hideSpotlight);
 
     if (holidayApiCard) {
       holidayApiCard.addEventListener('mouseenter', showSpotlight);
@@ -86,9 +87,9 @@ export function initPingpinPopup() {
   setupDesktopHover();
 
   // Keyboard accessibility
-  pingpinVisual.addEventListener('focusin', showSpotlight);
-  pingpinVisual.addEventListener('focusout', (e) => {
-    if (!pingpinVisual.contains(e.relatedTarget) && (!holidayApiCard || !holidayApiCard.contains(e.relatedTarget)) && !popup.contains(e.relatedTarget)) {
+  pingpinCard.addEventListener('focusin', showSpotlight);
+  pingpinCard.addEventListener('focusout', (e) => {
+    if (!pingpinCard.contains(e.relatedTarget) && (!holidayApiCard || !holidayApiCard.contains(e.relatedTarget)) && !popup.contains(e.relatedTarget)) {
       hideSpotlight();
     }
   });
