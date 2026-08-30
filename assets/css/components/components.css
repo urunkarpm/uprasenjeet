@@ -1201,6 +1201,95 @@
   background: rgba(192, 132, 252, 0.12);
 }
 
+/* Custom Visual styling for Holiday2API Card */
+.visual-holiday-api {
+  background: radial-gradient(ellipse at 50% 20%, rgba(56, 189, 248, 0.22) 0%, rgba(8, 18, 28, 0.98) 75%);
+}
+
+.visual-holiday-api .mockup-window {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(56, 189, 248, 0.12);
+}
+
+.holiday-api-visual-content {
+  padding: 0 !important;
+  position: relative;
+  height: calc(100% - 25px);
+  background-color: #081018;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.holiday-api-hero-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.holiday-api-logo-img {
+  max-width: 78%;
+  max-height: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 20px rgba(56, 189, 248, 0.35));
+  transition: transform var(--transition-normal);
+}
+
+.project-card:hover .holiday-api-logo-img {
+  transform: scale(1.05);
+}
+
+.holiday-api-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8, 16, 24, 0.92) 0%, rgba(8, 16, 24, 0.15) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.holiday-api-floating-badges {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.holiday-api-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 500;
+  padding: 2px 7px;
+  background: rgba(8, 16, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  backdrop-filter: blur(4px);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.holiday-api-badge i {
+  font-size: 0.58rem;
+  color: #38BDF8;
+}
+
+.holiday-api-badge.accent {
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.12);
+}
+
 .mockup-sidebar {
   width: 30px;
   display: flex;
@@ -2614,6 +2703,7 @@
   .project-card:hover .splixter-logo-img,
   .project-card:hover .tether-icon-display,
   .project-card:hover .yukuza-logo-img,
+  .project-card:hover .holiday-api-logo-img,
   .tool-chip:hover .tool-svg {
     transform: none !important;
   }
