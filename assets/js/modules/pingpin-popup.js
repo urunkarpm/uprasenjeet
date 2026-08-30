@@ -4,17 +4,16 @@
 
 /**
  * Initializes the hover spotlight effect and in-house tech pop-up for the PingPin card.
- * Hovering over PingPin's visual brings both PingPin and Holiday2API forward in full spotlight focus,
- * while the entire rest of the page is blurred.
+ * Hovering over PingPin's visual brings both PingPin and Holiday2API forward in full spotlight focus.
+ * On mobile/scroll, the spotlight remains active until scrolling past the end of the Holiday2API tile.
  */
 export function initPingpinPopup() {
   const pingpinCard = document.getElementById('project-card-pingpin');
   const holidayApiCard = document.getElementById('project-card-holiday-api');
   const pingpinVisual = document.getElementById('pingpin-visual-trigger') || (pingpinCard && pingpinCard.querySelector('.visual-pingpin'));
-  const overlay = document.getElementById('viewport-spotlight-overlay');
   const popup = document.getElementById('pingpin-tech-popup');
 
-  if (!pingpinVisual || !overlay || !popup) return;
+  if (!pingpinVisual || !popup) return;
 
   let showTimeout = null;
   let hideTimeout = null;
@@ -46,7 +45,6 @@ export function initPingpinPopup() {
       if (!isHovered) return;
       updatePopupPosition();
       document.body.classList.add('spotlight-active');
-      overlay.classList.add('active');
       if (pingpinCard) pingpinCard.classList.add('spotlight-focused');
       if (holidayApiCard) holidayApiCard.classList.add('spotlight-partner');
       popup.setAttribute('aria-hidden', 'false');
@@ -61,15 +59,14 @@ export function initPingpinPopup() {
     hideTimeout = setTimeout(() => {
       if (isHovered) return;
       document.body.classList.remove('spotlight-active');
-      overlay.classList.remove('active');
       if (pingpinCard) pingpinCard.classList.remove('spotlight-focused');
       if (holidayApiCard) holidayApiCard.classList.remove('spotlight-partner');
       popup.setAttribute('aria-hidden', 'true');
       popup.classList.remove('visible');
-    }, 70);
+    }, 60);
   };
 
-  // Hover triggers on PingPin visual, Holiday2API card, and the popup
+  // Hover triggers on desktop
   pingpinVisual.addEventListener('mouseenter', showSpotlight);
   pingpinVisual.addEventListener('mouseleave', hideSpotlight);
 
@@ -81,6 +78,27 @@ export function initPingpinPopup() {
   popup.addEventListener('mouseenter', showSpotlight);
   popup.addEventListener('mouseleave', hideSpotlight);
 
+  // Mobile tap support to toggle
+  pingpinVisual.addEventListener('click', (e) => {
+    const isTouchOrMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+    if (isTouchOrMobile) {
+      if (popup.classList.contains('visible')) {
+        hideSpotlight();
+      } else {
+        showSpotlight();
+      }
+    }
+  });
+
+  // Tap outside to close on mobile
+  document.addEventListener('touchstart', (e) => {
+    if (!popup.classList.contains('visible')) return;
+    const isTargetInside = pingpinVisual.contains(e.target) || (holidayApiCard && holidayApiCard.contains(e.target)) || popup.contains(e.target);
+    if (!isTargetInside) {
+      hideSpotlight();
+    }
+  }, { passive: true });
+
   // Keyboard accessibility
   pingpinVisual.addEventListener('focusin', showSpotlight);
   pingpinVisual.addEventListener('focusout', (e) => {
@@ -89,9 +107,20 @@ export function initPingpinPopup() {
     }
   });
 
-  // Reposition on scroll or resize when active
+  // Scroll tracking: Auto-close once scrolling past the end of the Holiday2API tile
   window.addEventListener('scroll', () => {
-    if (popup.classList.contains('visible')) {
+    if (popup.classList.contains('visible') || document.body.classList.contains('spotlight-active')) {
+      if (holidayApiCard && pingpinVisual) {
+        const holidayRect = holidayApiCard.getBoundingClientRect();
+        const pingpinRect = pingpinVisual.getBoundingClientRect();
+
+        // If user scrolls down past the bottom of Holiday2API card or scrolls above PingPin visual:
+        if (holidayRect.bottom < 40 || pingpinRect.top > window.innerHeight - 40) {
+          hideSpotlight();
+          return;
+        }
+      }
+
       updatePopupPosition();
     }
   }, { passive: true });
