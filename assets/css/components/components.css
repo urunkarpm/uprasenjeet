@@ -879,6 +879,7 @@ body.spotlight-active #project-card-holiday-api {
 
 /* In-House Tech Quick Popup (Rendered above everything in crisp focus) */
 .pingpin-tech-popup {
+  font-family: var(--font-sans);
   position: fixed;
   z-index: 1000;
   background: rgba(14, 18, 27, 0.98);
@@ -972,8 +973,9 @@ body.spotlight-active #project-card-holiday-api {
 
 .tech-popup-title {
   font-family: var(--font-sans);
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
   display: flex;
   align-items: center;
@@ -986,13 +988,15 @@ body.spotlight-active #project-card-holiday-api {
 }
 
 .tech-popup-desc {
-  font-size: 0.75rem;
-  line-height: 1.45;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  line-height: 1.5;
   color: var(--text-secondary);
   margin: 0;
 }
 
 .tech-popup-desc strong {
+  font-family: var(--font-sans);
   color: var(--text-primary);
   font-weight: 600;
 }
