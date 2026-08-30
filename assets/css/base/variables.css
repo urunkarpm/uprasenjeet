@@ -40,6 +40,9 @@
   --text-muted: #9CA3AF;
 
   --accent-amber-text: #E5A737;
+  --accent-green-text: #4ADE80;
+  --accent-blue-text: #60A5FA;
+  --accent-purple-text: #C084FC;
   --focus-ring-color: #E5A737;
 
   --border-main: #242D3F;
@@ -87,7 +90,10 @@
   --text-secondary: #374151;
   --text-muted: #4B5563;
 
-  --accent-amber-text: #96600E;
+  --accent-amber-text: #8F5B0D;
+  --accent-green-text: #137738;
+  --accent-blue-text: #195AE9;
+  --accent-purple-text: #7C3AED;
   --focus-ring-color: #18191B;
 
   --border-main: #DCD5C9;

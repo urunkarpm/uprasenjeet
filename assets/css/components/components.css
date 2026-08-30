@@ -101,7 +101,7 @@
 
 .btn-secondary:hover {
   border-color: var(--accent-amber);
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   transform: translateY(-2px);
 }
 
@@ -229,7 +229,7 @@
 
 .theme-btn:hover {
   border-color: var(--accent-amber);
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
 }
 
 [data-theme="dark"] .icon-light { display: none; }
@@ -562,7 +562,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   animation: float-cursor 6s ease-in-out infinite;
 }
 
@@ -664,7 +664,7 @@
   height: 220px;
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-main);
-  padding: 24px;
+  padding: 20px 20px 0 20px;
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -686,8 +686,8 @@
 }
 
 .mockup-window {
-  width: 90%;
-  height: 150px;
+  width: 100%;
+  height: 160px;
   background-color: var(--bg-card);
   border: 1px solid var(--border-main);
   border-radius: var(--radius-sm);
@@ -788,19 +788,20 @@
 .pingpin-floating-badges {
   position: absolute;
   bottom: 8px;
-  left: 10px;
-  right: 10px;
+  left: 8px;
+  right: 8px;
   display: flex;
   gap: 6px;
   justify-content: space-between;
+  align-items: center;
   z-index: 2;
 }
 
 .pingpin-badge {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 500;
-  padding: 3px 8px;
+  padding: 2px 7px;
   background: rgba(16, 20, 30, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
@@ -809,16 +810,17 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
 }
 
 .pingpin-badge i {
-  font-size: 0.6rem;
-  color: var(--accent-amber);
+  font-size: 0.58rem;
+  color: var(--accent-amber-text);
 }
 
 .pingpin-badge.accent {
   border-color: rgba(229, 167, 55, 0.35);
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   background: rgba(229, 167, 55, 0.12);
 }
 
@@ -876,19 +878,20 @@
 .logpaper-floating-badges {
   position: absolute;
   bottom: 8px;
-  left: 10px;
-  right: 10px;
+  left: 8px;
+  right: 8px;
   display: flex;
   gap: 6px;
   justify-content: space-between;
+  align-items: center;
   z-index: 2;
 }
 
 .logpaper-badge {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 500;
-  padding: 3px 8px;
+  padding: 2px 7px;
   background: rgba(10, 15, 12, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
@@ -897,16 +900,17 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
 }
 
 .logpaper-badge i {
-  font-size: 0.6rem;
-  color: var(--accent-green);
+  font-size: 0.58rem;
+  color: var(--accent-green-text);
 }
 
 .logpaper-badge.accent {
   border-color: rgba(74, 222, 128, 0.35);
-  color: var(--accent-green);
+  color: var(--accent-green-text);
   background: rgba(74, 222, 128, 0.12);
 }
 
@@ -963,19 +967,20 @@
 .splixter-floating-badges {
   position: absolute;
   bottom: 8px;
-  left: 10px;
-  right: 10px;
+  left: 8px;
+  right: 8px;
   display: flex;
   gap: 6px;
   justify-content: space-between;
+  align-items: center;
   z-index: 2;
 }
 
 .splixter-badge {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 500;
-  padding: 3px 8px;
+  padding: 2px 7px;
   background: rgba(20, 10, 12, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
@@ -984,16 +989,17 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
 }
 
 .splixter-badge i {
-  font-size: 0.6rem;
-  color: #EE3634;
+  font-size: 0.58rem;
+  color: #F04442;
 }
 
 .splixter-badge.accent {
   border-color: rgba(238, 54, 52, 0.35);
-  color: #EE3634;
+  color: #F04442;
   background: rgba(238, 54, 52, 0.12);
 }
 
@@ -1032,30 +1038,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  color: var(--accent-blue);
+  gap: 6px;
+  color: var(--accent-blue-text);
   filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.4));
   transition: transform var(--transition-normal);
+  transform: translateY(-10px);
 }
 
 .project-card:hover .tether-icon-display {
-  transform: scale(1.08);
+  transform: translateY(-10px) scale(1.06);
 }
 
 .tether-icon-display i {
-  font-size: 3.2rem;
+  font-size: 2.5rem;
 }
 
 .tether-speed-tag {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   padding: 2px 8px;
   background: rgba(96, 165, 250, 0.15);
   border: 1px solid rgba(96, 165, 250, 0.4);
   border-radius: var(--radius-sm);
-  color: #60A5FA;
+  color: var(--accent-blue-text);
+  white-space: nowrap;
 }
 
 .tether-overlay-gradient {
@@ -1068,19 +1076,20 @@
 .tether-floating-badges {
   position: absolute;
   bottom: 8px;
-  left: 10px;
-  right: 10px;
+  left: 8px;
+  right: 8px;
   display: flex;
   gap: 6px;
   justify-content: space-between;
+  align-items: center;
   z-index: 2;
 }
 
 .tether-badge {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 500;
-  padding: 3px 8px;
+  padding: 2px 7px;
   background: rgba(8, 14, 24, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
@@ -1089,16 +1098,17 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
 }
 
 .tether-badge i {
-  font-size: 0.6rem;
-  color: #60A5FA;
+  font-size: 0.58rem;
+  color: var(--accent-blue-text);
 }
 
 .tether-badge.accent {
   border-color: rgba(96, 165, 250, 0.35);
-  color: #60A5FA;
+  color: var(--accent-blue-text);
   background: rgba(96, 165, 250, 0.12);
 }
 
@@ -1155,19 +1165,20 @@
 .yukuza-floating-badges {
   position: absolute;
   bottom: 8px;
-  left: 10px;
-  right: 10px;
+  left: 8px;
+  right: 8px;
   display: flex;
   gap: 6px;
   justify-content: space-between;
+  align-items: center;
   z-index: 2;
 }
 
 .yukuza-badge {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 500;
-  padding: 3px 8px;
+  padding: 2px 7px;
   background: rgba(14, 10, 24, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
@@ -1176,16 +1187,17 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
 }
 
 .yukuza-badge i {
-  font-size: 0.6rem;
-  color: #C084FC;
+  font-size: 0.58rem;
+  color: var(--accent-purple-text);
 }
 
 .yukuza-badge.accent {
   border-color: rgba(192, 132, 252, 0.35);
-  color: #C084FC;
+  color: var(--accent-purple-text);
   background: rgba(192, 132, 252, 0.12);
 }
 
@@ -1246,7 +1258,7 @@
 .tag {
   font-family: var(--font-sans);
   font-size: 0.72rem;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   background-color: var(--bg-secondary);
   padding: 4px 10px;
   border-radius: 3px;
@@ -1278,7 +1290,7 @@
   font-family: var(--font-sans);
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1286,7 +1298,7 @@
 }
 
 .card-link:hover {
-  color: var(--accent-amber-hover);
+  color: var(--accent-amber-dark);
 }
 
 /* --------------------------------------------------------------------------
@@ -1305,7 +1317,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-main);
   padding: 4px 12px;
@@ -1362,7 +1374,7 @@
   font-family: var(--font-mono);
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
 }
 
 .stat-box .stat-lbl {
@@ -1390,7 +1402,7 @@
   font-size: 0.95rem;
   font-family: var(--font-sans);
   font-weight: 700;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   margin-bottom: 14px;
   display: flex;
   align-items: center;
@@ -1418,7 +1430,7 @@
 
 .skill-pill:hover {
   border-color: var(--accent-amber);
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
 }
 
 @media (max-width: 900px) {
@@ -1442,7 +1454,7 @@
   font-family: var(--font-sans);
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1510,31 +1522,31 @@
   font-size: 1.25rem;
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-main);
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
 }
 
 .istqb-icon {
   background: rgba(229, 167, 55, 0.15);
   border-color: rgba(229, 167, 55, 0.4);
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
 }
 
 .playwright-icon {
   background: rgba(96, 165, 250, 0.15);
   border-color: rgba(96, 165, 250, 0.4);
-  color: #60A5FA;
+  color: var(--accent-blue-text);
 }
 
 .api-icon {
   background: rgba(74, 222, 128, 0.15);
   border-color: rgba(74, 222, 128, 0.4);
-  color: var(--accent-green);
+  color: var(--accent-green-text);
 }
 
 .ai-icon {
   background: rgba(192, 132, 252, 0.15);
   border-color: rgba(192, 132, 252, 0.4);
-  color: #C084FC;
+  color: var(--accent-purple-text);
 }
 
 .cert-issuer-badge {
@@ -1560,7 +1572,7 @@
   background: rgba(74, 222, 128, 0.12);
   border: 1px solid rgba(74, 222, 128, 0.35);
   border-radius: var(--radius-sm);
-  color: var(--accent-green);
+  color: var(--accent-green-text);
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -1569,13 +1581,13 @@
 .cert-status-pill.accent-blue {
   background: rgba(96, 165, 250, 0.12);
   border-color: rgba(96, 165, 250, 0.35);
-  color: #60A5FA;
+  color: var(--accent-blue-text);
 }
 
 .cert-status-pill.accent-purple {
   background: rgba(192, 132, 252, 0.12);
   border-color: rgba(192, 132, 252, 0.35);
-  color: #C084FC;
+  color: var(--accent-purple-text);
 }
 
 .cert-card-body {
@@ -1593,7 +1605,7 @@
 .cert-org {
   font-family: var(--font-sans);
   font-size: 0.8rem;
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   margin-bottom: 6px;
 }
 
@@ -1628,7 +1640,7 @@
 }
 
 .cert-id-number {
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   font-weight: 700;
   letter-spacing: 0.06em;
 }
@@ -1656,7 +1668,7 @@
 .btn-email-action:hover,
 .copy-email-btn:hover {
   border-color: var(--accent-amber);
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
   background-color: var(--bg-secondary);
 }
 
@@ -1782,7 +1794,7 @@
 }
 
 .email-address-link:hover {
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
 }
 
 .email-actions {
@@ -1811,7 +1823,7 @@
 }
 
 .footer-links a:hover {
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
 }
 
 .footer-bottom {
@@ -1857,7 +1869,7 @@
 
 .mobile-menu-btn:hover {
   border-color: var(--accent-amber);
-  color: var(--accent-amber);
+  color: var(--accent-amber-text);
 }
 
 .mobile-menu-btn .icon-close { display: none; }
@@ -1967,8 +1979,8 @@
 
 
   .project-grid { grid-template-columns: 1fr; gap: 24px; }
-  .card-visual { height: 180px; padding: 16px; }
-  .mockup-window { width: 100%; height: 130px; }
+  .card-visual { height: 190px; padding: 16px 16px 0 16px; }
+  .mockup-window { width: 100%; height: 145px; }
   .card-details { padding: 16px; }
 
 
