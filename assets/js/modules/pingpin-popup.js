@@ -4,8 +4,9 @@
 
 /**
  * Initializes the hover spotlight effect and in-house tech pop-up for the PingPin card.
- * Hovering over PingPin's visual brings both PingPin and Holiday2API forward in full spotlight focus.
- * On mobile/scroll, the spotlight remains active until scrolling past the end of the Holiday2API tile.
+ * - On desktop: Hovering over PingPin's visual brings both PingPin & Holiday2API into spotlight focus.
+ * - On mobile: Auto-triggers when PingPin's top reaches top of display, and auto-closes once scrolling
+ *   crosses the end of the Holiday2API tile.
  */
 export function initPingpinPopup() {
   const pingpinCard = document.getElementById('project-card-pingpin');
@@ -21,10 +22,11 @@ export function initPingpinPopup() {
 
   const updatePopupPosition = () => {
     const rect = pingpinVisual.getBoundingClientRect();
-    const isMobile = window.innerWidth <= 640;
+    const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
-      popup.style.top = `${Math.max(16, rect.top + 8)}px`;
+      const topPos = Math.max(76, Math.min(rect.top + 8, window.innerHeight - 200));
+      popup.style.top = `${topPos}px`;
       popup.style.left = '16px';
       popup.style.right = '16px';
       popup.style.width = 'calc(100vw - 32px)';
@@ -42,7 +44,6 @@ export function initPingpinPopup() {
     clearTimeout(hideTimeout);
 
     showTimeout = setTimeout(() => {
-      if (!isHovered) return;
       updatePopupPosition();
       document.body.classList.add('spotlight-active');
       if (pingpinCard) pingpinCard.classList.add('spotlight-focused');
@@ -57,47 +58,32 @@ export function initPingpinPopup() {
     clearTimeout(showTimeout);
 
     hideTimeout = setTimeout(() => {
-      if (isHovered) return;
       document.body.classList.remove('spotlight-active');
       if (pingpinCard) pingpinCard.classList.remove('spotlight-focused');
       if (holidayApiCard) holidayApiCard.classList.remove('spotlight-partner');
       popup.setAttribute('aria-hidden', 'true');
       popup.classList.remove('visible');
-    }, 60);
+    }, 50);
   };
 
-  // Hover triggers on desktop
-  pingpinVisual.addEventListener('mouseenter', showSpotlight);
-  pingpinVisual.addEventListener('mouseleave', hideSpotlight);
-
-  if (holidayApiCard) {
-    holidayApiCard.addEventListener('mouseenter', showSpotlight);
-    holidayApiCard.addEventListener('mouseleave', hideSpotlight);
-  }
-
-  popup.addEventListener('mouseenter', showSpotlight);
-  popup.addEventListener('mouseleave', hideSpotlight);
-
-  // Mobile tap support to toggle
-  pingpinVisual.addEventListener('click', (e) => {
+  // Desktop Hover triggers
+  const setupDesktopHover = () => {
     const isTouchOrMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
-    if (isTouchOrMobile) {
-      if (popup.classList.contains('visible')) {
-        hideSpotlight();
-      } else {
-        showSpotlight();
-      }
-    }
-  });
+    if (isTouchOrMobile) return;
 
-  // Tap outside to close on mobile
-  document.addEventListener('touchstart', (e) => {
-    if (!popup.classList.contains('visible')) return;
-    const isTargetInside = pingpinVisual.contains(e.target) || (holidayApiCard && holidayApiCard.contains(e.target)) || popup.contains(e.target);
-    if (!isTargetInside) {
-      hideSpotlight();
+    pingpinVisual.addEventListener('mouseenter', showSpotlight);
+    pingpinVisual.addEventListener('mouseleave', hideSpotlight);
+
+    if (holidayApiCard) {
+      holidayApiCard.addEventListener('mouseenter', showSpotlight);
+      holidayApiCard.addEventListener('mouseleave', hideSpotlight);
     }
-  }, { passive: true });
+
+    popup.addEventListener('mouseenter', showSpotlight);
+    popup.addEventListener('mouseleave', hideSpotlight);
+  };
+
+  setupDesktopHover();
 
   // Keyboard accessibility
   pingpinVisual.addEventListener('focusin', showSpotlight);
@@ -107,25 +93,39 @@ export function initPingpinPopup() {
     }
   });
 
-  // Scroll tracking: Auto-close once scrolling past the end of the Holiday2API tile
-  window.addEventListener('scroll', () => {
-    if (popup.classList.contains('visible') || document.body.classList.contains('spotlight-active')) {
-      if (holidayApiCard && pingpinVisual) {
-        const holidayRect = holidayApiCard.getBoundingClientRect();
-        const pingpinRect = pingpinVisual.getBoundingClientRect();
+  // Mobile scroll tracking: Auto-trigger at PingPin top and auto-end at Holiday2API bottom
+  const handleScroll = () => {
+    const isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
 
-        // If user scrolls down past the bottom of Holiday2API card or scrolls above PingPin visual:
-        if (holidayRect.bottom < 40 || pingpinRect.top > window.innerHeight - 40) {
+    if (isMobile && pingpinCard && holidayApiCard) {
+      const pingpinRect = pingpinCard.getBoundingClientRect();
+      const holidayRect = holidayApiCard.getBoundingClientRect();
+
+      // Active zone: from when PingPin reaches top of display (<= 120px)
+      // until the end of Holiday2API crosses past the top (>= 60px)
+      const isInSpotlightZone = pingpinRect.top <= 120 && holidayRect.bottom >= 60;
+
+      if (isInSpotlightZone) {
+        if (!document.body.classList.contains('spotlight-active')) {
+          showSpotlight();
+        } else {
+          updatePopupPosition();
+        }
+      } else {
+        if (document.body.classList.contains('spotlight-active')) {
           hideSpotlight();
-          return;
         }
       }
-
-      updatePopupPosition();
+    } else {
+      if (popup.classList.contains('visible')) {
+        updatePopupPosition();
+      }
     }
-  }, { passive: true });
+  };
 
+  window.addEventListener('scroll', handleScroll, { passive: true });
   window.addEventListener('resize', () => {
+    handleScroll();
     if (popup.classList.contains('visible')) {
       updatePopupPosition();
     }
