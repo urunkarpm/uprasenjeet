@@ -1,3 +1,5 @@
+import { copyTextToClipboard } from './utils.js';
+
 export function initFooter() {
   initLiveClock();
   initEmailActions();
@@ -12,23 +14,16 @@ function initLiveClock() {
   const clockEl = document.getElementById('live-time-ist');
   if (!clockEl) return;
 
-  function updateClock() {
-    try {
-      const now = new Date();
-      const options = {
-        timeZone: 'Asia/Kolkata',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
-      };
-      const timeStr = new Intl.DateTimeFormat('en-US', options).format(now);
-      clockEl.textContent = `${timeStr} IST`;
-    } catch (e) {
-      const now = new Date();
-      clockEl.textContent = now.toLocaleTimeString() + ' IST';
-    }
-  }
+  const updateClock = () => {
+    const timeStr = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    }).format(new Date());
+    clockEl.textContent = `${timeStr} IST`;
+  };
 
   updateClock();
   setInterval(updateClock, 1000);
@@ -267,39 +262,3 @@ function initFooterIstqbCopy() {
   });
 }
 
-/**
- * Helper to copy text with clipboard API fallback
- */
-function copyTextToClipboard(text, textElement, defaultText, successText) {
-  const handleSuccess = () => {
-    if (textElement) textElement.textContent = successText;
-    setTimeout(() => {
-      if (textElement) textElement.textContent = defaultText;
-    }, 2000);
-  };
-
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text)
-      .then(handleSuccess)
-      .catch(() => fallbackCopy(text, handleSuccess));
-  } else {
-    fallbackCopy(text, handleSuccess);
-  }
-}
-
-function fallbackCopy(text, callback) {
-  const textArea = document.createElement('textarea');
-  textArea.value = text;
-  textArea.style.position = 'fixed';
-  textArea.style.opacity = '0';
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
-  try {
-    document.execCommand('copy');
-    if (callback) callback();
-  } catch (err) {
-    console.error('Fallback copy failed', err);
-  }
-  document.body.removeChild(textArea);
-}

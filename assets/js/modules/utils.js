@@ -2,23 +2,24 @@
    BLUEPRINT STUDIO — GENERAL UTILITIES MODULE
    ========================================================================== */
 
-export function initUtils() {
-  function copyToClipboard(text, textElement, defaultText) {
-    const handleSuccess = () => {
-      if (textElement) textElement.textContent = 'Copied!';
-      setTimeout(() => {
-        if (textElement) textElement.textContent = defaultText;
-      }, 2000);
-    };
+export function copyTextToClipboard(text, textElement, defaultText, successText = 'Copied!') {
+  const handleSuccess = () => {
+    if (textElement) textElement.textContent = successText;
+    setTimeout(() => {
+      if (textElement) textElement.textContent = defaultText;
+    }, 2000);
+  };
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text)
-        .then(handleSuccess)
-        .catch(() => fallbackCopyText(text, handleSuccess));
-    } else {
-      fallbackCopyText(text, handleSuccess);
-    }
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text)
+      .then(handleSuccess)
+      .catch(() => fallbackCopyText(text, handleSuccess));
+  } else {
+    fallbackCopyText(text, handleSuccess);
   }
+}
+
+export function initUtils() {
 
   // ISTQB Certificate Copy Button (Credentials Section)
   const copyCertBtn = document.getElementById('copy-istqb-btn');
@@ -27,7 +28,7 @@ export function initUtils() {
   if (copyCertBtn) {
     copyCertBtn.addEventListener('click', () => {
       const certId = certIdNum ? certIdNum.textContent.trim() : '00613950';
-      copyToClipboard(certId, copyCertText, 'Copy ID');
+      copyTextToClipboard(certId, copyCertText, 'Copy ID');
     });
   }
 

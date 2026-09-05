@@ -32,33 +32,23 @@ export function initAiAnimator() {
   const DECEL_RATE = 1.16; // Speed decrease multiplier per step
   let currentDelay = MIN_DELAY;
 
+  const targets = [aiWord, headerAiDot].filter(Boolean);
+
   function updateElementTransitions(delay) {
-    // Dynamic transition timing for crisp rapid flips and smooth slow transitions
     const transitionMs = Math.min(Math.round(delay * 0.6), 400);
-    const transitionStyle = `color ${transitionMs}ms ease`;
-    if (aiWord) aiWord.style.transition = transitionStyle;
-    if (headerAiDot) headerAiDot.style.transition = transitionStyle;
+    const style = `color ${transitionMs}ms ease`;
+    targets.forEach(el => el.style.transition = style);
   }
 
   function step() {
-    if (document.hidden || !isElementVisible) {
-      return;
-    }
+    if (document.hidden || !isElementVisible) return;
 
     const hex = aiBrandColors[colorIndex];
     updateElementTransitions(currentDelay);
-
-    if (aiWord) {
-      aiWord.style.color = hex;
-    }
-
-    if (headerAiDot) {
-      headerAiDot.style.color = hex;
-    }
+    targets.forEach(el => el.style.color = hex);
 
     colorIndex = (colorIndex + 1) % aiBrandColors.length;
 
-    // Gradually decelerate towards MAX_DELAY
     if (currentDelay < MAX_DELAY) {
       currentDelay = Math.min(Math.round(currentDelay * DECEL_RATE), MAX_DELAY);
     }
@@ -67,34 +57,24 @@ export function initAiAnimator() {
   }
 
   function startAnimation(resetToFast = false) {
-    if (timerId) {
-      clearTimeout(timerId);
-      timerId = null;
-    }
-    if (resetToFast) {
-      currentDelay = MIN_DELAY;
-    }
+    clearTimeout(timerId);
+    timerId = null;
+    if (resetToFast) currentDelay = MIN_DELAY;
     step();
   }
 
   function stopAnimation() {
-    if (timerId) {
-      clearTimeout(timerId);
-      timerId = null;
-    }
+    clearTimeout(timerId);
+    timerId = null;
   }
 
-  // Intersection Observer: pause when offscreen, resume when visible
-  if ('IntersectionObserver' in window && aiWord) {
+  if (aiWord) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const wasVisible = isElementVisible;
         isElementVisible = entry.isIntersecting;
-        if (isElementVisible && !wasVisible) {
-          startAnimation(false);
-        } else if (!isElementVisible && wasVisible) {
-          stopAnimation();
-        }
+        if (isElementVisible && !wasVisible) startAnimation(false);
+        else if (!isElementVisible && wasVisible) stopAnimation();
       });
     }, { threshold: 0.1 });
     observer.observe(aiWord);
