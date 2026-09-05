@@ -257,6 +257,109 @@ export function initQaRepair() {
 
   if (!consoleHud) return;
 
+  const DIAGNOSTIC_TESTS = [
+    { name: '[DOM_HYDRATION]', desc: 'Validating HTML5 Semantic Nodes & ARIA Accessibility Labels...', result: '[PASS] (12ms) — 0 ARIA Violations' },
+    { name: '[ISTQB_CTFL]', desc: 'Boundary Value Analysis & Equivalence Class Exceptions...', result: '[PASS] (18ms) — 0 Null Pointers' },
+    { name: '[PERF_AUDIT]', desc: 'Lighthouse 60FPS Frame Budget & Compositor Layering...', result: '[PASS] (24ms) — Score: 100/100' },
+    { name: '[SECURITY_CSP]', desc: 'Content-Security-Policy & Script Nonce Hash Integrity...', result: '[PASS] (8ms) — Strict Mode Active' },
+    { name: '[NETWORK_REST]', desc: 'PingPin Attendance & Holiday2API Endpoints Health Check...', result: '[PASS] (31ms) — HTTP 200 OK' },
+    { name: '[GPU_CANVAS]', desc: 'Background Particle Dot Engine & Canvas Frame Pacing...', result: '[PASS] (15ms) — Stable 60.0 FPS' },
+    { name: '[LAYOUT_MATRIX]', desc: 'Project & Certification Tile Rotations & Grid Alignment...', result: '[PASS] (9ms) — 0deg Matrix Aligned' },
+    { name: '[MEMORY_HEAP]', desc: 'Chrome V8 Garbage Collector & Leaked Handle Audit...', result: '[PASS] (14ms) — Heap Clean (14.2 MB)' },
+    { name: '[CROSS_BROWSER]', desc: 'Safari WebKit, Firefox Gecko & Edge Chromium Specs...', result: '[PASS] (22ms) — 100% Compatible' },
+    { name: '[PROD_SIGN_OFF]', desc: 'Final Regression Sanity & Release Approval Audit...', result: '[PASS] (11ms) — APPROVED FOR PROD' }
+  ];
+
+  let isExecutingDiagnostics = false;
+  let diagStepIndex = 0;
+  let diagTimeoutId = null;
+
+  const diagOverlay = document.getElementById('qa-diag-runner-overlay');
+  const diagModal = document.getElementById('qa-diag-runner-modal');
+  const diagStatusPill = document.getElementById('qa-diag-status-pill');
+  const diagStatusText = document.getElementById('qa-diag-status-text');
+  const diagStepCount = document.getElementById('qa-diag-step-count');
+  const diagProgressFill = document.getElementById('qa-diag-progress-fill');
+  const diagTerminalLog = document.getElementById('qa-diag-terminal-log');
+  const diagSkipBtn = document.getElementById('qa-diag-skip-btn');
+
+  function runDiagnosticsSuite() {
+    if (isExecutingDiagnostics || hasTriggeredCompletion) return;
+    isExecutingDiagnostics = true;
+
+    if (diagOverlay) diagOverlay.classList.add('active');
+    if (diagModal) diagModal.classList.remove('passed');
+    if (diagStatusPill) {
+      diagStatusPill.classList.remove('passed');
+      if (diagStatusText) diagStatusText.textContent = 'EXEC_RUNNING';
+    }
+
+    if (diagTerminalLog) {
+      diagTerminalLog.innerHTML = `<div class="log-line init">&gt; [INIT] Spawning Automated Technical QA Diagnostics Suite (v4.2.0)...</div>`;
+    }
+
+    diagStepIndex = 0;
+    executeNextDiagStep();
+  }
+
+  function executeNextDiagStep() {
+    if (diagStepIndex < DIAGNOSTIC_TESTS.length) {
+      const test = DIAGNOSTIC_TESTS[diagStepIndex];
+      const stepNum = diagStepIndex + 1;
+      const totalSteps = DIAGNOSTIC_TESTS.length;
+
+      if (diagStepCount) diagStepCount.textContent = `[ STEP ${stepNum}/${totalSteps} ]`;
+      if (diagProgressFill) diagProgressFill.style.width = `${(stepNum / totalSteps) * 100}%`;
+
+      if (diagTerminalLog) {
+        const line = document.createElement('div');
+        line.className = 'log-line pass';
+        line.innerHTML = `&gt; [TEST ${stepNum.toString().padStart(2, '0')}/${totalSteps}] <strong style="color:#38bdf8">${test.name}</strong> ${test.desc} <span style="color:#4ade80; font-weight:700">${test.result}</span>`;
+        diagTerminalLog.appendChild(line);
+        diagTerminalLog.scrollTop = diagTerminalLog.scrollHeight;
+      }
+
+      diagStepIndex++;
+      diagTimeoutId = setTimeout(executeNextDiagStep, 160);
+    } else {
+      finishDiagnosticsSuite();
+    }
+  }
+
+  function finishDiagnosticsSuite() {
+    if (diagTimeoutId) clearTimeout(diagTimeoutId);
+
+    if (diagProgressFill) diagProgressFill.style.width = '100%';
+    if (diagStepCount) diagStepCount.textContent = `[ STEP 10/10 ]`;
+
+    if (diagModal) diagModal.classList.add('passed');
+    if (diagStatusPill) {
+      diagStatusPill.classList.add('passed');
+      if (diagStatusText) diagStatusText.textContent = '10/10 PASSED ✅';
+    }
+
+    if (diagTerminalLog) {
+      const divider = document.createElement('div');
+      divider.className = 'log-line summary';
+      divider.innerHTML = `--------------------------------------------------------------------------------<br />✅ SUMMARY: ALL 10/10 SUITES PASSED (0 FAILURES, 0 FLAKY) — DURATION: 164ms`;
+      diagTerminalLog.appendChild(divider);
+      diagTerminalLog.scrollTop = diagTerminalLog.scrollHeight;
+    }
+
+    // Wait 750ms for user to register 100% passed result, then close overlay & transition to prod avatar
+    setTimeout(() => {
+      if (diagOverlay) diagOverlay.classList.remove('active');
+      isExecutingDiagnostics = false;
+      triggerCompletionSequence();
+    }, 750);
+  }
+
+  if (diagSkipBtn) {
+    diagSkipBtn.addEventListener('click', () => {
+      finishDiagnosticsSuite();
+    });
+  }
+
   function calculateStage() {
     if (isLockedToProd) return 5;
 
@@ -293,6 +396,9 @@ export function initQaRepair() {
     hasTriggeredCompletion = true;
     isLockedToProd = true;
 
+    // Update stage UI immediately so stage 5 overrides take effect
+    updateStageUI();
+
     // Smooth scroll back up to the top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -311,8 +417,9 @@ export function initQaRepair() {
   function updateStageUI() {
     const newStage = calculateStage();
 
-    if (newStage === 5 && !hasTriggeredCompletion) {
-      triggerCompletionSequence();
+    if (newStage === 5 && !hasTriggeredCompletion && !isExecutingDiagnostics) {
+      runDiagnosticsSuite();
+      return;
     }
 
     if (newStage === currentStage) return;
@@ -447,6 +554,9 @@ export function initQaRepair() {
       e.stopPropagation();
       isLockedToProd = false;
       hasTriggeredCompletion = false;
+      isExecutingDiagnostics = false;
+      if (diagTimeoutId) clearTimeout(diagTimeoutId);
+      if (diagOverlay) diagOverlay.classList.remove('active');
       if (topBanner) topBanner.classList.remove('hidden');
       if (modalOverlay) modalOverlay.classList.remove('active');
       if (consoleHud) consoleHud.classList.remove('minimized');

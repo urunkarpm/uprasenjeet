@@ -927,7 +927,47 @@
         <i class="fa-solid fa-arrow-down qa-hud-hint-icon" aria-hidden="true"></i>
       </span>
     </div>
-  </aside>
+  <!-- Technical QA Diagnostics Runner Overlay -->
+  <div id="qa-diag-runner-overlay" class="qa-diag-overlay" aria-modal="true" role="dialog" aria-label="Technical QA Diagnostics Runner">
+    <div id="qa-diag-runner-modal" class="qa-diag-modal">
+      <div class="qa-diag-topbar">
+        <div class="qa-diag-dots">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <div class="qa-diag-title">
+          <i class="fa-solid fa-terminal" aria-hidden="true"></i> QA_DIAGNOSTICS_RUNNER_v4.2
+        </div>
+        <div id="qa-diag-status-pill" class="qa-diag-status-pill">
+          <span class="pulse-dot"></span> <span id="qa-diag-status-text">EXEC_RUNNING</span>
+        </div>
+      </div>
+
+      <div class="qa-diag-body">
+        <div class="qa-diag-target-info">
+          <span class="label">TARGET_SUITE:</span>
+          <span class="value">uprasenjeet.vercel.app/prod-build</span>
+          <span id="qa-diag-step-count" class="suite-count">[ STEP 0/10 ]</span>
+        </div>
+
+        <div class="qa-diag-progress-bar">
+          <div id="qa-diag-progress-fill" class="qa-diag-progress-fill" style="width: 0%;"></div>
+        </div>
+
+        <div id="qa-diag-terminal-log" class="qa-diag-terminal-log" role="log" aria-live="polite">
+          <div class="log-line init">&gt; [INIT] Spawning Automated Technical QA Diagnostics Suite...</div>
+        </div>
+      </div>
+
+      <div class="qa-diag-footer">
+        <span class="qa-diag-hint">&gt;_ Promoting build to Production Avatar on 100% Pass...</span>
+        <button id="qa-diag-skip-btn" class="qa-diag-skip-btn" title="Fast-track diagnostics suite execution">
+          <span>Fast-Track</span> <i class="fa-solid fa-forward" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- QA Audit Completion Backdrop & Modal Dialog (Blueprint Studio Vibe) -->
   <div id="qa-modal-overlay" class="qa-modal-overlay" aria-modal="true" role="dialog">
