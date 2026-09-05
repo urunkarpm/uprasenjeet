@@ -360,10 +360,20 @@ export function initQaRepair() {
     });
   }
 
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
   function calculateStage() {
     if (isLockedToProd) return 5;
 
     const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    // Safety check: if user is near top of page (scrollTop < 120), stage MUST be 0
+    if (scrollTop < 120) {
+      return 0;
+    }
+
     const windowHeight = window.innerHeight || document.documentElement.clientHeight || 0;
     const totalHeight = Math.max(
       document.body.scrollHeight || 0,
@@ -374,8 +384,8 @@ export function initQaRepair() {
 
     const docHeight = Math.max(1, totalHeight - windowHeight);
 
-    // If user has reached the footer / near the end of page (within 80px of bottom)
-    if (scrollTop + windowHeight >= totalHeight - 80) {
+    // Stage 5 trigger: user must have scrolled past 70% of page AND reached near bottom (within 80px)
+    if (scrollTop > docHeight * 0.7 && scrollTop + windowHeight >= totalHeight - 80) {
       return 5;
     }
 
@@ -385,7 +395,7 @@ export function initQaRepair() {
     if (scrollFraction < 0.38) return 1;
     if (scrollFraction < 0.58) return 2;
     if (scrollFraction < 0.78) return 3;
-    if (scrollFraction < 0.85) return 4;
+    if (scrollFraction < 0.88) return 4;
     return 5; // Triggers production release view when reaching the footer
   }
 
