@@ -14,16 +14,21 @@ export function initMagneticButtons() {
     let rect = null;
     let rafId = null;
 
-    el.addEventListener('mouseenter', () => { rect = el.getBoundingClientRect(); }, { passive: true });
+    const updateRect = () => { rect = el.getBoundingClientRect(); };
+
+    el.addEventListener('mouseenter', updateRect, { passive: true });
+    window.addEventListener('resize', updateRect, { passive: true });
 
     el.addEventListener('mousemove', (e) => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(pointer: coarse)').matches) return;
 
+      if (!rect) updateRect();
+
       if (!rafId) {
         rafId = requestAnimationFrame(() => {
           rafId = null;
-          rect = el.getBoundingClientRect();
+          if (!rect) return;
           const centerX = rect.left + rect.width / 2;
           const centerY = rect.top + rect.height / 2;
 
@@ -56,16 +61,21 @@ export function initCardTiltAndSpotlight() {
     let rect = null;
     let rafId = null;
 
-    card.addEventListener('mouseenter', () => { rect = card.getBoundingClientRect(); }, { passive: true });
+    const updateRect = () => { rect = card.getBoundingClientRect(); };
+
+    card.addEventListener('mouseenter', updateRect, { passive: true });
+    window.addEventListener('resize', updateRect, { passive: true });
 
     card.addEventListener('mousemove', (e) => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(pointer: coarse)').matches) return;
 
+      if (!rect) updateRect();
+
       if (!rafId) {
         rafId = requestAnimationFrame(() => {
           rafId = null;
-          rect = card.getBoundingClientRect();
+          if (!rect) return;
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
 
@@ -142,8 +152,8 @@ export function initScrollReveal() {
 
   const observerOptions = {
     root: null,
-    rootMargin: '0px 0px -60px 0px',
-    threshold: 0.1
+    rootMargin: '0px 0px -40px 0px',
+    threshold: 0.05
   };
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -155,15 +165,7 @@ export function initScrollReveal() {
     });
   }, observerOptions);
 
-  revealElements.forEach(el => {
-    // Immediately reveal elements already near/in view on initial render
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 40) {
-      el.classList.add('is-revealed');
-    } else {
-      revealObserver.observe(el);
-    }
-  });
+  revealElements.forEach(el => revealObserver.observe(el));
 }
 
 /**

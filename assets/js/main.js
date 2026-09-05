@@ -12,6 +12,7 @@ import { initAnimations } from './modules/animations.js';
 import { initSmoothScroll } from './modules/smooth-scroll.js';
 import { initFooter } from './modules/footer.js';
 import { initPingpinPopup } from './modules/pingpin-popup.js';
+import { initQaRepair } from './modules/qa-repair.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
@@ -24,5 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initFooter();
   initPingpinPopup();
+  initQaRepair();
 });
 

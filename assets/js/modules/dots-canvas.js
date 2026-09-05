@@ -192,6 +192,7 @@ export function initDotsCanvas() {
 
   function startLoop() {
     if (document.hidden) return;
+    if (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5') return;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       render();
@@ -204,8 +205,9 @@ export function initDotsCanvas() {
   }
 
   function loop() {
-    if (document.hidden) {
+    if (document.hidden || (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5')) {
       isLoopRunning = false;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       return;
     }
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -41,6 +41,11 @@ export function initPingpinPopup() {
   };
 
   const showSpotlight = () => {
+    // Disable tile hover blur & spotlight popup during initial QA repair scroll (active only when stage 5 / clean mode is reached)
+    if (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5') {
+      return;
+    }
+
     isHovered = true;
     clearTimeout(hideTimeout);
 

@@ -80,9 +80,18 @@
   <!-- Direct CSS Loading (Non-blocking) -->
   <link rel="stylesheet" href="assets/css/base/variables.css" />
   <link rel="stylesheet" href="assets/css/components/components.css" />
+  <link rel="stylesheet" href="assets/css/components/qa-repair.css" />
   <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body>
+<body data-qa-stage="0">
+
+  <!-- Top QA System Banner -->
+  <div id="qa-top-banner" class="qa-top-banner" role="alert">
+    <div class="qa-banner-content">
+      <span class="qa-banner-pulse" aria-hidden="true"></span>
+      <span id="qa-banner-text">⚠️ CRITICAL: 5 UNRESOLVED DEFECTS DETECTED IN UNTESTED BUILD</span>
+    </div>
+  </div>
 
   <!-- Skip to Main Content Link for Keyboard & Screen Reader Users (WCAG 2.4.1) -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -891,6 +900,63 @@
       <span class="tech-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Zero-Dependency</span>
     </div>
   </aside>
+
+  <!-- Floating QA Console HUD Widget (Blueprint Studio Aesthetic) -->
+  <aside id="qa-console-hud" class="qa-console-hud" aria-label="Live QA Automation Console">
+    <div class="qa-hud-header">
+      <span class="qa-hud-status-badge">
+        <span class="qa-hud-status-dot"></span>
+        <span id="qa-hud-status">QA HUD: FAIL ❌</span>
+      </span>
+      <span class="qa-hud-runner-badge">RUNNER: v1.0</span>
+    </div>
+    <div id="qa-hud-log" class="qa-hud-log">
+      &gt; [SYSTEM ALERT] 5 Defects active. Scroll to trigger QA repair sequence...
+    </div>
+    <div class="qa-hud-progress-container">
+      <div class="qa-hud-progress-bar">
+        <div id="qa-hud-progress-fill" class="qa-hud-progress-fill"></div>
+      </div>
+    </div>
+    <div class="qa-hud-controls">
+      <button id="qa-reset-btn" class="qa-hud-btn" title="Re-run QA Test Suite from Top">
+        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Re-test
+      </button>
+      <span id="qa-hud-hint" class="qa-hud-hint">
+        <span id="qa-hint-text">🐞 Scroll to Auto-Fix</span>
+        <i class="fa-solid fa-arrow-down qa-hud-hint-icon" aria-hidden="true"></i>
+      </span>
+    </div>
+  </aside>
+
+  <!-- QA Audit Completion Backdrop & Modal Dialog (Blueprint Studio Vibe) -->
+  <div id="qa-modal-overlay" class="qa-modal-overlay" aria-modal="true" role="dialog">
+    <div class="qa-modal-box">
+      <div class="qa-modal-header-strip">
+        <span class="blueprint-code">[ QA_BUILD_VERIFIED ]</span>
+        <span class="blueprint-status">● 200 OK</span>
+      </div>
+
+      <div class="qa-modal-icon-wrapper">
+        <i class="fa-solid fa-square-check" aria-hidden="true"></i>
+      </div>
+
+      <div class="qa-modal-tag">
+        <span class="bracket">[</span> <span class="tag-text">QUALITY ASSURANCE AUDIT</span> <span class="bracket">]</span>
+      </div>
+
+      <h2 class="qa-modal-title">Verification Complete</h2>
+      
+      <p class="qa-modal-desc">
+        All 5 regression defects have been resolved. The portfolio is now running in its optimal, zero-defect release build.
+      </p>
+
+      <button id="qa-modal-continue-btn" class="qa-modal-btn btn-primary">
+        <span>Proceed to Portfolio</span>
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
 
   <!-- Go Up / Back to Top Button -->
   <button id="back-to-top" class="back-to-top-btn" aria-label="Scroll back to top" title="Back to top" aria-hidden="true">

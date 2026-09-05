@@ -87,6 +87,13 @@ export function initToolbelt() {
   function autoStep() {
     rafId = null;
     if (!isVisible || document.hidden) return;
+
+    // Pause ticker scroll during QA defect stages (stages 0 to 4)
+    if (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5') {
+      startAutoScroll();
+      return;
+    }
+
     if (!isHovered && !isDown) {
       banner.scrollLeft += autoScrollSpeed;
       checkAndWrapScroll();

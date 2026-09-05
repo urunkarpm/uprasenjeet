@@ -33,18 +33,12 @@ export function initAiAnimator() {
   let currentDelay = MIN_DELAY;
 
   const targets = [aiWord, headerAiDot].filter(Boolean);
-
-  function updateElementTransitions(delay) {
-    const transitionMs = Math.min(Math.round(delay * 0.6), 400);
-    const style = `color ${transitionMs}ms ease`;
-    targets.forEach(el => el.style.transition = style);
-  }
+  targets.forEach(el => el.style.transition = 'color 0.35s ease');
 
   function step() {
     if (document.hidden || !isElementVisible) return;
 
     const hex = aiBrandColors[colorIndex];
-    updateElementTransitions(currentDelay);
     targets.forEach(el => el.style.color = hex);
 
     colorIndex = (colorIndex + 1) % aiBrandColors.length;
