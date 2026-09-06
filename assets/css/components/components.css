@@ -3046,6 +3046,7 @@ section:not(.hero-section) {
 .reveal-on-scroll.is-revealed {
   opacity: 1;
   transform: translateY(0) scale(1);
+  will-change: auto;
 }
 
 /* Stagger delay classes for grid items & lists */

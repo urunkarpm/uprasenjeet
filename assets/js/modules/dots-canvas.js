@@ -40,20 +40,27 @@ export function initDotsCanvas() {
   let dots = [];
   let waves = [];
 
-  const gridStepDesktop = 32;
-  const gridStepMobile = 48;
-  const hoverRadius = 120;
-  const hoverRadiusSq = hoverRadius * hoverRadius;
   const baseRadius = 1.25;
+
+  function isMidRangeDevice() {
+    const cores = navigator.hardwareConcurrency || 4;
+    const isMobileOrTablet = width <= 1024 || window.matchMedia('(pointer: coarse)').matches;
+    return cores <= 4 || isMobileOrTablet;
+  }
 
   function buildDots() {
     dots = [];
     waves = [];
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
     width = window.innerWidth || document.documentElement.clientWidth;
     height = window.innerHeight || document.documentElement.clientHeight;
 
-    const step = width <= 768 ? gridStepMobile : gridStepDesktop;
+    const midRange = isMidRangeDevice();
+    const maxDprCap = midRange ? 1.25 : 1.75;
+    dpr = Math.min(window.devicePixelRatio || 1, maxDprCap);
+
+    const stepDesktop = midRange ? 36 : 30;
+    const stepMobile = midRange ? 52 : 44;
+    const step = width <= 768 ? stepMobile : stepDesktop;
     const halfStep = step / 2;
 
     canvas.width = Math.floor(width * dpr);
@@ -92,7 +99,8 @@ export function initDotsCanvas() {
   }
 
   function addScrollWave(originX, originY, intensity) {
-    if (waves.length >= 3) {
+    const maxActiveWaves = isMidRangeDevice() ? 2 : 3;
+    if (waves.length >= maxActiveWaves) {
       waves.shift();
     }
     const maxR = Math.max(width, height) * 0.8;
