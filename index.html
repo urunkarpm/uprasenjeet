@@ -844,7 +844,7 @@
               <span class="dot dot-yellow"></span>
               <span class="dot dot-green"></span>
             </span>
-            <span class="diag-title-text">[QA-TERMINAL v2.4] — AUTOMATED SYSTEM HEALTH AUDIT</span>
+            <span class="diag-title-text">[QA-TERMINAL v2.5] — AUTOMATED REAL-TIME SYSTEM HEALTH AUDIT</span>
           </div>
           <div class="diag-header-actions">
             <button type="button" id="btn-rerun-diagnostics" class="diag-btn-action btn-rerun-diag" title="Re-run Diagnostics">
@@ -871,35 +871,60 @@
             <div class="diag-step-item" id="diag-step-1">
               <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
               <div class="step-details">
-                <span class="step-name">DOM &amp; Layout Integrity</span>
-                <span class="step-desc">Responsive CSS grid tokens &amp; layout stability</span>
+                <span class="step-name">DOM Navigation &amp; Anchor Routes</span>
+                <span class="step-desc">Validates active internal link targets, anchor IDs &amp; route stability</span>
               </div>
-              <span class="step-badge">PASS</span>
+              <span class="step-badge">READY</span>
             </div>
             <div class="diag-step-item" id="diag-step-2">
               <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
               <div class="step-details">
-                <span class="step-name">WCAG 2.1 Accessibility</span>
-                <span class="step-desc">4.5:1+ contrast ratios, ARIA landmarks &amp; keyboard navigation</span>
+                <span class="step-name">WCAG 2.1 AA Accessibility &amp; Alt Audit</span>
+                <span class="step-desc">Color contrast ratio, skip navigation link, alt attributes &amp; ARIA semantics</span>
               </div>
-              <span class="step-badge">PASS</span>
+              <span class="step-badge">READY</span>
             </div>
             <div class="diag-step-item" id="diag-step-3">
               <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
               <div class="step-details">
-                <span class="step-name">State &amp; Event Listeners</span>
-                <span class="step-desc">Theme engine, smooth scroll momentum &amp; canvas rendering</span>
+                <span class="step-name">Canvas 2D &amp; Viewport Render Engine</span>
+                <span class="step-desc">High-DPI canvas context validation, DPR scaling &amp; zero overflow verification</span>
               </div>
-              <span class="step-badge">PASS</span>
+              <span class="step-badge">READY</span>
             </div>
             <div class="diag-step-item" id="diag-step-4">
               <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
               <div class="step-details">
-                <span class="step-name">AI Workflow Pipelines</span>
-                <span class="step-desc">Prompt orchestration &amp; multi-model toolchains</span>
+                <span class="step-name">DOM Architecture &amp; Performance Budget</span>
+                <span class="step-desc">Element node count, script load overhead &amp; JS execution timing metrics</span>
               </div>
-              <span class="step-badge">PASS</span>
+              <span class="step-badge">READY</span>
             </div>
+            <div class="diag-step-item" id="diag-step-5">
+              <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
+              <div class="step-details">
+                <span class="step-name">State Engine &amp; Session Integrity</span>
+                <span class="step-desc">Theme switching state, scroll restoration policies &amp; event listener bindings</span>
+              </div>
+              <span class="step-badge">READY</span>
+            </div>
+            <div class="diag-step-item" id="diag-step-6">
+              <i class="step-icon fa-solid fa-circle-check" aria-hidden="true"></i>
+              <div class="step-details">
+                <span class="step-name">Interactive Touch Targets &amp; UX Audit</span>
+                <span class="step-desc">44px+ touch target accessibility, interactive copy triggers &amp; modal traps</span>
+              </div>
+              <span class="step-badge">READY</span>
+            </div>
+          </div>
+
+          <!-- Live Telemetry Terminal Log Stream -->
+          <div class="diag-terminal-log-wrapper">
+            <div class="diag-terminal-log-header">
+              <span><i class="fa-solid fa-terminal" aria-hidden="true"></i> TELEMETRY LOG CONSOLE</span>
+              <span id="diag-log-count" class="diag-log-count">0 logs</span>
+            </div>
+            <pre id="diag-terminal-log" class="diag-terminal-log" aria-live="polite">&gt; System initialized. Click "Run QA Diagnostics" to start execution telemetry...</pre>
           </div>
         </div>
       </div>
