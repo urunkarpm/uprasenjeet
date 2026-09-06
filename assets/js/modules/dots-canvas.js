@@ -105,19 +105,19 @@ export function initDotsCanvas() {
     if (waves.length >= maxActiveWaves) {
       waves.shift();
     }
-    const maxR = Math.max(width, height) * 0.8;
-    const thickness = 110;
+    const maxR = Math.max(width, height) * 0.85;
+    const thickness = 130;
     waves.push({
       x: originX,
       y: originY,
       radius: 0,
       maxRadius: maxR,
-      speed: 15,
+      speed: 18,
       thickness: thickness,
       halfThickness: thickness / 2,
-      amplitude: Math.min(0.8, 0.4 + intensity * 0.01),
-      pushForce: 12,
-      decay: 0.978
+      amplitude: Math.min(0.85, 0.4 + intensity * 0.01),
+      pushForce: 14,
+      decay: 0.982
     });
   }
 
@@ -128,12 +128,13 @@ export function initDotsCanvas() {
     const palette = colorPalettes[currentTheme] || colorPalettes.dark;
     let needsAnimation = false;
 
-    // Update active scroll waves
+    // Update active scroll waves with physics speed deceleration
     for (let w = waves.length - 1; w >= 0; w--) {
       const wave = waves[w];
       wave.radius += wave.speed;
+      wave.speed = Math.max(9, wave.speed * 0.986);
       wave.amplitude *= wave.decay;
-      if (wave.radius > wave.maxRadius || wave.amplitude < 0.02) {
+      if (wave.radius > wave.maxRadius || wave.amplitude < 0.015) {
         waves.splice(w, 1);
       } else {
         needsAnimation = true;
@@ -184,7 +185,7 @@ export function initDotsCanvas() {
         }
       }
 
-      // Fast wave calculation with bounding-box pre-filtering & zero trig functions
+      // Sophisticated Damped Dual-Harmonic Wave Calculation
       let wavePushX = 0;
       let wavePushY = 0;
       let waveRadiusAdd = 0;
@@ -202,17 +203,24 @@ export function initDotsCanvas() {
         if (distSq < pw.minDistSq || distSq > pw.maxDistSq || distSq < 0.001) continue;
 
         const dist = Math.sqrt(distSq);
-        const ringDist = Math.abs(dist - wave.radius);
+        const ringDist = dist - wave.radius;
+        const normalizedDist = ringDist / wave.halfThickness;
 
-        const factor = 1 - ringDist / wave.halfThickness;
-        const smoothFactor = factor * factor * (3 - 2 * factor);
-        const effect = smoothFactor * wave.amplitude;
-        const invDist = 1 / dist;
+        // Damped dual-harmonic cosine equation for natural wave crest & trailing trough
+        const phase = normalizedDist * Math.PI;
+        const damp = Math.exp(-2.5 * normalizedDist * normalizedDist);
+        const harmonic = (Math.cos(phase) + 0.3 * Math.cos(phase * 2 - 0.4)) * damp;
 
-        wavePushX += dx * invDist * effect * wave.pushForce;
-        wavePushY += dy * invDist * effect * wave.pushForce;
-        waveRadiusAdd += effect * 1.4;
-        waveAlphaAdd += effect * 0.3;
+        if (Math.abs(harmonic) > 0.01) {
+          const energyFade = Math.pow(1 - Math.min(1, wave.radius / wave.maxRadius), 1.2);
+          const effect = harmonic * wave.amplitude * energyFade;
+          const invDist = 1 / dist;
+
+          wavePushX += dx * invDist * effect * wave.pushForce;
+          wavePushY += dy * invDist * effect * wave.pushForce;
+          waveRadiusAdd += Math.max(0, effect) * 1.6;
+          waveAlphaAdd += Math.max(0, effect) * 0.32;
+        }
       }
 
       dot.targetX = dot.baseX + hoverPushX + wavePushX;
