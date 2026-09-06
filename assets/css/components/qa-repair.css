@@ -3,17 +3,12 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Suppress Background Animation & Dot Patterns in Stages 0 to 4
+   Background Animation & Dot Canvas
    -------------------------------------------------------------------------- */
-body:not([data-qa-stage="5"]) #bg-dots-canvas,
-body:not([data-qa-stage="5"])::before {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
 #bg-dots-canvas {
   transition: opacity 0.8s ease, visibility 0.8s ease;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* --------------------------------------------------------------------------
