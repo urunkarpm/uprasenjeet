@@ -540,6 +540,23 @@ body[data-qa-stage="5"] .qa-console-hud,
   display: none !important;
 }
 
+/* Stage-Based Tile Visuals: Code Mockups in Broken Stages 0–4 vs Hero Images in Prod Stage 5 */
+body:not([data-qa-stage="5"]) .hero-image-frame {
+  display: none !important;
+}
+
+body:not([data-qa-stage="5"]) .code-mockup-frame {
+  display: flex !important;
+}
+
+body[data-qa-stage="5"] .hero-image-frame {
+  display: flex !important;
+}
+
+body[data-qa-stage="5"] .code-mockup-frame {
+  display: none !important;
+}
+
 /* --------------------------------------------------------------------------
    QA Completion Modal & Backdrop Blur (Blueprint Studio Aesthetic)
    -------------------------------------------------------------------------- */

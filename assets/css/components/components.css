@@ -735,6 +735,70 @@
   background-color: #06080C;
 }
 
+/* Code-Driven QA & Config Mockup Frame (No Image Dependencies) */
+.code-mockup-frame {
+  height: 100%;
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.code-header-line {
+  color: var(--text-primary);
+  line-height: 1.45;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.code-keyword { color: #f43f5e; font-weight: 600; }
+.code-var { color: #3b82f6; }
+.code-prop { color: #eab308; }
+.code-str { color: #10b981; }
+.code-bool { color: #8b5cf6; }
+.code-func { color: #ec4899; }
+.code-number { color: #f97316; }
+.code-comment { color: var(--text-muted); font-style: italic; }
+
+.code-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border-main);
+}
+
+.code-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.code-status-pill.success {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-green-text, #10b981);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.code-telemetry {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
 /* Custom Visual styling for PingPin Card */
 .visual-pingpin {
   background: radial-gradient(ellipse at 50% 20%, rgba(229, 167, 55, 0.15) 0%, rgba(16, 20, 30, 0.98) 75%);
