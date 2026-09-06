@@ -41,7 +41,6 @@ export function initPingpinPopup() {
   };
 
   const showSpotlight = () => {
-    // Disable tile hover blur & spotlight popup during initial QA repair scroll (active only when stage 5 / clean mode is reached)
     if (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5') {
       return;
     }
@@ -49,27 +48,46 @@ export function initPingpinPopup() {
     isHovered = true;
     clearTimeout(hideTimeout);
 
-    showTimeout = setTimeout(() => {
-      updatePopupPosition();
-      document.body.classList.add('spotlight-active');
-      pingpinCard.classList.add('spotlight-focused');
-      if (holidayApiCard) holidayApiCard.classList.add('spotlight-partner');
-      popup.setAttribute('aria-hidden', 'false');
-      popup.classList.add('visible');
-    }, 20);
+    updatePopupPosition();
+    document.body.classList.add('spotlight-active');
+    pingpinCard.classList.add('spotlight-focused');
+    if (holidayApiCard) holidayApiCard.classList.add('spotlight-partner');
+    popup.setAttribute('aria-hidden', 'false');
+    popup.classList.add('visible');
   };
 
   const hideSpotlight = () => {
     isHovered = false;
     clearTimeout(showTimeout);
 
-    hideTimeout = setTimeout(() => {
-      document.body.classList.remove('spotlight-active');
-      pingpinCard.classList.remove('spotlight-focused');
-      if (holidayApiCard) holidayApiCard.classList.remove('spotlight-partner');
-      popup.setAttribute('aria-hidden', 'true');
-      popup.classList.remove('visible');
-    }, 50);
+    document.body.classList.remove('spotlight-active');
+    pingpinCard.classList.remove('spotlight-focused');
+    if (holidayApiCard) holidayApiCard.classList.remove('spotlight-partner');
+    popup.setAttribute('aria-hidden', 'true');
+    popup.classList.remove('visible');
+  };
+
+  const isPointerInside = (element, x, y) => {
+    if (!element) return false;
+    const rect = element.getBoundingClientRect();
+    return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+  };
+
+  const checkPointerBounds = (e) => {
+    if (!document.body.classList.contains('spotlight-active')) return;
+    const isMobile = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
+    if (isMobile) return;
+
+    const x = e.clientX;
+    const y = e.clientY;
+
+    const isOverPingpin = isPointerInside(pingpinCard, x, y);
+    const isOverHoliday = holidayApiCard ? isPointerInside(holidayApiCard, x, y) : false;
+    const isOverPopup = popup.classList.contains('visible') ? isPointerInside(popup, x, y) : false;
+
+    if (!isOverPingpin && !isOverHoliday && !isOverPopup) {
+      hideSpotlight();
+    }
   };
 
   // Desktop Hover triggers across whole PingPin tile, Holiday2API tile, and popup
@@ -87,6 +105,8 @@ export function initPingpinPopup() {
 
     popup.addEventListener('mouseenter', showSpotlight);
     popup.addEventListener('mouseleave', hideSpotlight);
+
+    document.addEventListener('mousemove', checkPointerBounds, { passive: true });
   };
 
   setupDesktopHover();
