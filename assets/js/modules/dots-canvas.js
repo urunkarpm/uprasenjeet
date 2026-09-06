@@ -40,6 +40,8 @@ export function initDotsCanvas() {
   let dots = [];
   let waves = [];
 
+  const hoverRadius = 160;
+  const hoverRadiusSq = hoverRadius * hoverRadius;
   const baseRadius = 1.25;
 
   function isMidRangeDevice() {
@@ -99,23 +101,23 @@ export function initDotsCanvas() {
   }
 
   function addScrollWave(originX, originY, intensity) {
-    const maxActiveWaves = isMidRangeDevice() ? 2 : 3;
+    const maxActiveWaves = isMidRangeDevice() ? 3 : 4;
     if (waves.length >= maxActiveWaves) {
       waves.shift();
     }
-    const maxR = Math.max(width, height) * 0.8;
-    const thickness = 100;
+    const maxR = Math.max(width, height) * 0.9;
+    const thickness = 130;
     waves.push({
       x: originX,
       y: originY,
       radius: 0,
       maxRadius: maxR,
-      speed: 18,
+      speed: 14,
       thickness: thickness,
       halfThickness: thickness / 2,
-      amplitude: Math.min(1.0, 0.4 + intensity * 0.012),
-      pushForce: 11,
-      decay: 0.975
+      amplitude: Math.min(1.2, 0.5 + intensity * 0.015),
+      pushForce: 22,
+      decay: 0.985
     });
   }
 
@@ -172,12 +174,12 @@ export function initDotsCanvas() {
             const factor = 1 - dist / hoverRadius;
             const smoothFactor = factor * factor * (3 - 2 * factor);
             const invDist = 1 / dist;
-            const pushAmount = smoothFactor * 8;
+            const pushAmount = smoothFactor * 22;
 
             hoverPushX = dx * invDist * pushAmount;
             hoverPushY = dy * invDist * pushAmount;
-            hoverRadiusAdd = smoothFactor * 1.2;
-            hoverAlphaAdd = smoothFactor * 0.25;
+            hoverRadiusAdd = smoothFactor * 2.2;
+            hoverAlphaAdd = smoothFactor * 0.45;
           }
         }
       }
@@ -209,14 +211,14 @@ export function initDotsCanvas() {
 
         wavePushX += dx * invDist * effect * wave.pushForce;
         wavePushY += dy * invDist * effect * wave.pushForce;
-        waveRadiusAdd += effect * 1.4;
-        waveAlphaAdd += effect * 0.3;
+        waveRadiusAdd += effect * 2.5;
+        waveAlphaAdd += effect * 0.45;
       }
 
       dot.targetX = dot.baseX + hoverPushX + wavePushX;
       dot.targetY = dot.baseY + hoverPushY + wavePushY;
       dot.targetRadius = baseRadius + hoverRadiusAdd + waveRadiusAdd;
-      dot.targetAlpha = Math.min(0.75, baseColor.baseAlpha + hoverAlphaAdd + waveAlphaAdd);
+      dot.targetAlpha = Math.min(0.88, baseColor.baseAlpha + hoverAlphaAdd + waveAlphaAdd);
 
       const diffX = dot.targetX - dot.x;
       const diffY = dot.targetY - dot.y;
@@ -365,7 +367,7 @@ export function initDotsCanvas() {
     lastScrollY = currentScrollY;
 
     const now = performance.now();
-    if (deltaY > 3 && (now - lastWaveTime > 110)) {
+    if (deltaY > 1 && (now - lastWaveTime > 70)) {
       lastWaveTime = now;
       const originX = mouse.active ? mouse.x : width / 2;
       const originY = mouse.active ? mouse.y : height / 2;
