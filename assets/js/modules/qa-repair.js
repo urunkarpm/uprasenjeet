@@ -303,8 +303,9 @@ export function initQaRepair() {
     hasTriggeredCompletion = true;
     isLockedToProd = true;
 
-    // Smooth scroll back up to the top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Immediately reset scroll to top (masthead area) so mobile viewport starts from masthead
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo(0, 0);
 
     // Hide top banner as requested (remove green banner)
     if (topBanner) topBanner.classList.add('hidden');
@@ -312,10 +313,16 @@ export function initQaRepair() {
     // Minimize QA Console HUD into a compact pill
     if (consoleHud) consoleHud.classList.add('minimized');
 
-    // Show completion modal after scroll initiates
+    // Ensure scroll position remains at masthead top (0, 0) after banner height update
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+
+    // Show completion modal after scroll resets to masthead top
     setTimeout(() => {
+      window.scrollTo(0, 0);
       if (modalOverlay) modalOverlay.classList.add('active');
-    }, 400);
+    }, 200);
   }
 
   function updateStageUI() {
@@ -439,6 +446,8 @@ export function initQaRepair() {
     modalContinueBtn.addEventListener('click', () => {
       if (modalOverlay) modalOverlay.classList.remove('active');
       if (consoleHud) consoleHud.classList.add('minimized');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo(0, 0);
     });
   }
 

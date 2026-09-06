@@ -44,6 +44,10 @@ export function initDotsCanvas() {
   const hoverRadiusSq = hoverRadius * hoverRadius;
   const baseRadius = 1.25;
 
+  function isMobileDevice() {
+    return width <= 768 || window.matchMedia('(pointer: coarse)').matches;
+  }
+
   function isMidRangeDevice() {
     const cores = navigator.hardwareConcurrency || 4;
     const isMobileOrTablet = width <= 1024 || window.matchMedia('(pointer: coarse)').matches;
@@ -56,13 +60,14 @@ export function initDotsCanvas() {
     width = window.innerWidth || document.documentElement.clientWidth;
     height = window.innerHeight || document.documentElement.clientHeight;
 
+    const isMobile = isMobileDevice();
     const midRange = isMidRangeDevice();
-    const maxDprCap = midRange ? 1.25 : 1.75;
+    const maxDprCap = isMobile ? 1.0 : (midRange ? 1.25 : 1.75);
     dpr = Math.min(window.devicePixelRatio || 1, maxDprCap);
 
     const stepDesktop = midRange ? 36 : 30;
-    const stepMobile = midRange ? 52 : 44;
-    const step = width <= 768 ? stepMobile : stepDesktop;
+    const stepMobile = 64; // Low dot count spacing for 60FPS mobile performance
+    const step = isMobile ? stepMobile : stepDesktop;
     const halfStep = step / 2;
 
     canvas.width = Math.floor(width * dpr);
@@ -101,23 +106,24 @@ export function initDotsCanvas() {
   }
 
   function addScrollWave(originX, originY, intensity) {
-    const maxActiveWaves = isMidRangeDevice() ? 2 : 3;
+    const isMobile = isMobileDevice();
+    const maxActiveWaves = isMobile ? 1 : (isMidRangeDevice() ? 2 : 3);
     if (waves.length >= maxActiveWaves) {
       waves.shift();
     }
     const maxR = Math.max(width, height) * 0.85;
-    const thickness = 130;
+    const thickness = isMobile ? 90 : 130;
     waves.push({
       x: originX,
       y: originY,
       radius: 0,
       maxRadius: maxR,
-      speed: 18,
+      speed: isMobile ? 15 : 18,
       thickness: thickness,
       halfThickness: thickness / 2,
-      amplitude: Math.min(0.85, 0.4 + intensity * 0.01),
-      pushForce: 14,
-      decay: 0.982
+      amplitude: Math.min(0.7, 0.3 + intensity * 0.01),
+      pushForce: isMobile ? 8 : 14,
+      decay: isMobile ? 0.96 : 0.982
     });
   }
 
@@ -286,9 +292,12 @@ export function initDotsCanvas() {
     }
   }
 
+  function isStageActive() {
+    return !document.body.dataset.qaStage || document.body.dataset.qaStage === '5';
+  }
+
   function startLoop() {
-    if (document.hidden) return;
-    if (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5') return;
+    if (document.hidden || !isStageActive()) return;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       render();
@@ -301,7 +310,7 @@ export function initDotsCanvas() {
   }
 
   function loop() {
-    if (document.hidden || (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5')) {
+    if (document.hidden || !isStageActive()) {
       isLoopRunning = false;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       return;
@@ -323,12 +332,13 @@ export function initDotsCanvas() {
   }
 
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
+    if (!document.hidden && isStageActive()) {
       startLoop();
     }
   });
 
   window.addEventListener('mousemove', (e) => {
+    if (!isStageActive()) return;
     mouse.x = e.clientX;
     mouse.y = e.clientY;
     mouse.active = true;
@@ -336,6 +346,7 @@ export function initDotsCanvas() {
   });
 
   window.addEventListener('mouseleave', () => {
+    if (!isStageActive()) return;
     mouse.active = false;
     mouse.x = -1000;
     mouse.y = -1000;
@@ -343,6 +354,7 @@ export function initDotsCanvas() {
   });
 
   window.addEventListener('touchstart', (e) => {
+    if (!isStageActive()) return;
     if (e.touches.length > 0) {
       mouse.x = e.touches[0].clientX;
       mouse.y = e.touches[0].clientY;
@@ -352,6 +364,7 @@ export function initDotsCanvas() {
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
+    if (!isStageActive()) return;
     if (e.touches.length > 0) {
       mouse.x = e.touches[0].clientX;
       mouse.y = e.touches[0].clientY;
@@ -361,6 +374,7 @@ export function initDotsCanvas() {
   }, { passive: true });
 
   window.addEventListener('touchend', () => {
+    if (!isStageActive()) return;
     mouse.active = false;
     mouse.x = -1000;
     mouse.y = -1000;
@@ -371,12 +385,16 @@ export function initDotsCanvas() {
   let lastWaveTime = 0;
 
   window.addEventListener('scroll', () => {
+    if (!isStageActive()) return;
+    const isMobile = isMobileDevice();
     const currentScrollY = window.scrollY || window.pageYOffset || 0;
     const deltaY = Math.abs(currentScrollY - lastScrollY);
     lastScrollY = currentScrollY;
 
     const now = performance.now();
-    if (deltaY > 1 && (now - lastWaveTime > 70)) {
+    const minWaveInterval = isMobile ? 250 : 70;
+    const minDelta = isMobile ? 12 : 1;
+    if (deltaY > minDelta && (now - lastWaveTime > minWaveInterval)) {
       lastWaveTime = now;
       const originX = mouse.active ? mouse.x : width / 2;
       const originY = mouse.active ? mouse.y : height / 2;
@@ -388,8 +406,10 @@ export function initDotsCanvas() {
   window.addEventListener('resize', () => {
     const currentWidth = window.innerWidth || document.documentElement.clientWidth;
     const currentHeight = window.innerHeight || document.documentElement.clientHeight;
+    const isMobile = isMobileDevice();
+    const heightThreshold = isMobile ? 180 : 120;
 
-    if (currentWidth !== lastWidth || Math.abs(currentHeight - lastHeight) > 120) {
+    if (currentWidth !== lastWidth || Math.abs(currentHeight - lastHeight) > heightThreshold) {
       lastWidth = currentWidth;
       lastHeight = currentHeight;
       clearTimeout(resizeTimeout);

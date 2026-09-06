@@ -190,6 +190,8 @@ body.canvas-dots-active::before {
   z-index: 0;
   will-change: transform;
   transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: strict;
 }
 
 a {
