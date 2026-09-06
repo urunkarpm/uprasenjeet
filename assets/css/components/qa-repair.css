@@ -3,12 +3,19 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Background Animation & Dot Canvas
+   Background Animation & Dot Canvas (Active Only in Production Stage 5)
    -------------------------------------------------------------------------- */
-#bg-dots-canvas {
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+body:not([data-qa-stage="5"]) #bg-dots-canvas,
+body:not([data-qa-stage="5"])::before {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body[data-qa-stage="5"] #bg-dots-canvas {
   opacity: 1 !important;
   visibility: visible !important;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
 /* --------------------------------------------------------------------------
