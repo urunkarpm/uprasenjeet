@@ -232,7 +232,6 @@ function initDiagnosticsRunner() {
           const rect = el.getBoundingClientRect();
           if (rect.width >= 32 && rect.height >= 32) optimalTargets++;
         });
-        const istqbBtn = document.getElementById('footer-copy-istqb');
         const passed = interactiveElements.length > 0;
         return {
           tag: 'UX-06',
