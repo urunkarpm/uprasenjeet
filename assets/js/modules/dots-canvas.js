@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BLUEPRINT STUDIO — INTERACTIVE BACKGROUND DOTS CANVAS MODULE
+   BLUEPRINT STUDIO — INTERACTIVE BACKGROUND DOTS CANVAS MODULE (60-120FPS OPTIMIZED)
    ========================================================================== */
 
 export function initDotsCanvas() {
@@ -15,7 +15,7 @@ export function initDotsCanvas() {
   const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true }) || canvas.getContext('2d');
   let width = 0;
   let height = 0;
-  let dpr = window.devicePixelRatio || 1;
+  let dpr = 1;
   let lastWidth = 0;
   let lastHeight = 0;
 
@@ -38,16 +38,18 @@ export function initDotsCanvas() {
 
   let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
   let dots = [];
+  let waves = [];
 
-  const gridStepDesktop = 30;
-  const gridStepMobile = 45;
+  const gridStepDesktop = 32;
+  const gridStepMobile = 48;
   const hoverRadius = 120;
   const hoverRadiusSq = hoverRadius * hoverRadius;
   const baseRadius = 1.25;
 
   function buildDots() {
     dots = [];
-    dpr = window.devicePixelRatio || 1;
+    waves = [];
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
     width = window.innerWidth || document.documentElement.clientWidth;
     height = window.innerHeight || document.documentElement.clientHeight;
 
@@ -84,8 +86,29 @@ export function initDotsCanvas() {
       currentRadius: baseRadius,
       targetRadius: baseRadius,
       currentAlpha: 0.3,
-      targetAlpha: 0.3
+      targetAlpha: 0.3,
+      isDisplaced: false
     };
+  }
+
+  function addScrollWave(originX, originY, intensity) {
+    if (waves.length >= 3) {
+      waves.shift();
+    }
+    const maxR = Math.max(width, height) * 0.8;
+    const thickness = 100;
+    waves.push({
+      x: originX,
+      y: originY,
+      radius: 0,
+      maxRadius: maxR,
+      speed: 18,
+      thickness: thickness,
+      halfThickness: thickness / 2,
+      amplitude: Math.min(1.0, 0.4 + intensity * 0.012),
+      pushForce: 11,
+      decay: 0.975
+    });
   }
 
   let isLoopRunning = false;
@@ -95,42 +118,97 @@ export function initDotsCanvas() {
     const palette = colorPalettes[currentTheme] || colorPalettes.dark;
     let needsAnimation = false;
 
+    // Update active scroll waves
+    for (let w = waves.length - 1; w >= 0; w--) {
+      const wave = waves[w];
+      wave.radius += wave.speed;
+      wave.amplitude *= wave.decay;
+      if (wave.radius > wave.maxRadius || wave.amplitude < 0.02) {
+        waves.splice(w, 1);
+      } else {
+        needsAnimation = true;
+      }
+    }
+
+    // Pre-calculate wave bounding bounds
+    const preparedWaves = [];
+    for (let w = 0; w < waves.length; w++) {
+      const wave = waves[w];
+      const minDist = Math.max(0, wave.radius - wave.halfThickness);
+      const maxDist = wave.radius + wave.halfThickness;
+      preparedWaves.push({
+        wave: wave,
+        minDist: minDist,
+        maxDist: maxDist,
+        minDistSq: minDist * minDist,
+        maxDistSq: maxDist * maxDist
+      });
+    }
+
     for (let i = 0; i < dots.length; i++) {
       const dot = dots[i];
       const baseColor = palette[dot.colorType];
 
-      let isWithinHover = false;
-      let dist = 9999;
+      let hoverPushX = 0;
+      let hoverPushY = 0;
+      let hoverRadiusAdd = 0;
+      let hoverAlphaAdd = 0;
 
       if (mouse.active) {
         const dx = dot.baseX - mouse.x;
         const dy = dot.baseY - mouse.y;
         if (Math.abs(dx) < hoverRadius && Math.abs(dy) < hoverRadius) {
           const distSq = dx * dx + dy * dy;
-          if (distSq < hoverRadiusSq) {
-            dist = Math.sqrt(distSq);
-            isWithinHover = true;
+          if (distSq < hoverRadiusSq && distSq > 0.001) {
+            const dist = Math.sqrt(distSq);
+            const factor = 1 - dist / hoverRadius;
+            const smoothFactor = factor * factor * (3 - 2 * factor);
+            const invDist = 1 / dist;
+            const pushAmount = smoothFactor * 8;
+
+            hoverPushX = dx * invDist * pushAmount;
+            hoverPushY = dy * invDist * pushAmount;
+            hoverRadiusAdd = smoothFactor * 1.2;
+            hoverAlphaAdd = smoothFactor * 0.25;
           }
         }
       }
 
-      if (isWithinHover) {
-        const factor = 1 - dist / hoverRadius;
+      // Fast wave calculation with bounding-box pre-filtering & zero trig functions
+      let wavePushX = 0;
+      let wavePushY = 0;
+      let waveRadiusAdd = 0;
+      let waveAlphaAdd = 0;
+
+      for (let w = 0; w < preparedWaves.length; w++) {
+        const pw = preparedWaves[w];
+        const wave = pw.wave;
+        const dx = dot.baseX - wave.x;
+        const dy = dot.baseY - wave.y;
+
+        if (Math.abs(dx) > pw.maxDist || Math.abs(dy) > pw.maxDist) continue;
+
+        const distSq = dx * dx + dy * dy;
+        if (distSq < pw.minDistSq || distSq > pw.maxDistSq || distSq < 0.001) continue;
+
+        const dist = Math.sqrt(distSq);
+        const ringDist = Math.abs(dist - wave.radius);
+
+        const factor = 1 - ringDist / wave.halfThickness;
         const smoothFactor = factor * factor * (3 - 2 * factor);
+        const effect = smoothFactor * wave.amplitude;
+        const invDist = 1 / dist;
 
-        const angle = Math.atan2(dot.baseY - mouse.y, dot.baseX - mouse.x);
-        const pushAmount = smoothFactor * 8;
-
-        dot.targetX = dot.baseX + Math.cos(angle) * pushAmount;
-        dot.targetY = dot.baseY + Math.sin(angle) * pushAmount;
-        dot.targetRadius = baseRadius + smoothFactor * 1.2;
-        dot.targetAlpha = Math.min(0.65, baseColor.baseAlpha + smoothFactor * 0.25);
-      } else {
-        dot.targetX = dot.baseX;
-        dot.targetY = dot.baseY;
-        dot.targetRadius = baseRadius;
-        dot.targetAlpha = baseColor.baseAlpha;
+        wavePushX += dx * invDist * effect * wave.pushForce;
+        wavePushY += dy * invDist * effect * wave.pushForce;
+        waveRadiusAdd += effect * 1.4;
+        waveAlphaAdd += effect * 0.3;
       }
+
+      dot.targetX = dot.baseX + hoverPushX + wavePushX;
+      dot.targetY = dot.baseY + hoverPushY + wavePushY;
+      dot.targetRadius = baseRadius + hoverRadiusAdd + waveRadiusAdd;
+      dot.targetAlpha = Math.min(0.75, baseColor.baseAlpha + hoverAlphaAdd + waveAlphaAdd);
 
       const diffX = dot.targetX - dot.x;
       const diffY = dot.targetY - dot.y;
@@ -138,36 +216,37 @@ export function initDotsCanvas() {
       const diffA = dot.targetAlpha - dot.currentAlpha;
 
       if (Math.abs(diffX) > 0.01 || Math.abs(diffY) > 0.01 || Math.abs(diffR) > 0.001 || Math.abs(diffA) > 0.001) {
-        dot.x += diffX * 0.16;
-        dot.y += diffY * 0.16;
-        dot.currentRadius += diffR * 0.16;
-        dot.currentAlpha += diffA * 0.16;
+        dot.x += diffX * 0.18;
+        dot.y += diffY * 0.18;
+        dot.currentRadius += diffR * 0.18;
+        dot.currentAlpha += diffA * 0.18;
+        dot.isDisplaced = true;
         needsAnimation = true;
       } else {
         dot.x = dot.targetX;
         dot.y = dot.targetY;
         dot.currentRadius = dot.targetRadius;
         dot.currentAlpha = dot.targetAlpha;
+        dot.isDisplaced = (Math.abs(dot.x - dot.baseX) > 0.05 || Math.abs(dot.y - dot.baseY) > 0.05);
       }
     }
 
-    return needsAnimation;
+    return needsAnimation || waves.length > 0;
   }
 
   function render() {
     ctx.clearRect(0, 0, width, height);
     const palette = colorPalettes[currentTheme] || colorPalettes.dark;
 
-    // Single-pass path grouping for static unmodified dots
     const staticPaths = [new Path2D(), new Path2D(), new Path2D(), new Path2D()];
     const displacedDots = [];
 
     for (let i = 0; i < dots.length; i++) {
       const dot = dots[i];
-      if (Math.abs(dot.x - dot.baseX) <= 0.05 && Math.abs(dot.y - dot.baseY) <= 0.05) {
+      if (!dot.isDisplaced) {
         const p = staticPaths[dot.colorType];
-        p.moveTo(dot.x + dot.currentRadius, dot.y);
-        p.arc(dot.x, dot.y, dot.currentRadius, 0, Math.PI * 2);
+        p.moveTo(dot.x + baseRadius, dot.y);
+        p.arc(dot.x, dot.y, baseRadius, 0, Math.PI * 2);
       } else {
         displacedDots.push(dot);
       }
@@ -179,7 +258,6 @@ export function initDotsCanvas() {
       ctx.fill(staticPaths[cIndex]);
     }
 
-    // Render displaced/hovered dots individually
     for (let i = 0; i < displacedDots.length; i++) {
       const dot = displacedDots[i];
       const c = palette[dot.colorType];
@@ -271,14 +349,22 @@ export function initDotsCanvas() {
     startLoop();
   });
 
-  let scrollTimeout = null;
+  let lastScrollY = window.scrollY || window.pageYOffset || 0;
+  let lastWaveTime = 0;
+
   window.addEventListener('scroll', () => {
-    if (!mouse.active) {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        startLoop();
-      }, 80);
+    const currentScrollY = window.scrollY || window.pageYOffset || 0;
+    const deltaY = Math.abs(currentScrollY - lastScrollY);
+    lastScrollY = currentScrollY;
+
+    const now = performance.now();
+    if (deltaY > 3 && (now - lastWaveTime > 110)) {
+      lastWaveTime = now;
+      const originX = mouse.active ? mouse.x : width / 2;
+      const originY = mouse.active ? mouse.y : height / 2;
+      addScrollWave(originX, originY, deltaY);
     }
+    startLoop();
   }, { passive: true });
 
   window.addEventListener('resize', () => {
@@ -318,3 +404,4 @@ export function initDotsCanvas() {
     startLoop();
   });
 }
+
