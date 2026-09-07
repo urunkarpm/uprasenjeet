@@ -95,37 +95,37 @@ export function initQaRepair() {
 
   const STAGE_TEXT_OVERRIDES = {
     0: {
-      heroTitle: `I design, QA test, and build digital products with <span class="highlight-text" id="ai-animated-word">AI</span>.`,
-      heroCta: `Inspect QA Test Harness Specs 🧪`,
-      heroDesc: `<div style="font-family:var(--font-mono); font-size:0.83rem; background:var(--bg-card); border:1px solid rgba(239,68,68,0.35); padding:10px 14px; border-radius:8px; margin-top:10px;"><div style="color:var(--text-secondary); font-size:0.75rem; margin-bottom:4px;"><i class="fa-solid fa-microchip" aria-hidden="true"></i> <strong>QA_RUNNER_CONFIG:</strong> <code>{ suite: "Playwright E2E", env: "staging.local", viewport: "390x844" }</code></div><div style="color:#ef4444; font-weight:600;"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <strong>SUITE AUDIT:</strong> 42 E2E Specs Executed • 5 Regression Defects failing • Scroll to trigger QA auto-patch.</div></div>`,
-      workTitle: `<span style="font-family:var(--font-mono); color:#ef4444;">[SUITE_FAIL: STAGING_BUILD_#4092]</span> Selected Engineering Projects`,
-      workSub: `QA Automation Suite running 42 E2E test specs against live endpoints. 5 regression defect tickets failing:`,
-      aboutTitle: `QA Test Architecture &amp;<br />Regression Defect Analysis`,
-      aboutSub: `Configured E2E test suites, boundary analysis matrices, and API mock stubs to ensure 100% production stability.`,
-      aboutBannerTag: `[QA_TEST_RUNNER]: STAGING REGRESSION SUITE ACTIVE`,
-      aboutBio1: `Configured with <strong>6+ years of QA Engineering experience</strong> breaking banking &amp; payment platforms before users do. Expert in test automation frameworks (Playwright, Cypress), API validation, and performance stress testing.`,
-      aboutBio2: `Leveraging <strong>AI-assisted QA testing</strong> to generate edge-case fuzzer payloads, automated regression scripts, and zero-defect production releases.`,
-      statBox1: `<span class="stat-num" style="color:#ef4444;">5 / 42</span><span class="stat-lbl">Failing Test Specs</span>`,
-      statBox2: `<span class="stat-num" style="color:#f59e0b;">88.1%</span><span class="stat-lbl">Pass Rate (Staging)</span>`,
-      statBox3: `<span class="stat-num" style="color:#ef4444;">401 / 500</span><span class="stat-lbl">API Errors Caught</span>`,
-      statBox4: `<span class="stat-num">Playwright</span><span class="stat-lbl">Test Harness Active</span>`,
-      certsTitle: `[SUITE_AUDIT]: QA Test Specs &amp; Industry Credentials`,
-      certsSub: `Certificate &amp; test suite checks pending. ISTQB CTFL #00613950 under regression audit.`,
-      certsBannerTag: `STAGING CREDENTIALS &amp; TEST SUITE LOGS`,
+      heroTitle: `[STAGING_BUILD_v0.9.4]: QA Test Automation &amp; Regression Suite`,
+      heroCta: `Inspect Staging Test Harness Specs 🧪`,
+      heroDesc: `<div style="font-family:var(--font-mono); font-size:0.83rem; background:var(--bg-card); border:1px solid rgba(239,68,68,0.35); padding:10px 14px; border-radius:8px; margin-top:10px;"><div style="color:var(--text-secondary); font-size:0.75rem; margin-bottom:4px;"><i class="fa-solid fa-microchip" aria-hidden="true"></i> <strong>QA_MOCK_ENV_CONFIG:</strong> <code>{ suite: "Playwright E2E", mockData: true, target: "staging.internal.local" }</code></div><div style="color:#ef4444; font-weight:600;"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <strong>STAGING SUITE AUDIT:</strong> 42 Synthetic E2E Specs Executed • 5 Regression Defects failing • Scroll down to trigger QA auto-patch.</div></div>`,
+      workTitle: `<span style="font-family:var(--font-mono); color:#ef4444;">[MOCK_DATASET_v2]: STAGING REGRESSION SUITE</span> Anonymous Project Test Harness`,
+      workSub: `Synthetic QA mock fixtures running 42 E2E test specs against isolated staging endpoints (5 defect tickets active):`,
+      aboutTitle: `[STAGING_FIXTURE]: QA Test Architecture &amp;<br />Regression Defect Matrix`,
+      aboutSub: `Anonymized test harness suite simulating boundary conditions, load stress, and security vectors.`,
+      aboutBannerTag: `[QA_MOCK_ENV]: STAGING TEST FIXTURES ACTIVE`,
+      aboutBio1: `<strong>[SYNTHETIC_QA_PROFILE]:</strong> Simulated test runner profile executing automated test suites across mock banking &amp; payment endpoints. Evaluates response payloads, error boundaries, and race conditions.`,
+      aboutBio2: `<strong>[AUTOMATION_SPEC]:</strong> Simulating AI-driven test generators, edge-case fuzzer payloads, and automated regression runners prior to production deployment.`,
+      statBox1: `<span class="stat-num" style="color:#ef4444;">5 / 42</span><span class="stat-lbl">Synthetic Defect Tickets</span>`,
+      statBox2: `<span class="stat-num" style="color:#f59e0b;">88.1%</span><span class="stat-lbl">Mock Pass Rate</span>`,
+      statBox3: `<span class="stat-num" style="color:#ef4444;">401 / 500</span><span class="stat-lbl">Mock API Errors Caught</span>`,
+      statBox4: `<span class="stat-num">Playwright</span><span class="stat-lbl">Staging Test Suite</span>`,
+      certsTitle: `[STAGING_AUDIT]: Synthetic Test Specs &amp; Mock Credentials`,
+      certsSub: `Mock certification &amp; test suite checks pending verification under staging regression runner.`,
+      certsBannerTag: `SYNTHETIC CREDENTIALS &amp; STAGING LOGS`,
       istqbStatus: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 5 Specs Failing`,
       istqbTitle: `[SPEC-SUITE #01] ISTQB® CTFL — Equivalence Partitioning Test Suite`,
-      istqbDesc: `Configured test suite specs for Equivalence Partitioning &amp; Boundary Value Analysis. 250 test vectors executed: 5 boundary failures detected.`,
-      istqbId: `TEST_HARNESS_AUDIT`
+      istqbDesc: `Synthetic test suite specs for Equivalence Partitioning &amp; Boundary Value Analysis. 250 test vectors executed: 5 boundary failures detected.`,
+      istqbId: `MOCK_CERT_ID_#000000`
     },
     1: {
-      heroTitle: `I design, QA test, and build digital products with <span class="highlight-text" id="ai-animated-word">AI</span>.`,
-      heroCta: `Proof I Talk to Robots`,
-      heroDesc: `QA Specialist (6+ yrs making sure banking apps don't crash when you buy coffee).<br /><br />🛠️ <i>Patching in progress:</i> Harnessing AI to build real products without burning production down.`,
-      workTitle: `[QA_PATCH_1]: Selected Engineering Projects`,
-      workSub: `🛠️ Patching in progress: Validating UI components &amp; backend endpoints...`,
+      heroTitle: `[STAGING_BUILD_v0.9.4]: QA Test Automation &amp; Regression Suite`,
+      heroCta: `Inspect Staging Test Harness Specs 🧪`,
+      heroDesc: `🛠️ <i>Patch 1/5 in progress:</i> Validating layout grid assertions &amp; flexbox element boundaries...`,
+      workTitle: `[QA_PATCH_1]: Staging Project Fixtures`,
+      workSub: `🛠️ Patching in progress: Realigning layout grids &amp; DOM element bounds...`,
       aboutBannerTag: `[PATCH_01]: ABOUT IN REVIEW`,
-      certsTitle: `Certifications &amp; Core Competencies`,
-      certsSub: `Verified industry credentials under regression testing.`,
+      certsTitle: `Synthetic Certifications &amp; Core Competencies`,
+      certsSub: `Mock credentials under regression testing.`,
       certsBannerTag: `CREDENTIALS UNDER AUDIT`,
       istqbStatus: `<i class="fa-solid fa-hourglass-half" style="color:#f59e0b;"></i> Re-evaluating`,
       istqbTitle: `ISTQB® Certified Tester Foundation Level (CTFL)`,
@@ -158,28 +158,28 @@ export function initQaRepair() {
 
   const LOREM_TILE_DEFECTS = [
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-101</span> <span class="qa-badge-http">401 UNAUTHORIZED</span> PingPin — Auth Header Expiration &amp; Auto-Retry Cascade`,
-      desc: `<strong>Test Vector:</strong> <code>POST /api/v1/auth/punch</code> with <code>{ token: "EXPIRED_BEARER", retryCount: 9999 }</code>.<br/><span class="qa-err-msg">❌ AssertionError: Expected HTTP 200 OK, received 401 Unauthorized (AuthInterceptor.kt:42).</span>`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-101</span> <span class="qa-badge-http">401 UNAUTHORIZED</span> NexusPunch — Auth Header Expiration &amp; Auto-Retry Loop`,
+      desc: `<strong>Mock Payload:</strong> <code>POST /api/v1/mock/punch</code> with <code>{ bearerToken: "SYNTHETIC_EXPIRED", maxRetries: 9999 }</code>.<br/><span class="qa-err-msg">❌ AssertionError: Expected HTTP 200 OK, received 401 Unauthorized (MockAuthInterceptor.kt:42).</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-102</span> <span class="qa-badge-http">500 SERVER ERROR</span> Holiday2API — Edge CDN Fuzzing &amp; Null Payload Vector`,
-      desc: `<strong>Test Vector:</strong> <code>GET /api/v1/holidays?year=999999&amp;state=ALL</code>.<br/><span class="qa-err-msg">❌ UncaughtTypeError: Cannot read properties of undefined (reading 'isoCode') at WorkerHandler.js:88.</span>`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-102</span> <span class="qa-badge-http">500 SERVER ERROR</span> OmniCalendar — Edge CDN Fuzzing &amp; Null Payload Vector`,
+      desc: `<strong>Mock Payload:</strong> <code>GET /api/v1/mock/holidays?year=999999&amp;state=NULL</code>.<br/><span class="qa-err-msg">❌ UncaughtTypeError: Cannot read properties of undefined (reading 'isoCode') at WorkerStub.js:88.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-103</span> <span class="qa-badge-http">503 SERVICE UNAVAIL</span> LogPaper — Logcat Buffer Stress &amp; Memory Heap Leak`,
-      desc: `<strong>Test Vector:</strong> <code>adb logcat -v threadtime *:V</code> streaming 50,000 logs/sec.<br/><span class="qa-err-msg">❌ OutOfMemoryError: Canvas surface texture allocation failed at LiveWallpaperService.kt:114.</span>`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-103</span> <span class="qa-badge-http">503 SERVICE UNAVAIL</span> TerminalStream — Logcat Buffer Stress &amp; Memory Heap Leak`,
+      desc: `<strong>Mock Payload:</strong> <code>adb logcat -v threadtime *:V</code> streaming 50,000 synthetic logs/sec.<br/><span class="qa-err-msg">❌ OutOfMemoryError: Canvas surface texture allocation failed at MockLiveWallpaperService.kt:114.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-104</span> <span class="qa-badge-http">422 UNPROCESSABLE</span> Splixter — Float Precision Underflow &amp; GST Boundary`,
-      desc: `<strong>Test Vector:</strong> <code>SplitCalculator.calculate({ total: 0.00000001, splitRatio: [0, 0, 0] })</code>.<br/><span class="qa-err-msg">❌ ArithmeticException: Division by zero in ProportionalSplitter.kt:62.</span>`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-104</span> <span class="qa-badge-http">422 UNPROCESSABLE</span> MatrixSplit — Float Precision Underflow &amp; GST Boundary`,
+      desc: `<strong>Mock Payload:</strong> <code>SplitCalculator.calculate({ total: 0.00000001, splitRatio: [0, 0, 0] })</code>.<br/><span class="qa-err-msg">❌ ArithmeticException: Division by zero in ProportionalSplitter.kt:62.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-105</span> <span class="qa-badge-http">504 TIMEOUT</span> Force Ethernet — Dongle Hot-Plug &amp; Socket Leak`,
-      desc: `<strong>Test Vector:</strong> <code>NetworkEmulationProfile({ latency: "4500ms", packetLoss: "85%" })</code>.<br/><span class="qa-err-msg">❌ SocketTimeoutException: USB-C interface eth0 reset by peer at NetworkTetherManager.kt:205.</span>`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-105</span> <span class="qa-badge-http">504 TIMEOUT</span> EtherNetRouter — Dongle Hot-Plug &amp; Socket Leak`,
+      desc: `<strong>Mock Payload:</strong> <code>NetworkEmulationProfile({ latency: "4500ms", packetLoss: "85%" })</code>.<br/><span class="qa-err-msg">❌ SocketTimeoutException: USB-C interface eth0 reset by peer at MockTetherManager.kt:205.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-106</span> <span class="qa-badge-http">OOM HEAP LEAK</span> Yukuza Launcher — Texture Buffer Leak on Focus Scroll`,
-      desc: `<strong>Test Vector:</strong> <code>DevTools Heap Profiler Trace (1,000 D-Pad focus events)</code>.<br/><span class="qa-err-msg">❌ GraphicBufferLeak: 1.4 GB un-reclaimed bitmap textures at ShaderCanvas.kt:78.</span>`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-106</span> <span class="qa-badge-http">OOM HEAP LEAK</span> QuantumLauncher — Texture Buffer Leak on Focus Scroll`,
+      desc: `<strong>Mock Payload:</strong> <code>DevTools Heap Profiler Trace (1,000 D-Pad focus events)</code>.<br/><span class="qa-err-msg">❌ GraphicBufferLeak: 1.4 GB un-reclaimed bitmap textures at ShaderCanvas.kt:78.</span>`
     }
   ];
 
@@ -205,28 +205,28 @@ export function initQaRepair() {
     {
       title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-01</span> ISTQB® CTFL — Boundary Value &amp; Equivalence Matrix`,
       desc: `<strong>Test Spec:</strong> 250 Boundary Value Analysis &amp; Equivalence Partitioning test vectors executed.<br/><span class="qa-err-msg">⚠️ 5/250 boundary assertions failing on edge parameters.</span>`,
-      issuer: `[QA RUNNER] ISTQB Test Execution Bureau`,
+      issuer: `[MOCK_QA_HARNESS] Synthetic Test Execution Bureau`,
       status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 5 Specs Failing`,
       chips: [`[FAIL] Boundary Vector`, `[SPEC] Equivalence Partition`, `[STUB] Mock Payload`, `[WARN] 401 Expiration`]
     },
     {
       title: `<span class="qa-badge warn"><i class="fa-solid fa-vial-circle-check"></i> SPEC-02</span> Playwright E2E — Async Locator &amp; Timeout Spec`,
       desc: `<strong>Test Spec:</strong> <code>{ actionTimeout: "5000ms", retries: 3 }</code>.<br/><span class="qa-err-msg">⚠️ Flaky assertion due to async DOM element hydration race condition.</span>`,
-      issuer: `[QA RUNNER] Playwright Automation Suite`,
+      issuer: `[MOCK_QA_HARNESS] Playwright Automation Suite`,
       status: `<i class="fa-solid fa-hourglass-half" style="color:#f59e0b;"></i> Flaky Assertion`,
       chips: [`[WARN] Locator Timeout`, `[RACE] Async Hydration`, `[RETRY] 3x Executed`, `[PASS] 37/42 Specs`]
     },
     {
       title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-03</span> Payment Gateway — k6 Load Test &amp; Security Scan`,
       desc: `<strong>Test Spec:</strong> k6 load test simulating 5,000 concurrent Virtual Users (VUs).<br/><span class="qa-err-msg">❌ 500 Internal Server Error &amp; database connection pool exhaustion.</span>`,
-      issuer: `[QA RUNNER] k6 Load Testing Engine`,
+      issuer: `[MOCK_QA_HARNESS] k6 Load Testing Engine`,
       status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 500 Load Crash`,
       chips: [`[FAIL] 500 Server Error`, `[LOAD] 5k VUs`, `[SECURITY] OWASP ZAP`, `[WARN] Pool Lock`]
     },
     {
       title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-04</span> AI Prompt Fuzzer — Edge-Case Input Suite`,
       desc: `<strong>Test Spec:</strong> AI automated edge-case input generator (1,000 payload vectors).<br/><span class="qa-err-msg">⚠️ Uncovered 12 unhandled null pointer exceptions in form validation.</span>`,
-      issuer: `[QA RUNNER] AI Fuzzing Runner`,
+      issuer: `[MOCK_QA_HARNESS] AI Fuzzing Runner`,
       status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> Fuzzing Active`,
       chips: [`[FUZZ] 1k Payload Vectors`, `[NULL] Unhandled Exception`, `[PASS] 988/1000`, `[COVERAGE] 94%`]
     }
@@ -241,18 +241,18 @@ export function initQaRepair() {
   });
 
   const FUNNY_TOOL_DEFECTS = [
-    `[ENV: STAGING-V2]`,
+    `[STAGING_MOCK_DATA]`,
     `Playwright.config.ts`,
-    `Postman_Collection.json`,
+    `Mock_Payload_Fixture.json`,
     `Cypress_E2E.spec.ts`,
     `k6_Load_Test.js`,
     `ADB_Logcat_Harness`,
     `OWASP_ZAP_Scanner`,
     `Jest_Unit_Runner.ts`,
     `Charles_Proxy_Stubs`,
-    `ISTQB_CTFL_Matrix`,
-    `JIRA_DEFECT_LOG`,
-    `Selenium_Grid`
+    `ISTQB_Boundary_Matrix`,
+    `JIRA_MOCK_TICKET_LOG`,
+    `Synthetic_Data_Generator`
   ];
 
   if (!consoleHud) return;

@@ -866,8 +866,22 @@ body:not([data-qa-stage="5"]) .cert-card {
   box-shadow: 0 4px 15px rgba(239, 68, 68, 0.08) !important;
 }
 
+body:not([data-qa-stage="5"]) .project-card .card-visual img,
+body:not([data-qa-stage="5"]) .hero-image-frame img {
+  filter: grayscale(100%) blur(4px) !important;
+  opacity: 0.35 !important;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+}
+
+body[data-qa-stage="5"] .project-card .card-visual img,
+body[data-qa-stage="5"] .hero-image-frame img {
+  filter: none !important;
+  opacity: 1 !important;
+  transition: filter 0.5s ease, opacity 0.5s ease;
+}
+
 body:not([data-qa-stage="5"]) .project-card::before {
-  content: "DEFECT ACTIVE";
+  content: "SYNTHETIC MOCK FIXTURE";
   position: absolute;
   top: 12px;
   right: 14px;
