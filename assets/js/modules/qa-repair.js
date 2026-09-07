@@ -183,6 +183,10 @@ export function initQaRepair() {
     {
       title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-106</span> <span class="qa-badge-http">OOM HEAP LEAK</span> QuantumLauncher — Texture Buffer Leak on Focus Scroll`,
       desc: `<strong>Mock Payload:</strong> <code>DevTools Heap Profiler Trace (1,000 D-Pad focus events)</code>.<br/><span class="qa-err-msg">❌ GraphicBufferLeak: 1.4 GB un-reclaimed bitmap textures at ShaderCanvas.kt:78.</span>`
+    },
+    {
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-107</span> <span class="qa-badge-http">400 BAD REQUEST</span> ChronosMap — Timezone Drift &amp; Map Tile Hydration Race`,
+      desc: `<strong>Mock Payload:</strong> <code>POST /api/v1/mock/timezone</code> with <code>{ targetZone: "UTC+14:00", leafletTileZoom: 99 }</code>.<br/><span class="qa-err-msg">❌ RangeError: Invalid time zone offset or map bounds out of limits (ChronosEngine.ts:112).</span>`
     }
   ];
 
