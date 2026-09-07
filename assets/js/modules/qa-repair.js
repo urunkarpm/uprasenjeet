@@ -6,43 +6,43 @@ const STAGE_CONFIGS = [
   {
     stage: 0,
     status: 'FAIL ❌',
-    bannerText: '⚠️ CRITICAL: 5 UNRESOLVED DEFECTS DETECTED IN UNTESTED BUILD',
-    log: '> [SYSTEM ALERT] 5 Defects active. Scroll to trigger QA repair sequence...',
+    bannerText: '🧪 QA AUTOMATION RUNNER: 5 REGRESSION DEFECTS DETECTED IN STAGING BUILD #4092',
+    log: '> [QA RUNNER] Active Test Suite: 42 E2E Specs Executed. 5 Failed. Scroll to initiate auto-patch...',
     progress: 10
   },
   {
     stage: 1,
     status: 'PATCHING 🛠️',
-    bannerText: '🛠️ QA PIPELINE: EXECUTING PATCH 1/5 (GRID REALIGNMENT)',
-    log: '> [PATCH 01] Fixing flexbox grid, card rotations & element layout bounds...',
+    bannerText: '🛠️ QA PATCH 1/5: EXECUTING FLEXBOX & LAYOUT REALIGNMENT (ASSERTION RE-CHECK)',
+    log: '> [PATCH 01/05] Resolving grid bounds, card transforms & viewport overflow vectors...',
     progress: 30
   },
   {
     stage: 2,
     status: 'PATCHING 🛠️',
-    bannerText: '🛠️ QA PIPELINE: EXECUTING PATCH 2/5 (TYPOGRAPHY & ACCESSIBILITY)',
-    log: '> [PATCH 02] Resolving contrast ratios & Google Sans / Mono font hierarchy...',
+    bannerText: '🛠️ QA PATCH 2/5: AUDITING TYPOGRAPHY & WCAG 2.1 AA CONTRAST RATIOS',
+    log: '> [PATCH 02/05] Validating color contrast ratios, aria-labels & font scale hierarchy...',
     progress: 50
   },
   {
     stage: 3,
     status: 'PATCHING 🛠️',
-    bannerText: '🛠️ QA PIPELINE: EXECUTING PATCH 3/5 (ASSET & LINK RECOVERY)',
-    log: '> [PATCH 03] Verifying media assets & recovering interactive card links...',
+    bannerText: '🛠️ QA PATCH 3/5: VERIFYING MEDIA ASSETS & INTERACTIVE ROUTE STUBS',
+    log: '> [PATCH 03/05] Auditing image alt tags, SVG assets & internal anchor route targets...',
     progress: 70
   },
   {
     stage: 4,
     status: 'OPTIMIZING ⚡',
-    bannerText: '⚡ QA PIPELINE: EXECUTING PATCH 4/5 (PERFORMANCE & 60FPS ANIMATIONS)',
-    log: '> [PATCH 04] Enabling hardware-accelerated transitions & micro-interactions...',
+    bannerText: '⚡ QA PATCH 4/5: BENCHMARKING 60FPS HARDWARE ACCELERATION & PERF BUDGET',
+    log: '> [PATCH 04/05] Enabling 60FPS canvas layer compositing & micro-interaction physics...',
     progress: 90
   },
   {
     stage: 5,
     status: 'PASSED ✅',
     bannerText: '● ALL SYSTEMS OPERATIONAL: 100% REGRESSION TESTED | READY FOR PROD',
-    log: '> [QA RUNNER] Test Suite Executed: 42/42 Passed. Zero Defects Found.',
+    log: '> [QA RUNNER] Test Suite Completed: 42/42 Specs Passed (100% Quality Score). Zero Defects Found.',
     progress: 100
   }
 ];
@@ -95,25 +95,25 @@ export function initQaRepair() {
 
   const STAGE_TEXT_OVERRIDES = {
     0: {
-      heroTitle: `I design, <span style="color:#ef4444; font-family:monospace;">[QA_TEST_RUNNER: 5_DEFECTS]</span>, and test digital products with <span class="highlight-text" id="ai-animated-word">AI</span>.`,
-      heroCta: `View Test Harness Specs 🧪`,
-      heroDesc: `<strong>[TEST_CONFIG_ENV]:</strong> Target Host: <code>https://qa-staging.internal.local:8443</code><br /><br /><span style="color:#ef4444; font-family:monospace; font-weight:600;">⚠️ RUNNER_LOG:</span> Configured 42 E2E test specs (Playwright/Cypress). 5 critical regression defects failing on current commit.`,
-      workTitle: `[TEST_SUITE_FAIL]: Staging Build Regression Audit`,
-      workSub: `⚠️ Configured Test Runner Params: { viewport: '390x844', mockAPI: true, throttling: '3G_SLOW' }. 5 defects failing.`,
+      heroTitle: `I design, QA test, and build digital products with <span class="highlight-text" id="ai-animated-word">AI</span>.`,
+      heroCta: `Inspect QA Test Harness Specs 🧪`,
+      heroDesc: `<div style="font-family:var(--font-mono); font-size:0.83rem; background:var(--bg-card); border:1px solid rgba(239,68,68,0.35); padding:10px 14px; border-radius:8px; margin-top:10px;"><div style="color:var(--text-secondary); font-size:0.75rem; margin-bottom:4px;"><i class="fa-solid fa-microchip" aria-hidden="true"></i> <strong>QA_RUNNER_CONFIG:</strong> <code>{ suite: "Playwright E2E", env: "staging.local", viewport: "390x844" }</code></div><div style="color:#ef4444; font-weight:600;"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <strong>SUITE AUDIT:</strong> 42 E2E Specs Executed • 5 Regression Defects failing • Scroll to trigger QA auto-patch.</div></div>`,
+      workTitle: `<span style="font-family:var(--font-mono); color:#ef4444;">[SUITE_FAIL: STAGING_BUILD_#4092]</span> Selected Engineering Projects`,
+      workSub: `QA Automation Suite running 42 E2E test specs against live endpoints. 5 regression defect tickets failing:`,
       aboutTitle: `QA Test Architecture &amp;<br />Regression Defect Analysis`,
-      aboutSub: `Configured E2E test suites, boundary analysis vectors, and API mock stubs to ensure 100% production stability.`,
-      aboutBannerTag: `[TEST_CONFIG_LOG]: QA SUITE UNRESOLVED`,
+      aboutSub: `Configured E2E test suites, boundary analysis matrices, and API mock stubs to ensure 100% production stability.`,
+      aboutBannerTag: `[QA_TEST_RUNNER]: STAGING REGRESSION SUITE ACTIVE`,
       aboutBio1: `Configured with <strong>6+ years of QA Engineering experience</strong> breaking banking &amp; payment platforms before users do. Expert in test automation frameworks (Playwright, Cypress), API validation, and performance stress testing.`,
       aboutBio2: `Leveraging <strong>AI-assisted QA testing</strong> to generate edge-case fuzzer payloads, automated regression scripts, and zero-defect production releases.`,
-      statBox1: `<span class="stat-num" style="color:#ef4444;">5</span><span class="stat-lbl">Active Defect Tickets</span>`,
-      statBox2: `<span class="stat-num" style="color:#ef4444;">18%</span><span class="stat-lbl">Initial Test Coverage</span>`,
-      statBox3: `<span class="stat-num" style="color:#ef4444;">42/42</span><span class="stat-lbl">E2E Specs in Suite</span>`,
-      statBox4: `<span class="stat-num">Banking</span><span class="stat-lbl">QA Test Harness</span>`,
-      certsTitle: `[UNVERIFIED]: Test Specs &amp; QA Credentials`,
+      statBox1: `<span class="stat-num" style="color:#ef4444;">5 / 42</span><span class="stat-lbl">Failing Test Specs</span>`,
+      statBox2: `<span class="stat-num" style="color:#f59e0b;">88.1%</span><span class="stat-lbl">Pass Rate (Staging)</span>`,
+      statBox3: `<span class="stat-num" style="color:#ef4444;">401 / 500</span><span class="stat-lbl">API Errors Caught</span>`,
+      statBox4: `<span class="stat-num">Playwright</span><span class="stat-lbl">Test Harness Active</span>`,
+      certsTitle: `[SUITE_AUDIT]: QA Test Specs &amp; Industry Credentials`,
       certsSub: `Certificate &amp; test suite checks pending. ISTQB CTFL #00613950 under regression audit.`,
-      certsBannerTag: `UNVERIFIED CREDENTIALS &amp; TEST SUITE LOGS`,
+      certsBannerTag: `STAGING CREDENTIALS &amp; TEST SUITE LOGS`,
       istqbStatus: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 5 Specs Failing`,
-      istqbTitle: `[TEST_SPEC_FAIL] ISTQB® CTFL — Equivalence Partitioning Test Suite`,
+      istqbTitle: `[SPEC-SUITE #01] ISTQB® CTFL — Equivalence Partitioning Test Suite`,
       istqbDesc: `Configured test suite specs for Equivalence Partitioning &amp; Boundary Value Analysis. 250 test vectors executed: 5 boundary failures detected.`,
       istqbId: `TEST_HARNESS_AUDIT`
     },
@@ -158,28 +158,28 @@ export function initQaRepair() {
 
   const LOREM_TILE_DEFECTS = [
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[CONFIG_FAIL_404]</span> PingPin — Auth Header Expiration &amp; Auto-Punch Loop`,
-      desc: `Configured payload: <code>{ "auth_header": "Bearer null", "wifi_bssid": "00:00:00:00:00:00", "retry_count": 9999 }</code>. Result: Unhandled 401 Unauthorized cascade &amp; infinite background punch requests.`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-101</span> <span class="qa-badge-http">401 UNAUTHORIZED</span> PingPin — Auth Header Expiration &amp; Auto-Retry Cascade`,
+      desc: `<strong>Test Vector:</strong> <code>POST /api/v1/auth/punch</code> with <code>{ token: "EXPIRED_BEARER", retryCount: 9999 }</code>.<br/><span class="qa-err-msg">❌ AssertionError: Expected HTTP 200 OK, received 401 Unauthorized (AuthInterceptor.kt:42).</span>`
     },
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[STUB_API_500]</span> Holiday2API — Edge CDN Fuzzing &amp; Null Payload Injection`,
-      desc: `Configured test vector: <code>GET /api/v1/holidays?year=999999&amp;state='; DROP TABLE states;--</code>. Result: Cloudflare worker uncaught exception &amp; 500 Internal Server Error.`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-102</span> <span class="qa-badge-http">500 SERVER ERROR</span> Holiday2API — Edge CDN Fuzzing &amp; Null Payload Vector`,
+      desc: `<strong>Test Vector:</strong> <code>GET /api/v1/holidays?year=999999&amp;state=ALL</code>.<br/><span class="qa-err-msg">❌ UncaughtTypeError: Cannot read properties of undefined (reading 'isoCode') at WorkerHandler.js:88.</span>`
     },
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[OOM_CRASH_503]</span> LogPaper — Logcat Buffer Overflow &amp; Memory Leak`,
-      desc: `Configured stress harness: <code>adb logcat -v threadtime *:V</code> streaming 50,000 logs/sec. Result: OutOfMemoryError in Android surface buffer &amp; UI thread freeze.`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-103</span> <span class="qa-badge-http">503 SERVICE UNAVAIL</span> LogPaper — Logcat Buffer Stress &amp; Memory Heap Leak`,
+      desc: `<strong>Test Vector:</strong> <code>adb logcat -v threadtime *:V</code> streaming 50,000 logs/sec.<br/><span class="qa-err-msg">❌ OutOfMemoryError: Canvas surface texture allocation failed at LiveWallpaperService.kt:114.</span>`
     },
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[MATH_ERR_422]</span> Splixter — Boundary Value Float Rounding &amp; GST Overflow`,
-      desc: `Configured boundary matrix: <code>{ "total": 0.00000001, "split_ratio": [0, 0, 0], "tip_pct": 999999 }</code>. Result: Floating point precision underflow &amp; unhandled ArithmeticException.`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-104</span> <span class="qa-badge-http">422 UNPROCESSABLE</span> Splixter — Float Precision Underflow &amp; GST Boundary`,
+      desc: `<strong>Test Vector:</strong> <code>SplitCalculator.calculate({ total: 0.00000001, splitRatio: [0, 0, 0] })</code>.<br/><span class="qa-err-msg">❌ ArithmeticException: Division by zero in ProportionalSplitter.kt:62.</span>`
     },
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[SOCKET_DROP_504]</span> Force Ethernet — USB-C Dongle Timeout &amp; Socket Leak`,
-      desc: `Configured network profile: <code>{ "packet_loss": "85%", "latency_ms": 4500, "interface": "eth0" }</code>. Result: SocketTimeoutException &amp; 504 Gateway Timeout during USB-C hot-plugging.`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-105</span> <span class="qa-badge-http">504 TIMEOUT</span> Force Ethernet — Dongle Hot-Plug &amp; Socket Leak`,
+      desc: `<strong>Test Vector:</strong> <code>NetworkEmulationProfile({ latency: "4500ms", packetLoss: "85%" })</code>.<br/><span class="qa-err-msg">❌ SocketTimeoutException: USB-C interface eth0 reset by peer at NetworkTetherManager.kt:205.</span>`
     },
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[GPU_LEAK_500]</span> Yukuza Launcher — Jetpack Compose Render Heap Leak`,
-      desc: `Configured profiling spec: Chrome DevTools Heap Allocation Profiler. Result: 1.4 GB un-reclaimed bitmap textures &amp; Android TV launcher GPU panic on focus scroll.`
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> QA-106</span> <span class="qa-badge-http">OOM HEAP LEAK</span> Yukuza Launcher — Texture Buffer Leak on Focus Scroll`,
+      desc: `<strong>Test Vector:</strong> <code>DevTools Heap Profiler Trace (1,000 D-Pad focus events)</code>.<br/><span class="qa-err-msg">❌ GraphicBufferLeak: 1.4 GB un-reclaimed bitmap textures at ShaderCanvas.kt:78.</span>`
     }
   ];
 
@@ -203,32 +203,32 @@ export function initQaRepair() {
 
   const LOREM_CERT_DEFECTS = [
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[TEST_SPEC_FAIL]</span> ISTQB® CTFL — Equivalence Partitioning Test Suite`,
-      desc: `Configured test suite specs for Equivalence Partitioning &amp; Boundary Value Analysis. 250 test vectors executed: 5 boundary failures detected.`,
-      issuer: `[AUDIT_HARNESS] ISTQB Test Execution Bureau`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-01</span> ISTQB® CTFL — Boundary Value &amp; Equivalence Matrix`,
+      desc: `<strong>Test Spec:</strong> 250 Boundary Value Analysis &amp; Equivalence Partitioning test vectors executed.<br/><span class="qa-err-msg">⚠️ 5/250 boundary assertions failing on edge parameters.</span>`,
+      issuer: `[QA RUNNER] ISTQB Test Execution Bureau`,
       status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 5 Specs Failing`,
-      chips: [`[FAIL] Boundary Check`, `[CONFIG] Equivalence Vector`, `[STUB] Null Pointer`, `[WARN] 401 Unauthorized`]
+      chips: [`[FAIL] Boundary Vector`, `[SPEC] Equivalence Partition`, `[STUB] Mock Payload`, `[WARN] 401 Expiration`]
     },
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[E2E_SUITE_FLAKE]</span> Playwright E2E — Async DOM Locator &amp; Timeout Spec`,
-      desc: `Configured Playwright test config: <code>{ actionTimeout: 5000ms, retries: 3 }</code>. Result: Flaky test failures due to race condition in dynamic element hydration.`,
-      issuer: `[E2E_RUNNER] Playwright Automation Suite`,
+      title: `<span class="qa-badge warn"><i class="fa-solid fa-vial-circle-check"></i> SPEC-02</span> Playwright E2E — Async Locator &amp; Timeout Spec`,
+      desc: `<strong>Test Spec:</strong> <code>{ actionTimeout: "5000ms", retries: 3 }</code>.<br/><span class="qa-err-msg">⚠️ Flaky assertion due to async DOM element hydration race condition.</span>`,
+      issuer: `[QA RUNNER] Playwright Automation Suite`,
       status: `<i class="fa-solid fa-hourglass-half" style="color:#f59e0b;"></i> Flaky Assertion`,
-      chips: [`[FAIL] Timeout 5000ms`, `[FLAKY] Race Condition`, `[RETRY] 3x Executed`, `[STUB] Mock API`]
+      chips: [`[WARN] Locator Timeout`, `[RACE] Async Hydration`, `[RETRY] 3x Executed`, `[PASS] 37/42 Specs`]
     },
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[STRESS_TEST_500]</span> Payment Gateway — Load Test &amp; Security Audit`,
-      desc: `Configured k6 load test: 5,000 concurrent payment checkouts with mock credit cards. Result: 500 Internal Server Error &amp; database lockup under stress.`,
-      issuer: `[PERF_HARNESS] Financial Security Lab`,
-      status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 500 Gateway Crash`,
-      chips: [`[FAIL] 500 Server Error`, `[LOAD] 5k VUs`, `[SECURITY] SQL Injection`, `[WARN] Lock Timeout`]
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-03</span> Payment Gateway — k6 Load Test &amp; Security Scan`,
+      desc: `<strong>Test Spec:</strong> k6 load test simulating 5,000 concurrent Virtual Users (VUs).<br/><span class="qa-err-msg">❌ 500 Internal Server Error &amp; database connection pool exhaustion.</span>`,
+      issuer: `[QA RUNNER] k6 Load Testing Engine`,
+      status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 500 Load Crash`,
+      chips: [`[FAIL] 500 Server Error`, `[LOAD] 5k VUs`, `[SECURITY] OWASP ZAP`, `[WARN] Pool Lock`]
     },
     {
-      title: `<span style="color:#ef4444; font-family:monospace;">[AI_FUZZ_OVERLOAD]</span> AI Prompt Fuzzer &amp; Edge-Case Payload Generator`,
-      desc: `Configured AI test harness to generate 1,000 automated edge-case input vectors. Result: Uncovered 12 unhandled null pointer exceptions in form validation.`,
-      issuer: `[AI_RUNNER] Prompt Fuzzing Suite`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-04</span> AI Prompt Fuzzer — Edge-Case Input Suite`,
+      desc: `<strong>Test Spec:</strong> AI automated edge-case input generator (1,000 payload vectors).<br/><span class="qa-err-msg">⚠️ Uncovered 12 unhandled null pointer exceptions in form validation.</span>`,
+      issuer: `[QA RUNNER] AI Fuzzing Runner`,
       status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> Fuzzing Active`,
-      chips: [`[FUZZ] 1k Payload Vectors`, `[NULL] Unhandled Exception`, `[STUB] Mock Data`, `[PASS] 988/1000`]
+      chips: [`[FUZZ] 1k Payload Vectors`, `[NULL] Unhandled Exception`, `[PASS] 988/1000`, `[COVERAGE] 94%`]
     }
   ];
 
@@ -241,18 +241,18 @@ export function initQaRepair() {
   });
 
   const FUNNY_TOOL_DEFECTS = [
-    `[ENV: STAGING]`,
+    `[ENV: STAGING-V2]`,
     `Playwright.config.ts`,
     `Postman_Collection.json`,
     `Cypress_E2E.spec.ts`,
     `k6_Load_Test.js`,
-    `Selenium_Grid`,
-    `Jenkins_CI_CD`,
+    `ADB_Logcat_Harness`,
+    `OWASP_ZAP_Scanner`,
+    `Jest_Unit_Runner.ts`,
+    `Charles_Proxy_Stubs`,
+    `ISTQB_CTFL_Matrix`,
     `JIRA_DEFECT_LOG`,
-    `Jest_Unit_Runner`,
-    `Charles_Proxy_Stub`,
-    `OWASP_ZAP_Scan`,
-    `ISTQB_CTFL`
+    `Selenium_Grid`
   ];
 
   if (!consoleHud) return;

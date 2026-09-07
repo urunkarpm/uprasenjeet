@@ -804,4 +804,85 @@ body[data-qa-stage="5"] .code-mockup-frame {
   }
 }
 
+/* ==========================================================================
+   AUTHENTIC QA DEFECT & ASSERTION FAILURE STYLING (STAGES 0-4)
+   ========================================================================== */
+.qa-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+  margin-right: 6px;
+}
+
+.qa-badge.fail {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+.qa-badge.warn {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #f59e0b;
+}
+
+.qa-badge-http {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  border: 1px dashed rgba(239, 68, 68, 0.4);
+  margin-right: 6px;
+}
+
+.qa-err-msg {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 3px solid #ef4444;
+  padding: 6px 10px;
+  border-radius: 0 4px 4px 0;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+body:not([data-qa-stage="5"]) .project-card,
+body:not([data-qa-stage="5"]) .cert-card {
+  position: relative;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.08) !important;
+}
+
+body:not([data-qa-stage="5"]) .project-card::before {
+  content: "DEFECT ACTIVE";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  padding: 2px 7px;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  z-index: 10;
+  pointer-events: none;
+}
+
+
 
