@@ -477,23 +477,71 @@ body[data-qa-stage="0"] .hero-subtitle {
   word-spacing: 0.2em;
 }
 
+/* Stage 0: Severely Glitched & Misaligned Header (Unstyled QA Staging State) */
 body[data-qa-stage="0"] .site-header {
-  transform: translateY(-2px) rotate(0.8deg);
+  transform: translateY(-4px) rotate(-1.2deg) !important;
+  background: rgba(239, 68, 68, 0.08) !important;
+  border-bottom: 2px dashed rgba(239, 68, 68, 0.7) !important;
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2) !important;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes textJitter {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(-1px, 1px); }
-  50% { transform: translate(1px, -1px); }
-  75% { transform: translate(-1px, -1px); }
+body[data-qa-stage="0"] .site-header .brand-logo {
+  font-family: var(--font-mono) !important;
+  color: #ef4444 !important;
+  letter-spacing: -0.04em !important;
+  transform: skewX(-6deg) scale(0.95);
+}
+
+body[data-qa-stage="0"] .site-header .main-nav {
+  gap: 6px !important;
+  transform: translateX(-12px);
+}
+
+body[data-qa-stage="0"] .site-header .nav-link {
+  font-family: var(--font-mono) !important;
+  font-size: 0.76rem !important;
+  color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.12) !important;
+  border: 1px dashed rgba(239, 68, 68, 0.5) !important;
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+  text-transform: uppercase !important;
+}
+
+body[data-qa-stage="0"] .site-header .header-actions .contact-trigger {
+  font-family: var(--font-mono) !important;
+  background: transparent !important;
+  border: 2px dashed #ef4444 !important;
+  color: #ef4444 !important;
+  transform: rotate(2.5deg) scale(0.92) !important;
+  box-shadow: none !important;
+}
+
+body[data-qa-stage="0"] .site-header .theme-btn {
+  transform: rotate(-12deg) scale(0.88) !important;
+  border-color: #ef4444 !important;
 }
 
 /* --------------------------------------------------------------------------
-   STAGE 1: HEADER & HERO REALIGNMENT
+   STAGE 1: HEADER & HERO REALIGNMENT (PARTIAL PATCH)
    -------------------------------------------------------------------------- */
 body[data-qa-stage="1"] .site-header {
-  transform: none !important;
-  border-style: solid !important;
+  transform: translateY(-2px) rotate(0.4deg) !important;
+  background: rgba(245, 158, 11, 0.06) !important;
+  border-bottom: 1px dashed rgba(245, 158, 11, 0.6) !important;
+}
+
+body[data-qa-stage="1"] .site-header .brand-logo {
+  font-family: var(--font-mono) !important;
+  color: #f59e0b !important;
+}
+
+body[data-qa-stage="1"] .site-header .nav-link {
+  font-family: var(--font-mono) !important;
+  font-size: 0.8rem !important;
+  color: #f59e0b !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
 }
 
 body[data-qa-stage="1"] .hero-title,

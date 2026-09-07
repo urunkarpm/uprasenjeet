@@ -63,6 +63,7 @@ export function initQaRepair() {
   const hintTextEl = document.getElementById('qa-hint-text');
 
   const stageElements = {
+    headerLogo: document.querySelector('.brand-logo .logo-text'),
     heroTitle: document.querySelector('.hero-title'),
     heroCta: document.querySelector('#welcome .btn-primary'),
     heroDesc: document.querySelector('.hero-description'),
@@ -95,6 +96,7 @@ export function initQaRepair() {
 
   const STAGE_TEXT_OVERRIDES = {
     0: {
+      headerLogo: `[UNVERIFIED_HEADER_STUB]`,
       heroTitle: `[STAGING_BUILD_v0.9.4]: QA Test Automation &amp; Regression Suite`,
       heroCta: `Inspect Staging Test Harness Specs 🧪`,
       heroDesc: `<div style="font-family:var(--font-mono); font-size:0.83rem; background:var(--bg-card); border:1px solid rgba(239,68,68,0.35); padding:10px 14px; border-radius:8px; margin-top:10px;"><div style="color:var(--text-secondary); font-size:0.75rem; margin-bottom:4px;"><i class="fa-solid fa-microchip" aria-hidden="true"></i> <strong>QA_MOCK_ENV_CONFIG:</strong> <code>{ suite: "Playwright E2E", mockData: true, target: "staging.internal.local" }</code></div><div style="color:#ef4444; font-weight:600;"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <strong>STAGING SUITE AUDIT:</strong> 42 Synthetic E2E Specs Executed • 5 Regression Defects failing • Scroll down to trigger QA auto-patch.</div></div>`,
@@ -118,6 +120,7 @@ export function initQaRepair() {
       istqbId: `MOCK_CERT_ID_#000000`
     },
     1: {
+      headerLogo: `[HEADER_PATCH_1/5]`,
       heroTitle: `[STAGING_BUILD_v0.9.4]: QA Test Automation &amp; Regression Suite`,
       heroCta: `Inspect Staging Test Harness Specs 🧪`,
       heroDesc: `🛠️ <i>Patch 1/5 in progress:</i> Validating layout grid assertions &amp; flexbox element boundaries...`,
