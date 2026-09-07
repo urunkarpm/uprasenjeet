@@ -469,9 +469,6 @@ export function initQaRepair() {
       e.stopPropagation();
       isLockedToProd = false;
       hasTriggeredCompletion = false;
-      isExecutingDiagnostics = false;
-      if (diagTimeoutId) clearTimeout(diagTimeoutId);
-      if (diagOverlay) diagOverlay.classList.remove('active');
       if (topBanner) topBanner.classList.remove('hidden');
       if (modalOverlay) modalOverlay.classList.remove('active');
       if (consoleHud) consoleHud.classList.remove('minimized');
