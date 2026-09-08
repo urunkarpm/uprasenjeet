@@ -47,8 +47,8 @@ const STAGE_CONFIGS = [
   }
 ];
 
-let isLockedToProd = false;
-let hasTriggeredCompletion = false;
+let isLockedToProd = true;
+let hasTriggeredCompletion = true;
 
 export function initQaRepair() {
   const topBanner = document.getElementById('qa-top-banner');
