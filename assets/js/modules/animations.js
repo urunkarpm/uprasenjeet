@@ -78,18 +78,46 @@ export function initCounterMetrics() {
   const counterElements = document.querySelectorAll('[data-counter]');
   if (counterElements.length === 0) return;
 
-  counterElements.forEach(el => {
-    const targetVal = parseFloat(el.getAttribute('data-counter'));
-    const prefix = el.getAttribute('data-prefix') || '';
-    const suffix = el.getAttribute('data-suffix') || '';
-    el.textContent = `${prefix}${targetVal}${suffix}`;
-  });
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const targetVal = parseFloat(el.getAttribute('data-counter'));
+      const duration = parseInt(el.getAttribute('data-duration') || '1500', 10);
+      const prefix = el.getAttribute('data-prefix') || '';
+      const suffix = el.getAttribute('data-suffix') || '';
+      
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        el.textContent = `${prefix}${Math.floor(progress * targetVal)}${suffix}`;
+        if (progress < 1) window.requestAnimationFrame(step);
+        else el.textContent = `${prefix}${targetVal}${suffix}`;
+      };
+
+      window.requestAnimationFrame(step);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.3 });
+
+  counterElements.forEach(el => observer.observe(el));
 }
 
 export function initScrollReveal() {
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   if (revealElements.length === 0) return;
-  revealElements.forEach(el => el.classList.add('is-revealed'));
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
+
+  revealElements.forEach(el => revealObserver.observe(el));
 }
 
 export function initAnimations() {
