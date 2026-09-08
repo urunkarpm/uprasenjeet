@@ -477,9 +477,9 @@ body[data-qa-stage="0"] .hero-subtitle {
   word-spacing: 0.2em;
 }
 
-/* Stage 0: Severely Glitched & Misaligned Header (Unstyled QA Staging State) */
+/* Stage 0: QA Staging Header (Stable Layout, Staging Colors) */
 body[data-qa-stage="0"] .site-header {
-  transform: translateY(-4px) rotate(-1.2deg) !important;
+  transform: none !important;
   background: rgba(239, 68, 68, 0.08) !important;
   border-bottom: 2px dashed rgba(239, 68, 68, 0.7) !important;
   box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2) !important;
@@ -490,12 +490,12 @@ body[data-qa-stage="0"] .site-header .brand-logo {
   font-family: var(--font-mono) !important;
   color: #ef4444 !important;
   letter-spacing: -0.04em !important;
-  transform: skewX(-6deg) scale(0.95);
+  transform: none !important;
 }
 
 body[data-qa-stage="0"] .site-header .main-nav {
   gap: 6px !important;
-  transform: translateX(-12px);
+  transform: none !important;
 }
 
 body[data-qa-stage="0"] .site-header .nav-link {
@@ -514,12 +514,12 @@ body[data-qa-stage="0"] .site-header .header-actions .contact-trigger {
   background: transparent !important;
   border: 2px dashed #ef4444 !important;
   color: #ef4444 !important;
-  transform: rotate(2.5deg) scale(0.92) !important;
+  transform: none !important;
   box-shadow: none !important;
 }
 
 body[data-qa-stage="0"] .site-header .theme-btn {
-  transform: rotate(-12deg) scale(0.88) !important;
+  transform: none !important;
   border-color: #ef4444 !important;
 }
 
@@ -527,7 +527,7 @@ body[data-qa-stage="0"] .site-header .theme-btn {
    STAGE 1: HEADER & HERO REALIGNMENT (PARTIAL PATCH)
    -------------------------------------------------------------------------- */
 body[data-qa-stage="1"] .site-header {
-  transform: translateY(-2px) rotate(0.4deg) !important;
+  transform: none !important;
   background: rgba(245, 158, 11, 0.06) !important;
   border-bottom: 1px dashed rgba(245, 158, 11, 0.6) !important;
 }
