@@ -83,6 +83,9 @@
 </head>
 <body data-qa-stage="0">
 
+  <!-- Native CSS Scroll Progress Bar -->
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+
   <!-- Top QA System Banner -->
   <div id="qa-top-banner" class="qa-top-banner" role="alert">
     <div class="qa-banner-content">
@@ -110,10 +113,7 @@
       </a>
 
       <nav class="main-nav" id="main-nav">
-        <a href="#welcome" class="nav-link active" data-section="welcome">
-          Welcome
-          <span class="nav-indicator"></span>
-        </a>
+        <a href="#welcome" class="nav-link active" data-section="welcome">Welcome</a>
         <a href="#work" class="nav-link" data-section="work">Work</a>
         <a href="#about" class="nav-link" data-section="about">About</a>
         <a href="#certifications" class="nav-link" data-section="certifications">Credentials</a>
@@ -276,7 +276,7 @@
     <section id="work" class="section work-section">
       <div class="section-header reveal-on-scroll">
         <div class="draft-tag"><span class="bracket">[</span> PROJECTS <span class="bracket">]</span></div>
-        <h2 class="section-title">Selected Work & AI Builds</h2>
+        <h2 class="section-title" data-scramble>Selected Work & AI Builds</h2>
         <p class="section-sub">End-to-end product architecture, UI/UX systems, and AI workflows.</p>
       </div>
 
@@ -326,8 +326,8 @@
               Automated, privacy-focused office attendance tracking for Android with local Wi-Fi detection, HR portal auto-punching, make-up WFO scheduling, and 100% on-device data privacy.
             </p>
             <div class="card-links">
+              <a href="https://github.com/urunkarpm/pingpin/releases/latest" target="_blank" rel="noopener noreferrer" class="card-link"><i class="fa-solid fa-download" aria-hidden="true"></i> Download APK <span class="sr-only">(opens in a new tab)</span></a>
               <a href="https://github.com/urunkarpm/pingpin" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
-              <a href="https://github.com/urunkarpm/pingpin/tree/master/playwright_tests" target="_blank" rel="noopener noreferrer" class="card-link">View Testing Scope <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
             </div>
           </div>
         </article>
@@ -476,6 +476,7 @@
               Customizable Android Live Wallpaper transforming device home screens into a dynamic hacker terminal with real-time system logcat streams and an animated Matrix rain overlay.
             </p>
             <div class="card-links">
+              <a href="https://github.com/urunkarpm/logpaper/releases/latest" target="_blank" rel="noopener noreferrer" class="card-link"><i class="fa-solid fa-download" aria-hidden="true"></i> Download APK <span class="sr-only">(opens in a new tab)</span></a>
               <a href="https://github.com/urunkarpm/logpaper" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
             </div>
           </div>
@@ -525,8 +526,8 @@
               Modern Android app built with Kotlin &amp; Jetpack Compose for fair group bill splitting, proportional tax/tip calculation, category GST/VAT slicing, and high-res receipt export.
             </p>
             <div class="card-links">
+              <a href="https://github.com/urunkarpm/Splixter/releases/latest" target="_blank" rel="noopener noreferrer" class="card-link"><i class="fa-solid fa-download" aria-hidden="true"></i> Download APK <span class="sr-only">(opens in a new tab)</span></a>
               <a href="https://github.com/urunkarpm/Splixter" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
-              <a href="https://github.com/urunkarpm/Splixter/tree/master/tests/playwright" target="_blank" rel="noopener noreferrer" class="card-link">View Testing Scope <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
             </div>
           </div>
         </article>
@@ -578,6 +579,7 @@
               Specialized Android system utility that automates Ethernet tethering over USB-C dongles, converting 5G smartphones into low-cost high-speed home routers (200–700 Mbps).
             </p>
             <div class="card-links">
+              <a href="https://github.com/urunkarpm/force-ethernet-tethering/releases/latest" target="_blank" rel="noopener noreferrer" class="card-link"><i class="fa-solid fa-download" aria-hidden="true"></i> Download APK <span class="sr-only">(opens in a new tab)</span></a>
               <a href="https://github.com/urunkarpm/force-ethernet-tethering" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
             </div>
           </div>
@@ -627,6 +629,7 @@
               Cinematic Android TV launcher built with Jetpack Compose featuring a GPU-composited animated aurora canvas, smart frequency app ordering, live weather/AQI widgets, and Now Playing controls.
             </p>
             <div class="card-links">
+              <a href="https://github.com/urunkarpm/yukuza-launcher/releases/latest" target="_blank" rel="noopener noreferrer" class="card-link"><i class="fa-solid fa-download" aria-hidden="true"></i> Download APK <span class="sr-only">(opens in a new tab)</span></a>
               <a href="https://github.com/urunkarpm/yukuza-launcher" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
             </div>
           </div>
@@ -642,7 +645,7 @@
       </div>
 
       <div class="section-header reveal-on-scroll">
-        <h2 class="section-title">QA Engineering meets <br />AI-Driven Product Building</h2>
+        <h2 class="section-title" data-scramble>QA Engineering meets <br />AI-Driven Product Building</h2>
         <p class="section-sub">Combining 6+ years of software quality assurance with modern AI workflows to engineer robust, high-performance applications.</p>
       </div>
 
@@ -719,7 +722,7 @@
       </div>
 
       <div class="section-header reveal-on-scroll">
-        <h2 class="section-title">Certifications &amp; Core Competencies</h2>
+        <h2 class="section-title" data-scramble>Certifications &amp; Core Competencies</h2>
         <p class="section-sub">Verified industry testing credentials alongside hands-on test automation and AI engineering expertise.</p>
       </div>
 
@@ -986,8 +989,12 @@
         <!-- Col 1: Brand & Direct Contact -->
         <div class="footer-col main-col">
           <div class="brand-logo">
-            <span class="logo-symbol" aria-hidden="true">■</span>
-            <span class="logo-text">uprasenjeet<span class="accent-dot">.ai</span></span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="none" class="logo-symbol-svg" aria-hidden="true">
+              <path d="M16 4L26 8V15C26 21.2 21.9 26.4 16 28C10.1 26.4 6 21.2 6 15V8L16 4Z" class="logo-shield" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M11 15.5L14.5 19L21 11.5" class="logo-check" stroke="var(--accent-amber-text)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 4C22 6 23.5 7.5 25.5 7.5C23.5 7.5 22 9 22 11C22 9 20.5 7.5 18.5 7.5C20.5 7.5 22 6 22 4Z" class="logo-spark" fill="var(--accent-amber-text)"/>
+            </svg>
+            <span class="logo-text">uprasenjeet<span class="accent-dot" id="footer-ai-dot">.ai</span></span>
           </div>
           <p class="footer-bio">
             QA professional with 6+ years of experience, building digital products &amp; interactive AI workflows.

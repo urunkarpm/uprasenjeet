@@ -20,20 +20,27 @@ export function initPingpinPopup() {
   let hideTimeout = null;
   let isHovered = false;
 
+  const getHeaderHeight = () => {
+    const header = document.querySelector('.site-header');
+    return header ? header.offsetHeight : 72;
+  };
+
   const updatePopupPosition = () => {
     const targetElement = pingpinVisual || pingpinCard;
     const rect = targetElement.getBoundingClientRect();
     const isMobile = window.innerWidth <= 768;
+    const minTop = getHeaderHeight() + 8;
 
     if (isMobile) {
-      const topPos = Math.max(76, Math.min(rect.top + 8, window.innerHeight - 200));
+      const topPos = Math.max(minTop, Math.min(rect.top + 8, window.innerHeight - 200));
       popup.style.top = `${topPos}px`;
       popup.style.left = '16px';
       popup.style.right = '16px';
       popup.style.width = 'calc(100vw - 32px)';
       popup.style.maxWidth = '460px';
     } else {
-      popup.style.top = `${rect.top + 10}px`;
+      const topPos = Math.max(minTop, rect.top + 10);
+      popup.style.top = `${topPos}px`;
       popup.style.left = `${rect.left + 12}px`;
       popup.style.width = `${rect.width - 24}px`;
       popup.style.maxWidth = '440px';
@@ -42,6 +49,14 @@ export function initPingpinPopup() {
 
   const showSpotlight = () => {
     if (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5') {
+      return;
+    }
+
+    const headerHeight = getHeaderHeight();
+    const targetElement = pingpinVisual || pingpinCard;
+    const rect = targetElement.getBoundingClientRect();
+
+    if (rect.bottom <= headerHeight) {
       return;
     }
 

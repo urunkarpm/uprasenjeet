@@ -69,4 +69,42 @@ test('Portfolio Sanity & Quality Assurance Suite', async (t) => {
       );
     }
   });
+
+  await t.test('Web Animation Enhancements Specifications', async (st) => {
+    const cssPath = path.join(rootDir, 'assets', 'css', 'components', 'components.css');
+    const themeJsPath = path.join(rootDir, 'assets', 'js', 'modules', 'theme.js');
+    const animJsPath = path.join(rootDir, 'assets', 'js', 'modules', 'animations.js');
+
+    assert.ok(fs.existsSync(cssPath), 'components.css should exist');
+    assert.ok(fs.existsSync(themeJsPath), 'theme.js should exist');
+    assert.ok(fs.existsSync(animJsPath), 'animations.js should exist');
+
+    const cssContent = fs.readFileSync(cssPath, 'utf8');
+    const themeJsContent = fs.readFileSync(themeJsPath, 'utf8');
+    const animJsContent = fs.readFileSync(animJsPath, 'utf8');
+
+    await st.test('1. Scroll Progress Bar Element and CSS', () => {
+      assert.ok(htmlContent.includes('id="scroll-progress"'), 'HTML must contain id="scroll-progress"');
+      assert.ok(cssContent.includes('.scroll-progress'), 'CSS must contain .scroll-progress rule');
+      assert.ok(cssContent.includes('animation-timeline: scroll(root block);'), 'CSS must use animation-timeline: scroll()');
+    });
+
+    await st.test('2. View Transitions API Theme Toggle', () => {
+      assert.ok(themeJsContent.includes('startViewTransition'), 'theme.js must use startViewTransition');
+      assert.ok(cssContent.includes('::view-transition-old(root)'), 'CSS must contain ::view-transition-old(root)');
+      assert.ok(cssContent.includes('::view-transition-new(root)'), 'CSS must contain ::view-transition-new(root)');
+    });
+
+    await st.test('3. Bento Grid Border Tracing Glow', () => {
+      assert.ok(cssContent.includes('@property --border-angle'), 'CSS must define @property --border-angle');
+      assert.ok(cssContent.includes('conic-gradient(from var(--border-angle)'), 'CSS must use conic-gradient with --border-angle');
+    });
+
+    await st.test('4. Text Scramble Matrix Effect', () => {
+      assert.ok(animJsContent.includes('export function initTextScramble'), 'animations.js must export initTextScramble');
+      assert.ok(htmlContent.includes('data-scramble'), 'HTML must contain data-scramble attributes');
+    });
+  });
 });
+
+

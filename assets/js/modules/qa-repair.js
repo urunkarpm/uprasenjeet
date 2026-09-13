@@ -51,6 +51,9 @@ let isLockedToProd = false;
 let hasTriggeredCompletion = false;
 
 export function initQaRepair() {
+  if (typeof window !== 'undefined') {
+    window.initQaRepair = initQaRepair;
+  }
   const topBanner = document.getElementById('qa-top-banner');
   const consoleHud = document.getElementById('qa-console-hud');
   const bannerTextEl = document.getElementById('qa-banner-text');

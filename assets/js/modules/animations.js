@@ -110,9 +110,46 @@ export function initScrollReveal() {
   revealElements.forEach(el => el.classList.add('is-revealed'));
 }
 
+export function initTextScramble() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%-+';
+  document.querySelectorAll('[data-scramble]').forEach(el => {
+    const originalText = el.textContent;
+    let iteration = 0;
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const interval = setInterval(() => {
+          el.textContent = originalText
+            .split('')
+            .map((char, index) => {
+              if (index < iteration) return originalText[index];
+              return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join('');
+
+          if (iteration >= originalText.length) {
+            clearInterval(interval);
+          }
+          iteration += 1 / 3;
+        }, 30);
+
+        obs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(el);
+  });
+}
+
 export function initAnimations() {
   initScrollReveal();
   initMagneticButtons();
   initCardTiltAndSpotlight();
   initCounterMetrics();
+  initTextScramble();
 }
+

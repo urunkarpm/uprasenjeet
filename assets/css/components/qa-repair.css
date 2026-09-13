@@ -431,10 +431,21 @@ body:not([data-qa-stage="5"]) .cert-card:nth-child(even) {
   transform: rotate(3.2deg) translateY(-5px) !important;
 }
 
-body:not([data-qa-stage="5"]) .tech-chip,
-body:not([data-qa-stage="5"]) .footer-profile-badge {
+body:not([data-qa-stage="5"]) .tech-chip {
   transform: rotate(-2deg) !important;
   background: rgba(239, 68, 68, 0.08) !important;
+}
+
+body:not([data-qa-stage="5"]) .footer-profile-badge {
+  transform: rotate(-2deg);
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+body:not([data-qa-stage="5"]) .footer-profile-badge:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: var(--accent-amber);
+  color: var(--footer-text-primary);
 }
 
 body[data-qa-stage="0"] .hero-title,

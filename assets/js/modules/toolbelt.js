@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BLUEPRINT STUDIO — INTERACTIVE TOOLBELT MODULE
+   BLUEPRINT STUDIO — INTERACTIVE TOOLBELT MODULE (GPU CSS MARQUEE ENGINE)
    ========================================================================== */
 
 export function initToolbelt() {
@@ -7,163 +7,75 @@ export function initToolbelt() {
   if (!banner) return;
 
   const track = banner.querySelector('.tool-belt-track');
-  if (track && track.children.length > 0) {
-    // If only one set of tool chips is present, dynamically clone for continuous marquee loop
-    const initialChips = Array.from(track.children);
-    if (initialChips.length <= 12) {
-      initialChips.forEach(chip => {
-        track.appendChild(chip.cloneNode(true));
-      });
+  if (!track || track.children.length === 0) return;
+
+  // Duplicate chips once to guarantee seamless -50% CSS GPU marquee loop
+  const initialChips = Array.from(track.children);
+  initialChips.forEach(chip => {
+    track.appendChild(chip.cloneNode(true));
+  });
+
+  // Pause marquee during QA defect stages (stages 0 to 4)
+  const updateQaState = () => {
+    const isDefectStage = document.body.dataset.qaStage && document.body.dataset.qaStage !== '5';
+    if (isDefectStage) {
+      banner.classList.add('is-paused');
+    } else {
+      banner.classList.remove('is-paused');
     }
+  };
+
+  updateQaState();
+
+  // Observe mutations to dataset.qaStage
+  if ('MutationObserver' in window) {
+    const observer = new MutationObserver(() => updateQaState());
+    observer.observe(document.body, { attributes: true, attributeFilter: ['data-qa-stage'] });
   }
 
+  // Interactive Drag & Touch Target Support
   let isDown = false;
   let startX = 0;
-  let scrollLeft = 0;
-  let isHovered = false;
   let isDragging = false;
-  const autoScrollSpeed = 0.6;
-
-  let isVisible = false;
-  let rafId = null;
-
-  function startAutoScroll() {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-    if (!rafId && isVisible && !document.hidden) {
-      rafId = requestAnimationFrame(autoStep);
-    }
-  }
-
-  function stopAutoScroll() {
-    if (rafId) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
-    }
-  }
-
-  if ('IntersectionObserver' in window) {
-    const bannerObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) {
-          startAutoScroll();
-        } else {
-          stopAutoScroll();
-        }
-      });
-    }, { threshold: 0.05 });
-    bannerObserver.observe(banner);
-  } else {
-    isVisible = true;
-    startAutoScroll();
-  }
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      stopAutoScroll();
-    } else {
-      startAutoScroll();
-    }
-  });
-
-  function checkAndWrapScroll(currentX) {
-    const halfWidth = banner.scrollWidth / 2;
-    if (banner.scrollLeft >= halfWidth) {
-      banner.scrollLeft -= halfWidth;
-      if (currentX !== undefined) {
-        startX = currentX;
-        scrollLeft = banner.scrollLeft;
-      }
-    } else if (banner.scrollLeft <= 0) {
-      banner.scrollLeft += halfWidth;
-      if (currentX !== undefined) {
-        startX = currentX;
-        scrollLeft = banner.scrollLeft;
-      }
-    }
-  }
-
-  function autoStep() {
-    rafId = null;
-    if (!isVisible || document.hidden) return;
-
-    // Pause ticker scroll during QA defect stages (stages 0 to 4)
-    if (document.body.dataset.qaStage && document.body.dataset.qaStage !== '5') {
-      startAutoScroll();
-      return;
-    }
-
-    if (!isHovered && !isDown) {
-      banner.scrollLeft += autoScrollSpeed;
-      checkAndWrapScroll();
-    }
-    startAutoScroll();
-  }
-
-  banner.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    banner.scrollLeft += delta;
-    checkAndWrapScroll();
-  }, { passive: false });
-
-  banner.addEventListener('mouseenter', () => { isHovered = true; });
-  banner.addEventListener('mouseleave', () => {
-    isHovered = false;
-    isDown = false;
-    banner.classList.remove('active');
-  });
 
   banner.addEventListener('mousedown', (e) => {
     isDown = true;
     isDragging = false;
-    banner.classList.add('active');
-    startX = e.pageX - banner.offsetLeft;
-    scrollLeft = banner.scrollLeft;
+    startX = e.clientX;
+    banner.classList.add('active', 'is-paused');
+  });
+
+  banner.addEventListener('mouseleave', () => {
+    isDown = false;
+    banner.classList.remove('active', 'is-paused');
   });
 
   banner.addEventListener('mouseup', () => {
     isDown = false;
-    banner.classList.remove('active');
+    banner.classList.remove('active', 'is-paused');
   });
 
   banner.addEventListener('mousemove', (e) => {
     if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - banner.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    if (Math.abs(walk) > 4) {
+    const diffX = e.clientX - startX;
+    if (Math.abs(diffX) > 4) {
       isDragging = true;
     }
-    banner.scrollLeft = scrollLeft - walk;
-    checkAndWrapScroll(x);
   });
 
-  // Touch Events for Mobile Dragging
   banner.addEventListener('touchstart', (e) => {
     if (e.touches.length === 1) {
       isDown = true;
       isDragging = false;
-      startX = e.touches[0].pageX - banner.offsetLeft;
-      scrollLeft = banner.scrollLeft;
+      startX = e.touches[0].clientX;
+      banner.classList.add('active', 'is-paused');
     }
   }, { passive: true });
 
   banner.addEventListener('touchend', () => {
     isDown = false;
+    banner.classList.remove('active', 'is-paused');
   });
-
-  banner.addEventListener('touchmove', (e) => {
-    if (!isDown || e.touches.length !== 1) return;
-    const x = e.touches[0].pageX - banner.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    if (Math.abs(walk) > 4) {
-      isDragging = true;
-    }
-    banner.scrollLeft = scrollLeft - walk;
-    checkAndWrapScroll(x);
-  }, { passive: true });
 
   banner.querySelectorAll('.tool-chip').forEach(chip => {
     chip.addEventListener('click', (e) => {
