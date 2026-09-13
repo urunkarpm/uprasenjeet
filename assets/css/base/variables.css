@@ -78,12 +78,15 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
 
   /* Contrast Header & Footer Tokens (Dark Theme) */
-  --header-bg: rgba(10, 14, 24, 0.95);
-  --header-border: #1E293B;
+  --header-bg: rgba(9, 11, 16, 0.82);
+  --header-border: rgba(255, 255, 255, 0.08);
   --header-text-primary: #F9FAFB;
   --header-text-secondary: #9CA3AF;
-  --header-pill-bg: #111827;
-  --header-pill-border: #374151;
+  --header-link-hover-bg: rgba(229, 167, 55, 0.10);
+  --header-link-hover-border: rgba(229, 167, 55, 0.25);
+  --header-link-active-bg: rgba(229, 167, 55, 0.16);
+  --header-link-active-border: rgba(229, 167, 55, 0.45);
+  --header-link-active-text: #E5A737;
 
   --footer-bg: #070A11;
   --footer-border: #1E293B;
@@ -147,12 +150,15 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
 
   /* Contrast Header & Footer Tokens (Light Theme) */
-  --header-bg: #0F172A;
-  --header-border: #020617;
-  --header-text-primary: #FFFFFF;
-  --header-text-secondary: #CBD5E1;
-  --header-pill-bg: #1E293B;
-  --header-pill-border: #334155;
+  --header-bg: rgba(245, 242, 236, 0.82);
+  --header-border: rgba(0, 0, 0, 0.08);
+  --header-text-primary: #18191B;
+  --header-text-secondary: #4B5563;
+  --header-link-hover-bg: rgba(212, 148, 40, 0.12);
+  --header-link-hover-border: rgba(212, 148, 40, 0.30);
+  --header-link-active-bg: rgba(212, 148, 40, 0.18);
+  --header-link-active-border: rgba(212, 148, 40, 0.50);
+  --header-link-active-text: #8F5B0D;
 
   --footer-bg: #0F172A;
   --footer-border: #020617;
