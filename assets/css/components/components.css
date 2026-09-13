@@ -134,15 +134,38 @@
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-decoration: none;
 }
 
-.logo-symbol {
-  color: var(--accent-amber-text);
-  font-size: 0.9rem;
+.logo-symbol-svg {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+  color: var(--text-primary);
+}
+
+.logo-symbol-svg .logo-shield {
+  transition: stroke var(--transition-fast);
+}
+
+.logo-symbol-svg .logo-check,
+.logo-symbol-svg .logo-spark {
+  transition: transform var(--transition-normal), fill var(--transition-fast), stroke var(--transition-fast);
+  transform-origin: center;
+}
+
+.brand-logo:hover .logo-symbol-svg {
+  transform: translateY(-1px) scale(1.05);
+}
+
+.brand-logo:hover .logo-symbol-svg .logo-spark {
+  transform: scale(1.2);
 }
 
 .accent-dot {
