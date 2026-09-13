@@ -511,20 +511,9 @@ body[data-qa-stage="0"] .site-header .brand-logo {
   transform: none !important;
 }
 
-body[data-qa-stage="0"] .site-header .main-nav {
-  gap: 6px !important;
+body[data-qa-stage="0"] .site-header .main-nav,
+body[data-qa-stage="1"] .site-header .main-nav {
   transform: none !important;
-}
-
-body[data-qa-stage="0"] .site-header .nav-link {
-  font-family: var(--font-mono) !important;
-  font-size: 0.76rem !important;
-  color: #ef4444 !important;
-  background: rgba(239, 68, 68, 0.12) !important;
-  border: 1px dashed rgba(239, 68, 68, 0.5) !important;
-  padding: 4px 8px !important;
-  border-radius: 4px !important;
-  text-transform: uppercase !important;
 }
 
 body[data-qa-stage="0"] .site-header .header-actions .contact-trigger {
@@ -553,13 +542,6 @@ body[data-qa-stage="1"] .site-header {
 body[data-qa-stage="1"] .site-header .brand-logo {
   font-family: var(--font-mono) !important;
   color: #f59e0b !important;
-}
-
-body[data-qa-stage="1"] .site-header .nav-link {
-  font-family: var(--font-mono) !important;
-  font-size: 0.8rem !important;
-  color: #f59e0b !important;
-  border: 1px solid rgba(245, 158, 11, 0.3) !important;
 }
 
 body[data-qa-stage="1"] .hero-title,

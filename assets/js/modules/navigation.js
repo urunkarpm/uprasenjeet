@@ -7,31 +7,10 @@ export function initNavigation() {
   const mainNav = document.getElementById('main-nav');
   const navLinks = document.querySelectorAll('.nav-link');
 
-  // Create dynamic sliding active pill indicator element
-  let activePill = mainNav ? mainNav.querySelector('.nav-active-pill') : null;
-  if (mainNav && !activePill) {
-    activePill = document.createElement('div');
-    activePill.className = 'nav-active-pill';
-    activePill.setAttribute('aria-hidden', 'true');
-    mainNav.appendChild(activePill);
-  }
-
-  function updateActivePill() {
-    if (!mainNav || !activePill) return;
-    const activeLink = mainNav.querySelector('.nav-link.active');
-    if (activeLink && mainNav.offsetParent !== null && activeLink.offsetWidth > 0) {
-      const left = activeLink.offsetLeft;
-      const top = activeLink.offsetTop;
-      const width = activeLink.offsetWidth;
-      const height = activeLink.offsetHeight;
-
-      activePill.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-      activePill.style.width = `${width}px`;
-      activePill.style.height = `${height}px`;
-      activePill.classList.add('visible');
-    } else {
-      activePill.classList.remove('visible');
-    }
+  // Remove any legacy active pill element if present
+  if (mainNav) {
+    const legacyPill = mainNav.querySelector('.nav-active-pill');
+    if (legacyPill) legacyPill.remove();
   }
 
   function setActiveNav(sectionId) {
@@ -40,13 +19,6 @@ export function initNavigation() {
       const isTarget = link.getAttribute('data-section') === sectionId;
       link.classList.toggle('active', isTarget);
     });
-    updateActivePill();
-  }
-
-  window.addEventListener('resize', () => updateActivePill(), { passive: true });
-  requestAnimationFrame(() => updateActivePill());
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => updateActivePill());
   }
 
   if (mobileMenuToggle && mainNav) {
@@ -60,7 +32,6 @@ export function initNavigation() {
         mobileMenuToggle.classList.remove('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
       }
-      setTimeout(updateActivePill, 50);
     };
 
     mobileMenuToggle.addEventListener('click', () => {
