@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="128" height="128">
+  <defs>
+    <!-- Deep Royal Felt Background Gradient -->
+    <radialGradient id="feltGrad" cx="54" cy="54" r="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1A382B" />
+      <stop offset="60%" stop-color="#0F231B" />
+      <stop offset="100%" stop-color="#09140F" />
+    </radialGradient>
+    <filter id="cardGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Circular Felt Table Base -->
+  <circle cx="54" cy="54" r="52" fill="url(#feltGrad)" stroke="#D4AF37" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- Subtle Golden Outer Rim Ring -->
+  <path d="M54,16 A38,38 0 1,0 54,92 A38,38 0 1,0 54,16"
+        stroke="#D4AF37" stroke-width="1.2" stroke-opacity="0.35" fill="none" />
+
+  <!-- CARDS CONTAINER -->
+  <g filter="url(#cardGlow)">
+    <!-- CARD 1: 10 OF SPADES ♠ -->
+    <g transform="translate(-8, 0) rotate(-22, 54, 74)">
+      <!-- Card Shadow -->
+      <path d="M44,35 h22 a3,3 0 0 1 3,3 v38 a3,3 0 0 1 -3,3 h-22 a3,3 0 0 1 -3,-3 v-38 a3,3 0 0 1 3,-3 z" fill="rgba(0,0,0,0.3)" />
+      <!-- Card Body -->
+      <path d="M43,34 h22 a3,3 0 0 1 3,3 v38 a3,3 0 0 1 -3,3 h-22 a3,3 0 0 1 -3,-3 v-38 a3,3 0 0 1 3,-3 z" fill="#FFFFFF" stroke="#D4AF37" stroke-width="0.8" />
+      <!-- Top Left 10 -->
+      <path d="M42.5,36.5 h2 v5 h-1.2 v-4 h-0.8 z M45.5,36.5 a1,1.5 0 0 1 1.5,0 v3.5 a1,1.5 0 0 1 -1.5,0 z" fill="#1E293B" />
+      <!-- Big Center Suit ♠ -->
+      <path d="M54,48 c-4,4 -7,7 -7,10 c0,2.5 2,4.5 4.5,4.5 c1.5,0 2.5,-0.8 2.5,-0.8 c0,0 1,0.8 2.5,0.8 c2.5,0 4.5,-2 4.5,-4.5 c0,-3 -3,-6 -7,-10 z M53,61 h2 v4 h-2 z" fill="#0F172A" />
+    </g>
+
+    <!-- CARD 2: 10 OF HEARTS ♥ -->
+    <g transform="translate(-3, 0) rotate(-7, 54, 74)">
+      <!-- Card Shadow -->
+      <path d="M44,35 h22 a3,3 0 0 1 3,3 v38 a3,3 0 0 1 -3,3 h-22 a3,3 0 0 1 -3,-3 v-38 a3,3 0 0 1 3,-3 z" fill="rgba(0,0,0,0.3)" />
+      <!-- Card Body -->
+      <path d="M43,34 h22 a3,3 0 0 1 3,3 v38 a3,3 0 0 1 -3,3 h-22 a3,3 0 0 1 -3,-3 v-38 a3,3 0 0 1 3,-3 z" fill="#FFFFFF" stroke="#D4AF37" stroke-width="0.8" />
+      <!-- Top Left 10 -->
+      <path d="M42.5,36.5 h2 v5 h-1.2 v-4 h-0.8 z M45.5,36.5 a1,1.5 0 0 1 1.5,0 v3.5 a1,1.5 0 0 1 -1.5,0 z" fill="#DC2626" />
+      <!-- Big Center Suit ♥ -->
+      <path d="M54,61.5 c-6,-5 -10,-8.5 -10,-12 c0,-2.8 2.2,-5 5,-5 c1.8,0 3.2,0.9 4,2.2 c0.8,-1.3 2.2,-2.2 4,-2.2 c2.8,0 5,2.2 5,5 c0,3.5 -4,7 -10,12 z" fill="#DC2626" />
+    </g>
+
+    <!-- CARD 3: 10 OF DIAMONDS ♦ -->
+    <g transform="translate(3, 0) rotate(7, 54, 74)">
+      <!-- Card Shadow -->
+      <path d="M44,35 h22 a3,3 0 0 1 3,3 v38 a3,3 0 0 1 -3,3 h-22 a3,3 0 0 1 -3,-3 v-38 a3,3 0 0 1 3,-3 z" fill="rgba(0,0,0,0.3)" />
+      <!-- Card Body -->
+      <path d="M43,34 h22 a3,3 0 0 1 3,3 v38 a3,3 0 0 1 -3,3 h-22 a3,3 0 0 1 -3,-3 v-38 a3,3 0 0 1 3,-3 z" fill="#FFFFFF" stroke="#D4AF37" stroke-width="0.8" />
+      <!-- Top Left 10 -->
+      <path d="M42.5,36.5 h2 v5 h-1.2 v-4 h-0.8 z M45.5,36.5 a1,1.5 0 0 1 1.5,0 v3.5 a1,1.5 0 0 1 -1.5,0 z" fill="#DC2626" />
+      <!-- Big Center Suit ♦ -->
+      <path d="M54,43.5 L61.5,53.5 L54,63.5 L46.5,53.5 Z" fill="#DC2626" />
+    </g>
+
+    <!-- CARD 4: 10 OF CLUBS ♣ -->
+    <g transform="translate(8, 0) rotate(22, 54, 74)">
+      <!-- Card Shadow -->
+      <path d="M44,35 h22 a3,3 0 0 1 3,3 v38 a3,3 0 0 1 -3,3 h-22 a3,3 0 0 1 -3,-3 v-38 a3,3 0 0 1 3,-3 z" fill="rgba(0,0,0,0.3)" />
+      <!-- Card Body -->
+      <path d="M43,34 h22 a3,3 0 0 1 3,3 v38 a3,3 0 0 1 -3,3 h-22 a3,3 0 0 1 -3,-3 v-38 a3,3 0 0 1 3,-3 z" fill="#FFFFFF" stroke="#D4AF37" stroke-width="0.8" />
+      <!-- Top Left 10 -->
+      <path d="M42.5,36.5 h2 v5 h-1.2 v-4 h-0.8 z M45.5,36.5 a1,1.5 0 0 1 1.5,0 v3.5 a1,1.5 0 0 1 -1.5,0 z" fill="#1E293B" />
+      <!-- Big Center Suit ♣ -->
+      <path d="M54,46.5 a3.5,3.5 0 0 1 3.2,4.8 a3.5,3.5 0 1 1 -1,4.2 h-4.4 a3.5,3.5 0 1 1 -1,-4.2 a3.5,3.5 0 0 1 3.2,-4.8 z M53,55.5 h2 v5.5 h-2 z" fill="#0F172A" />
+    </g>
+  </g>
+
+  <!-- Royal Golden Crown Emblem at Top Center -->
+  <path d="M54,23 L57.5,29.5 L64,26 L61.5,33.5 H46.5 L44,26 L50.5,29.5 Z"
+        fill="#F59E0B" stroke="#D4AF37" stroke-width="0.6" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.4))" />
+</svg>
