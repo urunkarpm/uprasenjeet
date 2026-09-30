@@ -318,7 +318,9 @@ export function initQaRepair() {
     // Minimize QA Console HUD into a compact pill
     if (consoleHud) consoleHud.classList.add('minimized');
 
-    // ponytail: Show completion modal in-place without window.scrollTo(0,0) jump to avoid fighting user touch scroll momentum
+    // Scroll back to the top of the page when the fixed version is revealed
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     if (modalOverlay) {
       setTimeout(() => {
         modalOverlay.classList.add('active');
