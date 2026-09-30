@@ -12,9 +12,7 @@ export function initAiAnimator() {
   ];
 
   const targets = [
-    document.getElementById('ai-animated-word'),
-    document.getElementById('header-ai-dot'),
-    document.getElementById('footer-ai-dot')
+    document.getElementById('ai-animated-word')
   ].filter(Boolean);
 
   if (targets.length === 0) return;

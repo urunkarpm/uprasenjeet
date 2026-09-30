@@ -164,7 +164,18 @@ export function initPingpinPopup() {
     }
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  let popupScrollTicking = false;
+  const onPopupScroll = () => {
+    if (!popupScrollTicking) {
+      window.requestAnimationFrame(() => {
+        handleScroll();
+        popupScrollTicking = false;
+      });
+      popupScrollTicking = true;
+    }
+  };
+
+  window.addEventListener('scroll', onPopupScroll, { passive: true });
   window.addEventListener('resize', () => {
     handleScroll();
     if (popup.classList.contains('visible')) {

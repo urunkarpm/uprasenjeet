@@ -106,6 +106,9 @@ export function initDotsCanvas() {
   }
 
   function addScrollWave(originX, originY, intensity) {
+    // ponytail: mobile skips canvas scroll-waves entirely; upgrade path: offload to WebGL shader or Web Worker if mobile animation is needed
+    if (isMobileDevice()) return;
+
     const isMobile = isMobileDevice();
     const maxActiveWaves = isMobile ? 1 : (isMidRangeDevice() ? 2 : 3);
     if (waves.length >= maxActiveWaves) {
@@ -353,8 +356,9 @@ export function initDotsCanvas() {
     startLoop();
   });
 
+  // ponytail: touch interactions and canvas scroll-waves disabled on mobile; ceiling: mobile shows static ambient dots grid without interactive touch displacement, saving 100% of canvas CPU cycles during touch scroll; upgrade path: optimize with offscreen canvas if mobile touch physics is desired
   window.addEventListener('touchstart', (e) => {
-    if (!isStageActive()) return;
+    if (!isStageActive() || isMobileDevice()) return;
     if (e.touches.length > 0) {
       mouse.x = e.touches[0].clientX;
       mouse.y = e.touches[0].clientY;
@@ -364,7 +368,7 @@ export function initDotsCanvas() {
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
-    if (!isStageActive()) return;
+    if (!isStageActive() || isMobileDevice()) return;
     if (e.touches.length > 0) {
       mouse.x = e.touches[0].clientX;
       mouse.y = e.touches[0].clientY;
@@ -374,7 +378,7 @@ export function initDotsCanvas() {
   }, { passive: true });
 
   window.addEventListener('touchend', () => {
-    if (!isStageActive()) return;
+    if (!isStageActive() || isMobileDevice()) return;
     mouse.active = false;
     mouse.x = -1000;
     mouse.y = -1000;
@@ -385,15 +389,14 @@ export function initDotsCanvas() {
   let lastWaveTime = 0;
 
   window.addEventListener('scroll', () => {
-    if (!isStageActive()) return;
-    const isMobile = isMobileDevice();
+    if (!isStageActive() || isMobileDevice()) return;
     const currentScrollY = window.scrollY || window.pageYOffset || 0;
     const deltaY = Math.abs(currentScrollY - lastScrollY);
     lastScrollY = currentScrollY;
 
     const now = performance.now();
-    const minWaveInterval = isMobile ? 250 : 70;
-    const minDelta = isMobile ? 12 : 1;
+    const minWaveInterval = 70;
+    const minDelta = 1;
     if (deltaY > minDelta && (now - lastWaveTime > minWaveInterval)) {
       lastWaveTime = now;
       const originX = mouse.active ? mouse.x : width / 2;

@@ -269,39 +269,39 @@ export function initQaRepair() {
     history.scrollRestoration = 'manual';
   }
 
+  let maxStageReached = 0;
+
+  // ponytail: monotonic forward-progression with top-of-page reset; ceiling: does not downgrade mid-page if user scrolls up slightly, preventing infinite DOM thrashing/jitter on mobile; upgrade path: add bidirectional hysteresis debouncing if mid-page regression is needed
   function calculateStage() {
     if (isLockedToProd) return 5;
 
-    const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
 
-    // Safety check: if user is near top of page (scrollTop < 120), stage MUST be 0
-    if (scrollTop < 120) {
+    // Safety check: if user is near top of page (scrollTop < 80), reset progression to 0
+    if (scrollTop < 80) {
+      maxStageReached = 0;
       return 0;
     }
 
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight || 0;
-    const totalHeight = Math.max(
-      document.body.scrollHeight || 0,
-      document.documentElement.scrollHeight || 0,
-      document.body.offsetHeight || 0,
-      document.documentElement.offsetHeight || 0
-    );
+    const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const scrollFraction = Math.min(Math.max(scrollTop / docHeight, 0), 1);
 
-    const docHeight = Math.max(1, totalHeight - windowHeight);
-
-    // Stage 5 trigger: user must have scrolled past 70% of page AND reached near bottom (within 80px)
-    if (scrollTop > docHeight * 0.7 && scrollTop + windowHeight >= totalHeight - 80) {
+    // Stage 5 trigger: user has scrolled near bottom (footer area) or past 88%
+    if (scrollFraction >= 0.88 || (scrollFraction > 0.7 && scrollTop + window.innerHeight >= document.documentElement.scrollHeight - 60)) {
+      maxStageReached = 5;
       return 5;
     }
 
-    const scrollFraction = Math.min(Math.max(scrollTop / docHeight, 0), 1);
+    let calculated = 0;
+    if (scrollFraction >= 0.70) calculated = 4;
+    else if (scrollFraction >= 0.50) calculated = 3;
+    else if (scrollFraction >= 0.30) calculated = 2;
+    else if (scrollFraction >= 0.12) calculated = 1;
 
-    if (scrollFraction < 0.18) return 0;
-    if (scrollFraction < 0.38) return 1;
-    if (scrollFraction < 0.58) return 2;
-    if (scrollFraction < 0.78) return 3;
-    if (scrollFraction < 0.88) return 4;
-    return 5; // Triggers production release view when reaching the footer
+    if (calculated > maxStageReached) {
+      maxStageReached = calculated;
+    }
+    return maxStageReached;
   }
 
   let currentStage = -1;
@@ -310,10 +310,7 @@ export function initQaRepair() {
     if (hasTriggeredCompletion) return;
     hasTriggeredCompletion = true;
     isLockedToProd = true;
-
-    // Immediately reset scroll to top (masthead area) so mobile viewport starts from masthead
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    window.scrollTo(0, 0);
+    maxStageReached = 5;
 
     // Hide top banner as requested (remove green banner)
     if (topBanner) topBanner.classList.add('hidden');
@@ -321,16 +318,12 @@ export function initQaRepair() {
     // Minimize QA Console HUD into a compact pill
     if (consoleHud) consoleHud.classList.add('minimized');
 
-    // Ensure scroll position remains at masthead top (0, 0) after banner height update
-    requestAnimationFrame(() => {
-      window.scrollTo(0, 0);
-    });
-
-    // Show completion modal after scroll resets to masthead top
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-      if (modalOverlay) modalOverlay.classList.add('active');
-    }, 200);
+    // ponytail: Show completion modal in-place without window.scrollTo(0,0) jump to avoid fighting user touch scroll momentum
+    if (modalOverlay) {
+      setTimeout(() => {
+        modalOverlay.classList.add('active');
+      }, 250);
+    }
   }
 
   function updateStageUI() {
@@ -454,8 +447,6 @@ export function initQaRepair() {
     modalContinueBtn.addEventListener('click', () => {
       if (modalOverlay) modalOverlay.classList.remove('active');
       if (consoleHud) consoleHud.classList.add('minimized');
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      window.scrollTo(0, 0);
     });
   }
 
@@ -474,6 +465,8 @@ export function initQaRepair() {
       e.stopPropagation();
       isLockedToProd = false;
       hasTriggeredCompletion = false;
+      maxStageReached = 0;
+      currentStage = -1;
       if (topBanner) topBanner.classList.remove('hidden');
       if (modalOverlay) modalOverlay.classList.remove('active');
       if (consoleHud) consoleHud.classList.remove('minimized');

@@ -577,9 +577,7 @@ body[data-qa-stage="5"] .stat-card,
 body[data-qa-stage="5"] .cert-card,
 body[data-qa-stage="5"] .tech-chip,
 body[data-qa-stage="5"] .footer-profile-badge {
-  transform: none !important;
   border-style: solid !important;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
 body[data-qa-stage="5"] .qa-top-banner,
@@ -772,14 +770,14 @@ body[data-qa-stage="5"] .code-mockup-frame {
     padding: 12px 14px !important;
     z-index: 100000 !important;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(229, 167, 55, 0.2);
-    transform: none !important;
+    transform: translateZ(0) !important;
   }
 
   .qa-console-hud.minimized {
     width: auto !important;
     left: 50% !important;
     right: auto !important;
-    transform: translateX(-50%) !important;
+    transform: translateX(-50%) translateZ(0) !important;
     bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
     max-width: calc(100% - 24px) !important;
     padding: 6px 14px !important;
