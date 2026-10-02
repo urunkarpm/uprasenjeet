@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -1161,31 +1161,35 @@
     </div>
   </aside>
 
-  <!-- Floating QA Console HUD Widget (Blueprint Studio Aesthetic) -->
+  <!-- Floating QA Console HUD Widget (Jira Aesthetic) -->
   <aside id="qa-console-hud" class="qa-console-hud" aria-label="Live QA Automation Console">
     <div class="qa-hud-header">
+      <span class="qa-hud-runner-badge"><i class="fa-solid fa-square-check" style="margin-right: 4px;"></i> QA-4092</span>
       <span class="qa-hud-status-badge">
         <span class="qa-hud-status-dot"></span>
-        <span id="qa-hud-status">QA HUD: FAIL ❌</span>
+        <span id="qa-hud-status">TO DO</span>
       </span>
-      <span class="qa-hud-runner-badge">RUNNER: v1.0</span>
     </div>
+    <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Automated Regression Patch</div>
     <div id="qa-hud-log" class="qa-hud-log">
-      &gt; [SYSTEM ALERT] 5 Defects active. Scroll to trigger QA repair sequence...
+      Description: Active Test Suite - 42 E2E Specs Executed. 5 Failed. Scroll to initiate auto-patch...
     </div>
     <div class="qa-hud-progress-container">
+      <div style="display:flex; justify-content:space-between; font-size: 11px; color: var(--text-secondary); margin-bottom:6px; font-weight:700;">
+        <span>PROGRESS</span>
+        <span id="qa-hud-percent">10%</span>
+      </div>
       <div class="qa-hud-progress-bar">
         <div id="qa-hud-progress-fill" class="qa-hud-progress-fill"></div>
       </div>
     </div>
     <div class="qa-hud-controls">
-      <button id="qa-reset-btn" class="qa-hud-btn" title="Re-run QA Test Suite from Top">
-        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Re-test
-      </button>
-      <span id="qa-hud-hint" class="qa-hud-hint">
-        <span id="qa-hint-text">🐞 Scroll to Auto-Fix</span>
-        <i class="fa-solid fa-arrow-down qa-hud-hint-icon" aria-hidden="true"></i>
+      <span id="qa-hud-hint" class="qa-hud-hint" style="color: var(--text-secondary); font-weight: 500;">
+        <span id="qa-hint-text">Scroll to Auto-Fix</span>
       </span>
+      <button id="qa-reset-btn" class="qa-hud-btn" title="Re-run QA Test Suite from Top">
+        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reboot
+      </button>
     </div>
   </aside>
 
