@@ -3328,39 +3328,20 @@ body.spotlight-active #project-card-holiday-api {
   transition: color 0.4s ease;
 }
 
-/* 3D Perspective Card Tilt & Spotlight Lighting */
+/* Performant Hardware-Accelerated Card Hover & Transitions */
 .project-card,
 .cert-card,
 .about-card,
 .case-study-card {
   position: relative;
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.project-card::before,
-.cert-card::before,
-.about-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 255, 255, 0.05),
-    transparent 40%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-}
-
-.project-card:hover::before,
-.cert-card:hover::before,
-.about-card:hover::before {
-  opacity: 1;
+.project-card:hover,
+.cert-card:hover,
+.about-card:hover,
+.case-study-card:hover {
+  transform: translateY(-2px);
 }
 
 /* Static Cards & Tiles on Mobile Devices & Touch Viewports */
@@ -3565,6 +3546,7 @@ section:not(.hero-section) {
 .reveal-on-scroll.is-revealed {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
 /* Stagger delay classes for grid items & lists */
@@ -3617,12 +3599,7 @@ section:not(.hero-section) {
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 3. Bento Grid Border Tracing Glow */
-@property --border-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
+/* 3. Bento Grid Fast Hover Acceleration */
 
 .project-card, .cert-card {
   position: relative;

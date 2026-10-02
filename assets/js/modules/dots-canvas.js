@@ -38,7 +38,6 @@ export function initDotsCanvas() {
 
   let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
   let dots = [];
-  let waves = [];
 
   const hoverRadius = 135;
   const hoverRadiusSq = hoverRadius * hoverRadius;
@@ -56,7 +55,6 @@ export function initDotsCanvas() {
 
   function buildDots() {
     dots = [];
-    waves = [];
     width = window.innerWidth || document.documentElement.clientWidth;
     height = window.innerHeight || document.documentElement.clientHeight;
 
@@ -105,29 +103,7 @@ export function initDotsCanvas() {
     };
   }
 
-  function addScrollWave(originX, originY, intensity) {
-    if (isMobileDevice()) return;
 
-    const isMobile = isMobileDevice();
-    const maxActiveWaves = isMobile ? 1 : (isMidRangeDevice() ? 2 : 3);
-    if (waves.length >= maxActiveWaves) {
-      waves.shift();
-    }
-    const maxR = Math.max(width, height) * 0.85;
-    const thickness = isMobile ? 90 : 130;
-    waves.push({
-      x: originX,
-      y: originY,
-      radius: 0,
-      maxRadius: maxR,
-      speed: isMobile ? 15 : 18,
-      thickness: thickness,
-      halfThickness: thickness / 2,
-      amplitude: Math.min(0.7, 0.3 + intensity * 0.01),
-      pushForce: isMobile ? 8 : 14,
-      decay: isMobile ? 0.96 : 0.982
-    });
-  }
 
   let isLoopRunning = false;
   let resizeTimeout = null;
@@ -135,34 +111,6 @@ export function initDotsCanvas() {
   function updateDots() {
     const palette = colorPalettes[currentTheme] || colorPalettes.dark;
     let needsAnimation = false;
-
-    // Update active scroll waves with physics speed deceleration
-    for (let w = waves.length - 1; w >= 0; w--) {
-      const wave = waves[w];
-      wave.radius += wave.speed;
-      wave.speed = Math.max(9, wave.speed * 0.986);
-      wave.amplitude *= wave.decay;
-      if (wave.radius > wave.maxRadius || wave.amplitude < 0.015) {
-        waves.splice(w, 1);
-      } else {
-        needsAnimation = true;
-      }
-    }
-
-    // Pre-calculate wave bounding bounds
-    const preparedWaves = [];
-    for (let w = 0; w < waves.length; w++) {
-      const wave = waves[w];
-      const minDist = Math.max(0, wave.radius - wave.halfThickness);
-      const maxDist = wave.radius + wave.halfThickness;
-      preparedWaves.push({
-        wave: wave,
-        minDist: minDist,
-        maxDist: maxDist,
-        minDistSq: minDist * minDist,
-        maxDistSq: maxDist * maxDist
-      });
-    }
 
     for (let i = 0; i < dots.length; i++) {
       const dot = dots[i];
@@ -193,48 +141,10 @@ export function initDotsCanvas() {
         }
       }
 
-      // Sophisticated Damped Dual-Harmonic Wave Calculation
-      let wavePushX = 0;
-      let wavePushY = 0;
-      let waveRadiusAdd = 0;
-      let waveAlphaAdd = 0;
-
-      for (let w = 0; w < preparedWaves.length; w++) {
-        const pw = preparedWaves[w];
-        const wave = pw.wave;
-        const dx = dot.baseX - wave.x;
-        const dy = dot.baseY - wave.y;
-
-        if (Math.abs(dx) > pw.maxDist || Math.abs(dy) > pw.maxDist) continue;
-
-        const distSq = dx * dx + dy * dy;
-        if (distSq < pw.minDistSq || distSq > pw.maxDistSq || distSq < 0.001) continue;
-
-        const dist = Math.sqrt(distSq);
-        const ringDist = dist - wave.radius;
-        const normalizedDist = ringDist / wave.halfThickness;
-
-        // Damped dual-harmonic cosine equation for natural wave crest & trailing trough
-        const phase = normalizedDist * Math.PI;
-        const damp = Math.exp(-2.5 * normalizedDist * normalizedDist);
-        const harmonic = (Math.cos(phase) + 0.3 * Math.cos(phase * 2 - 0.4)) * damp;
-
-        if (Math.abs(harmonic) > 0.01) {
-          const energyFade = Math.pow(1 - Math.min(1, wave.radius / wave.maxRadius), 1.2);
-          const effect = harmonic * wave.amplitude * energyFade;
-          const invDist = 1 / dist;
-
-          wavePushX += dx * invDist * effect * wave.pushForce;
-          wavePushY += dy * invDist * effect * wave.pushForce;
-          waveRadiusAdd += Math.max(0, effect) * 1.6;
-          waveAlphaAdd += Math.max(0, effect) * 0.32;
-        }
-      }
-
-      dot.targetX = dot.baseX + hoverPushX + wavePushX;
-      dot.targetY = dot.baseY + hoverPushY + wavePushY;
-      dot.targetRadius = baseRadius + hoverRadiusAdd + waveRadiusAdd;
-      dot.targetAlpha = Math.min(0.68, baseColor.baseAlpha + hoverAlphaAdd + waveAlphaAdd);
+      dot.targetX = dot.baseX + hoverPushX;
+      dot.targetY = dot.baseY + hoverPushY;
+      dot.targetRadius = baseRadius + hoverRadiusAdd;
+      dot.targetAlpha = Math.min(0.68, baseColor.baseAlpha + hoverAlphaAdd);
 
       const diffX = dot.targetX - dot.x;
       const diffY = dot.targetY - dot.y;
@@ -257,7 +167,7 @@ export function initDotsCanvas() {
       }
     }
 
-    return needsAnimation || waves.length > 0;
+    return needsAnimation;
   }
 
   function render() {
@@ -355,54 +265,7 @@ export function initDotsCanvas() {
     startLoop();
   });
 
-  window.addEventListener('touchstart', (e) => {
-    if (!isStageActive() || isMobileDevice()) return;
-    if (e.touches.length > 0) {
-      mouse.x = e.touches[0].clientX;
-      mouse.y = e.touches[0].clientY;
-      mouse.active = true;
-      startLoop();
-    }
-  }, { passive: true });
 
-  window.addEventListener('touchmove', (e) => {
-    if (!isStageActive() || isMobileDevice()) return;
-    if (e.touches.length > 0) {
-      mouse.x = e.touches[0].clientX;
-      mouse.y = e.touches[0].clientY;
-      mouse.active = true;
-      startLoop();
-    }
-  }, { passive: true });
-
-  window.addEventListener('touchend', () => {
-    if (!isStageActive() || isMobileDevice()) return;
-    mouse.active = false;
-    mouse.x = -1000;
-    mouse.y = -1000;
-    startLoop();
-  });
-
-  let lastScrollY = window.scrollY || window.pageYOffset || 0;
-  let lastWaveTime = 0;
-
-  window.addEventListener('scroll', () => {
-    if (!isStageActive() || isMobileDevice()) return;
-    const currentScrollY = window.scrollY || window.pageYOffset || 0;
-    const deltaY = Math.abs(currentScrollY - lastScrollY);
-    lastScrollY = currentScrollY;
-
-    const now = performance.now();
-    const minWaveInterval = 70;
-    const minDelta = 1;
-    if (deltaY > minDelta && (now - lastWaveTime > minWaveInterval)) {
-      lastWaveTime = now;
-      const originX = mouse.active ? mouse.x : width / 2;
-      const originY = mouse.active ? mouse.y : height / 2;
-      addScrollWave(originX, originY, deltaY);
-    }
-    startLoop();
-  }, { passive: true });
 
   window.addEventListener('resize', () => {
     const currentWidth = window.innerWidth || document.documentElement.clientWidth;

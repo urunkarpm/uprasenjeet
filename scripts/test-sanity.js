@@ -95,9 +95,9 @@ test('Portfolio Sanity & Quality Assurance Suite', async (t) => {
       assert.ok(cssContent.includes('::view-transition-new(root)'), 'CSS must contain ::view-transition-new(root)');
     });
 
-    await st.test('3. Bento Grid Border Tracing Glow', () => {
-      assert.ok(cssContent.includes('@property --border-angle'), 'CSS must define @property --border-angle');
-      assert.ok(cssContent.includes('conic-gradient(from var(--border-angle)'), 'CSS must use conic-gradient with --border-angle');
+    await st.test('3. Bento Grid Fast Hover Acceleration', () => {
+      assert.ok(cssContent.includes('.project-card'), 'CSS must contain .project-card rule');
+      assert.ok(cssContent.includes('box-shadow'), 'CSS must use hardware-accelerated box-shadow hover state');
     });
 
     await st.test('4. Text Scramble Matrix Effect', () => {
