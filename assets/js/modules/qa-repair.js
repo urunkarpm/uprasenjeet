@@ -319,11 +319,14 @@ export function initQaRepair() {
     if (consoleHud) consoleHud.classList.add('minimized');
 
     // Scroll back to the top of the page when the fixed version is revealed
+    document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(() => { document.documentElement.style.scrollBehavior = ''; }, 50);
 
     if (modalOverlay) {
       setTimeout(() => {
         modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
       }, 250);
     }
   }
@@ -460,7 +463,12 @@ export function initQaRepair() {
 
   if (modalContinueBtn) {
     modalContinueBtn.addEventListener('click', () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setTimeout(() => { document.documentElement.style.scrollBehavior = ''; }, 50);
+      document.documentElement.scrollTop = 0;
       if (modalOverlay) modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
       if (consoleHud) consoleHud.classList.add('minimized');
     });
   }
@@ -484,6 +492,7 @@ export function initQaRepair() {
       currentStage = -1;
       if (topBanner) topBanner.classList.remove('hidden');
       if (modalOverlay) modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
       if (consoleHud) consoleHud.classList.remove('minimized');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(updateStageUI, 300);
