@@ -374,6 +374,7 @@ body:not([data-qa-stage="5"]) .tool-belt-track {
   justify-content: center !important;
   gap: 0 !important;
   padding: 10px 0 !important;
+  animation: none !important;
 }
 
 body:not([data-qa-stage="5"]) .tool-chip {

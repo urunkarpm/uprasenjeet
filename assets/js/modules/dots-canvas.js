@@ -106,7 +106,6 @@ export function initDotsCanvas() {
   }
 
   function addScrollWave(originX, originY, intensity) {
-    // ponytail: mobile skips canvas scroll-waves entirely; upgrade path: offload to WebGL shader or Web Worker if mobile animation is needed
     if (isMobileDevice()) return;
 
     const isMobile = isMobileDevice();
@@ -356,7 +355,6 @@ export function initDotsCanvas() {
     startLoop();
   });
 
-  // ponytail: touch interactions and canvas scroll-waves disabled on mobile; ceiling: mobile shows static ambient dots grid without interactive touch displacement, saving 100% of canvas CPU cycles during touch scroll; upgrade path: optimize with offscreen canvas if mobile touch physics is desired
   window.addEventListener('touchstart', (e) => {
     if (!isStageActive() || isMobileDevice()) return;
     if (e.touches.length > 0) {

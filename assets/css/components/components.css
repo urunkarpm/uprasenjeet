@@ -3556,15 +3556,15 @@ section:not(.hero-section) {
    ========================================================================== */
 
 .reveal-on-scroll {
-  opacity: 1;
-  transform: none;
-  transition: none;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-on-scroll.is-revealed {
   opacity: 1;
-  transform: none;
-  transition: none;
+  transform: translateY(0);
 }
 
 /* Stagger delay classes for grid items & lists */
@@ -3599,6 +3599,7 @@ section:not(.hero-section) {
   z-index: 1000;
   animation: scroll-progress-grow linear;
   animation-timeline: scroll(root block);
+  will-change: transform;
 }
 
 @keyframes scroll-progress-grow {
@@ -3625,27 +3626,18 @@ section:not(.hero-section) {
 
 .project-card, .cert-card {
   position: relative;
-  border: 1px solid transparent;
-  background-image:
-    linear-gradient(var(--card-bg, var(--bg-card)), var(--card-bg, var(--bg-card))),
-    conic-gradient(from var(--border-angle), transparent 70%, var(--primary-color, var(--accent-amber, #3b82f6)) 100%);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  transition: --border-angle 0.5s ease;
+  border: 1px solid var(--border-light);
+  background: var(--card-bg, var(--bg-card));
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .project-card:hover, .cert-card:hover {
-  animation: border-rotate 3s linear infinite;
+  border-color: var(--primary-color, var(--accent-amber));
+  box-shadow: 0 10px 30px -10px rgba(var(--primary-rgb, 59, 130, 246), 0.3);
 }
 
-@keyframes border-rotate {
-  to { --border-angle: 360deg; }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .project-card:hover, .cert-card:hover {
-    animation: none;
-  }
-}
+
+
 
 

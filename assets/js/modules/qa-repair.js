@@ -271,7 +271,6 @@ export function initQaRepair() {
 
   let maxStageReached = 0;
 
-  // ponytail: monotonic forward-progression with top-of-page reset; ceiling: does not downgrade mid-page if user scrolls up slightly, preventing infinite DOM thrashing/jitter on mobile; upgrade path: add bidirectional hysteresis debouncing if mid-page regression is needed
   function calculateStage() {
     if (isLockedToProd) return 5;
 
@@ -319,7 +318,7 @@ export function initQaRepair() {
     if (consoleHud) consoleHud.classList.add('minimized');
 
     // Scroll back to the top of the page when the fixed version is revealed
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
     if (modalOverlay) {
       setTimeout(() => {
