@@ -1,4 +1,4 @@
-/* ==========================================================================
+ï»¿/* ==========================================================================
    QA REPAIR MODULE - PROGRESSIVE SCROLL INTERACTION
    ========================================================================== */
 
@@ -102,7 +102,7 @@ export function initQaRepair() {
     0: {
       heroTitle: `[STAGING_BUILD_v0.9.4]: QA Test Automation &amp; Regression Suite`,
       heroCta: `Inspect Staging Test Harness Specs ??`,
-      heroDesc: `<div style="font-family:var(--font-mono); font-size:0.83rem; background:var(--bg-card); border:1px solid rgba(239,68,68,0.35); padding:10px 14px; border-radius:8px; margin-top:10px;"><div style="color:var(--text-secondary); font-size:0.75rem; margin-bottom:4px;"><i class="fa-solid fa-microchip" aria-hidden="true"></i> <strong>QA_MOCK_ENV_CONFIG:</strong> <code>{ suite: "Playwright E2E", mockData: true, target: "staging.internal.local" }</code></div><div style="color:#ef4444; font-weight:600;"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <strong>STAGING SUITE AUDIT:</strong> 42 Synthetic E2E Specs Executed • 5 Regression Defects failing • Scroll down to trigger QA auto-patch.</div></div>`,
+      heroDesc: `<div style="font-family:var(--font-mono); font-size:0.83rem; background:var(--bg-card); border:1px solid rgba(239,68,68,0.35); padding:10px 14px; border-radius:8px; margin-top:10px;"><div style="color:var(--text-secondary); font-size:0.75rem; margin-bottom:4px;"><i class="fa-solid fa-microchip" aria-hidden="true"></i> <strong>QA_MOCK_ENV_CONFIG:</strong> <code>{ suite: "Playwright E2E", mockData: true, target: "staging.internal.local" }</code></div><div style="color:#ef4444; font-weight:600;"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> <strong>STAGING SUITE AUDIT:</strong> 42 Synthetic E2E Specs Executed ï¿½ 5 Regression Defects failing ï¿½ Scroll down to trigger QA auto-patch.</div></div>`,
       workTitle: `<span style="font-family:var(--font-mono); color:#ef4444;">[MOCK_DATASET_v2]: STAGING REGRESSION SUITE</span> Anonymous Project Test Harness`,
       workSub: `Synthetic QA mock fixtures running 42 E2E test specs against isolated staging endpoints (5 defect tickets active):`,
       aboutTitle: `[STAGING_FIXTURE]: QA Test Architecture &amp;<br />Regression Defect Matrix`,
@@ -118,7 +118,7 @@ export function initQaRepair() {
       certsSub: `Mock certification &amp; test suite checks pending verification under staging regression runner.`,
       certsBannerTag: `SYNTHETIC CREDENTIALS &amp; STAGING LOGS`,
       istqbStatus: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 5 Specs Failing`,
-      istqbTitle: `[SPEC-SUITE #01] ISTQB® CTFL — Equivalence Partitioning Test Suite`,
+      istqbTitle: `[SPEC-SUITE #01] ISTQBï¿½ CTFL ï¿½ Equivalence Partitioning Test Suite`,
       istqbDesc: `Synthetic test suite specs for Equivalence Partitioning &amp; Boundary Value Analysis. 250 test vectors executed: 5 boundary failures detected.`,
       istqbId: `MOCK_CERT_ID_#000000`
     },
@@ -133,7 +133,7 @@ export function initQaRepair() {
       certsSub: `Mock credentials under regression testing.`,
       certsBannerTag: `CREDENTIALS UNDER AUDIT`,
       istqbStatus: `<i class="fa-solid fa-hourglass-half" style="color:#f59e0b;"></i> Re-evaluating`,
-      istqbTitle: `ISTQB® Certified Tester Foundation Level (CTFL)`,
+      istqbTitle: `ISTQBï¿½ Certified Tester Foundation Level (CTFL)`,
       istqbDesc: `Standardized qualification covering Software Testing Lifecycle, Test Design Techniques, Static Testing, and Risk-Based QA.`
     },
     2: {
@@ -163,31 +163,31 @@ export function initQaRepair() {
 
   const LOREM_TILE_DEFECTS = [
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-101</span> <span class="qa-badge-http">401 UNAUTHORIZED</span> NexusPunch — Auth Header Expiration &amp; Auto-Retry Loop`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-101</span> <span class="qa-badge-http">401 UNAUTHORIZED</span> NexusPunch ï¿½ Auth Header Expiration &amp; Auto-Retry Loop`,
       desc: `<strong>Mock Payload:</strong> <code>POST /api/v1/mock/punch</code> with <code>{ bearerToken: "SYNTHETIC_EXPIRED", maxRetries: 9999 }</code>.<br/><span class="qa-err-msg">? AssertionError: Expected HTTP 200 OK, received 401 Unauthorized (MockAuthInterceptor.kt:42).</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-102</span> <span class="qa-badge-http">500 SERVER ERROR</span> OmniCalendar — Edge CDN Fuzzing &amp; Null Payload Vector`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-102</span> <span class="qa-badge-http">500 SERVER ERROR</span> OmniCalendar ï¿½ Edge CDN Fuzzing &amp; Null Payload Vector`,
       desc: `<strong>Mock Payload:</strong> <code>GET /api/v1/mock/holidays?year=999999&amp;state=NULL</code>.<br/><span class="qa-err-msg">? UncaughtTypeError: Cannot read properties of undefined (reading 'isoCode') at WorkerStub.js:88.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-103</span> <span class="qa-badge-http">503 SERVICE UNAVAIL</span> TerminalStream — Logcat Buffer Stress &amp; Memory Heap Leak`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-103</span> <span class="qa-badge-http">503 SERVICE UNAVAIL</span> TerminalStream ï¿½ Logcat Buffer Stress &amp; Memory Heap Leak`,
       desc: `<strong>Mock Payload:</strong> <code>adb logcat -v threadtime *:V</code> streaming 50,000 synthetic logs/sec.<br/><span class="qa-err-msg">? OutOfMemoryError: Canvas surface texture allocation failed at MockLiveWallpaperService.kt:114.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-104</span> <span class="qa-badge-http">422 UNPROCESSABLE</span> MatrixSplit — Float Precision Underflow &amp; GST Boundary`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-104</span> <span class="qa-badge-http">422 UNPROCESSABLE</span> MatrixSplit ï¿½ Float Precision Underflow &amp; GST Boundary`,
       desc: `<strong>Mock Payload:</strong> <code>SplitCalculator.calculate({ total: 0.00000001, splitRatio: [0, 0, 0] })</code>.<br/><span class="qa-err-msg">? ArithmeticException: Division by zero in ProportionalSplitter.kt:62.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-105</span> <span class="qa-badge-http">504 TIMEOUT</span> EtherNetRouter — Dongle Hot-Plug &amp; Socket Leak`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-105</span> <span class="qa-badge-http">504 TIMEOUT</span> EtherNetRouter ï¿½ Dongle Hot-Plug &amp; Socket Leak`,
       desc: `<strong>Mock Payload:</strong> <code>NetworkEmulationProfile({ latency: "4500ms", packetLoss: "85%" })</code>.<br/><span class="qa-err-msg">? SocketTimeoutException: USB-C interface eth0 reset by peer at MockTetherManager.kt:205.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-106</span> <span class="qa-badge-http">OOM HEAP LEAK</span> QuantumLauncher — Texture Buffer Leak on Focus Scroll`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-106</span> <span class="qa-badge-http">OOM HEAP LEAK</span> QuantumLauncher ï¿½ Texture Buffer Leak on Focus Scroll`,
       desc: `<strong>Mock Payload:</strong> <code>DevTools Heap Profiler Trace (1,000 D-Pad focus events)</code>.<br/><span class="qa-err-msg">? GraphicBufferLeak: 1.4 GB un-reclaimed bitmap textures at ShaderCanvas.kt:78.</span>`
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-107</span> <span class="qa-badge-http">400 BAD REQUEST</span> ChronosMap — Timezone Drift &amp; Map Tile Hydration Race`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-bug"></i> DEFECT-107</span> <span class="qa-badge-http">400 BAD REQUEST</span> ChronosMap ï¿½ Timezone Drift &amp; Map Tile Hydration Race`,
       desc: `<strong>Mock Payload:</strong> <code>POST /api/v1/mock/timezone</code> with <code>{ targetZone: "UTC+14:00", leafletTileZoom: 99 }</code>.<br/><span class="qa-err-msg">? RangeError: Invalid time zone offset or map bounds out of limits (ChronosEngine.ts:112).</span>`
     }
   ];
@@ -212,28 +212,28 @@ export function initQaRepair() {
 
   const LOREM_CERT_DEFECTS = [
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-01</span> ISTQB® CTFL — Boundary Value &amp; Equivalence Matrix`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-01</span> ISTQBï¿½ CTFL ï¿½ Boundary Value &amp; Equivalence Matrix`,
       desc: `<strong>Test Spec:</strong> 250 Boundary Value Analysis &amp; Equivalence Partitioning test vectors executed.<br/><span class="qa-err-msg">?? 5/250 boundary assertions failing on edge parameters.</span>`,
       issuer: `[MOCK_QA_HARNESS] Synthetic Test Execution Bureau`,
       status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 5 Specs Failing`,
       chips: [`[FAIL] Boundary Vector`, `[SPEC] Equivalence Partition`, `[STUB] Mock Payload`, `[WARN] 401 Expiration`]
     },
     {
-      title: `<span class="qa-badge warn"><i class="fa-solid fa-vial-circle-check"></i> SPEC-02</span> Playwright E2E — Async Locator &amp; Timeout Spec`,
+      title: `<span class="qa-badge warn"><i class="fa-solid fa-vial-circle-check"></i> SPEC-02</span> Playwright E2E ï¿½ Async Locator &amp; Timeout Spec`,
       desc: `<strong>Test Spec:</strong> <code>{ actionTimeout: "5000ms", retries: 3 }</code>.<br/><span class="qa-err-msg">?? Flaky assertion due to async DOM element hydration race condition.</span>`,
       issuer: `[MOCK_QA_HARNESS] Playwright Automation Suite`,
       status: `<i class="fa-solid fa-hourglass-half" style="color:#f59e0b;"></i> Flaky Assertion`,
       chips: [`[WARN] Locator Timeout`, `[RACE] Async Hydration`, `[RETRY] 3x Executed`, `[PASS] 37/42 Specs`]
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-03</span> Payment Gateway — k6 Load Test &amp; Security Scan`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-03</span> Payment Gateway ï¿½ k6 Load Test &amp; Security Scan`,
       desc: `<strong>Test Spec:</strong> k6 load test simulating 5,000 concurrent Virtual Users (VUs).<br/><span class="qa-err-msg">? 500 Internal Server Error &amp; database connection pool exhaustion.</span>`,
       issuer: `[MOCK_QA_HARNESS] k6 Load Testing Engine`,
       status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> 500 Load Crash`,
       chips: [`[FAIL] 500 Server Error`, `[LOAD] 5k VUs`, `[SECURITY] OWASP ZAP`, `[WARN] Pool Lock`]
     },
     {
-      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-04</span> AI Prompt Fuzzer — Edge-Case Input Suite`,
+      title: `<span class="qa-badge fail"><i class="fa-solid fa-vial-circle-check"></i> SPEC-04</span> AI Prompt Fuzzer ï¿½ Edge-Case Input Suite`,
       desc: `<strong>Test Spec:</strong> AI automated edge-case input generator (1,000 payload vectors).<br/><span class="qa-err-msg">?? Uncovered 12 unhandled null pointer exceptions in form validation.</span>`,
       issuer: `[MOCK_QA_HARNESS] AI Fuzzing Runner`,
       status: `<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> Fuzzing Active`,
@@ -328,7 +328,21 @@ export function initQaRepair() {
     }
   }
 
+  let maxProgress = 10;
   function updateStageUI() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const scrollFraction = Math.min(Math.max(scrollTop / docHeight, 0), 1);
+    
+    let currentProgress = isLockedToProd ? 100 : Math.max(10, Math.floor(scrollFraction * 115));
+    if (currentProgress > maxProgress) maxProgress = currentProgress;
+    if (maxProgress > 100) maxProgress = 100;
+    if (isLockedToProd) maxProgress = 100;
+
+    const hudPercentEl = document.getElementById('qa-hud-percent');
+    if (hudProgressFill) hudProgressFill.style.width = `${maxProgress}%`;
+    if (hudPercentEl) hudPercentEl.textContent = `${maxProgress}%`;
+
     const newStage = calculateStage();
 
     if (newStage === 5 && !hasTriggeredCompletion) {
@@ -343,8 +357,7 @@ export function initQaRepair() {
 
     if (bannerTextEl) bannerTextEl.textContent = config.bannerText;
     if (hudLogEl) hudLogEl.textContent = config.log;
-    if (hudStatusEl) hudStatusEl.textContent = `QA HUD: ${config.status}`;
-    if (hudProgressFill) hudProgressFill.style.width = `${config.progress}%`;
+    if (hudStatusEl) hudStatusEl.textContent = config.status;
 
     // Swap funny section titles & text for stages 0-4, then restore clean original text for stage 5
     for (const key in stageElements) {
