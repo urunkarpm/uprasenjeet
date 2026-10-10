@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -92,6 +92,11 @@
       <span class="qa-banner-pulse" aria-hidden="true"></span>
       <span id="qa-banner-text">⚠️ CRITICAL: 5 UNRESOLVED DEFECTS DETECTED IN UNTESTED BUILD</span>
     </div>
+    <div class="qa-banner-actions">
+      <button type="button" id="qa-quick-fix-btn" class="qa-banner-btn qa-quick-fix-btn" title="Instantly repair all defects and release production build">
+        <i class="fa-solid fa-bolt" aria-hidden="true"></i> <span>Instant Auto-Fix</span>
+      </button>
+    </div>
   </div>
 
   <!-- Skip to Main Content Link for Keyboard & Screen Reader Users (WCAG 2.4.1) -->
@@ -113,10 +118,23 @@
       </a>
 
       <nav class="main-nav" id="main-nav">
-        <a href="#welcome" class="nav-link active" data-section="welcome">Welcome</a>
-        <a href="#work" class="nav-link" data-section="work">Work</a>
-        <a href="#about" class="nav-link" data-section="about">About</a>
-        <a href="#certifications" class="nav-link" data-section="certifications">Credentials</a>
+        <div class="nav-active-pill" id="nav-active-pill" aria-hidden="true"></div>
+        <a href="#welcome" class="nav-link active" data-section="welcome">
+          <span class="nav-link-dot" aria-hidden="true"></span>
+          <span class="nav-link-text">Welcome</span>
+        </a>
+        <a href="#work" class="nav-link" data-section="work">
+          <span class="nav-link-dot" aria-hidden="true"></span>
+          <span class="nav-link-text">Work</span>
+        </a>
+        <a href="#about" class="nav-link" data-section="about">
+          <span class="nav-link-dot" aria-hidden="true"></span>
+          <span class="nav-link-text">About</span>
+        </a>
+        <a href="#certifications" class="nav-link" data-section="certifications">
+          <span class="nav-link-dot" aria-hidden="true"></span>
+          <span class="nav-link-text">Credentials</span>
+        </a>
       </nav>
 
       <div class="header-actions">
@@ -733,6 +751,48 @@
           </div>
         </article>
 
+        <!-- Project Card - Drawer Launcher -->
+        <article class="project-card reveal-on-scroll reveal-delay-4" id="project-card-drawer" data-project="drawer">
+          <div class="card-visual visual-drawer">
+            <div class="mockup-window">
+              <div class="window-bar">
+                <span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span><span class="win-dot" aria-hidden="true"></span>
+                <span class="win-title">github.com/urunkarpm/drawer</span>
+              </div>
+              <div class="window-content drawer-visual-content">
+                <div class="code-mockup-frame">
+                  <div class="code-header-line">
+                    <span class="code-keyword">class</span> <span class="code-var">DrawerLauncher</span> : <span class="code-func">ComponentActivity</span>()
+                  </div>
+                  <div class="code-status-row">
+                    <span class="code-status-pill success"><i class="fa-solid fa-bolt" aria-hidden="true"></i> LIGHTNING FAST</span>
+                    <span class="code-telemetry">Minimal UI</span>
+                  </div>
+                  <div class="card-floating-badges">
+                    <span class="card-floating-badge"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Accordions</span>
+                    <span class="card-floating-badge accent-emerald"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Privacy First</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-details">
+            <div class="card-tags">
+              <span class="tag">Android App</span>
+              <span class="tag">Launcher</span>
+              <span class="tag">Jetpack Compose</span>
+            </div>
+            <h3 class="project-name">Drawer - Minimal Android Launcher</h3>
+            <p class="project-desc">
+              Minimal, lightning-fast Android launcher with collapsible category accordions, floating glass dock, and privacy-first design.
+            </p>
+            <div class="card-links">
+              <a href="https://github.com/urunkarpm/drawer/releases/latest" target="_blank" rel="noopener noreferrer" class="card-link"><i class="fa-solid fa-download" aria-hidden="true"></i> Download APK <span class="sr-only">(opens in a new tab)</span></a>
+              <a href="https://github.com/urunkarpm/drawer" target="_blank" rel="noopener noreferrer" class="card-link">View Project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">(opens in a new tab)</span></a>
+            </div>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -743,7 +803,7 @@
       </div>
 
       <div class="section-header reveal-on-scroll">
-        <h2 class="section-title" data-scramble>QA Engineering meets <br />AI-Driven Product Building</h2>
+        <h2 class="section-title">QA Engineering meets <br />AI-Driven Product Building</h2>
         <p class="section-sub">Combining 6+ years of software quality assurance with modern AI workflows to engineer robust, high-performance applications.</p>
       </div>
 
@@ -809,8 +869,6 @@
 
         </div>
       </div>
-
-
     </section>
 
     <!-- Certifications & Credentials Section -->
@@ -820,7 +878,7 @@
       </div>
 
       <div class="section-header reveal-on-scroll">
-        <h2 class="section-title" data-scramble>Certifications &amp; Core Competencies</h2>
+        <h2 class="section-title">Certifications &amp; Core Competencies</h2>
         <p class="section-sub">Verified industry testing credentials alongside hands-on test automation and AI engineering expertise.</p>
       </div>
 
@@ -1185,11 +1243,16 @@
     </div>
     <div class="qa-hud-controls">
       <span id="qa-hud-hint" class="qa-hud-hint" style="color: var(--text-secondary); font-weight: 500;">
-        <span id="qa-hint-text">Scroll to Auto-Fix</span>
+        <span id="qa-hint-text">Scroll or click to Auto-Fix</span>
       </span>
-      <button id="qa-reset-btn" class="qa-hud-btn" title="Re-run QA Test Suite from Top">
-        <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reboot
-      </button>
+      <div class="qa-hud-btn-group">
+        <button id="qa-quick-fix-hud-btn" class="qa-hud-btn primary" title="Instantly Auto-Fix &amp; Release Build">
+          <i class="fa-solid fa-bolt" aria-hidden="true"></i> Fix Now
+        </button>
+        <button id="qa-reset-btn" class="qa-hud-btn" title="Re-run QA Test Suite from Top">
+          <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reboot
+        </button>
+      </div>
     </div>
   </aside>
 

@@ -23,7 +23,8 @@ body[data-qa-stage="5"] #bg-dots-canvas {
    -------------------------------------------------------------------------- */
 .qa-top-banner {
   width: 100%;
-  padding: 8px 16px;
+  height: 36px;
+  padding: 0 16px;
   background: rgba(220, 38, 38, 0.95);
   color: #ffffff;
   font-family: 'IBM Plex Mono', monospace;
@@ -32,23 +33,41 @@ body[data-qa-stage="5"] #bg-dots-canvas {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  z-index: 10001;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   transition: background 0.4s ease, color 0.4s ease;
   letter-spacing: 0.03em;
+  box-sizing: border-box;
+}
+
+body:not([data-qa-stage="5"]) {
+  padding-top: 104px;
+}
+
+body[data-qa-stage="5"] {
+  padding-top: 68px;
 }
 
 body:not([data-qa-stage="5"]) .site-header {
-  position: sticky !important;
+  position: fixed !important;
   top: 36px !important;
-  z-index: 999 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 10000 !important;
 }
 
 body[data-qa-stage="5"] .site-header {
-  position: sticky !important;
+  position: fixed !important;
   top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 10000 !important;
 }
 
 .qa-top-banner.stage-passed {
@@ -279,6 +298,12 @@ body[data-qa-stage="5"] .site-header {
   gap: 8px;
 }
 
+.qa-hud-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .qa-hud-btn {
   background: #F4F5F7;
   border: none;
@@ -345,84 +370,79 @@ body[data-qa-stage="5"] .site-header {
 /* --------------------------------------------------------------------------
    Tool Belt Banner Glitched & Overlapped State (Active Stages 0 to 4)
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Tool Belt Banner Glitched & Overlapped State (Active Stages 0 to 4)
+   -------------------------------------------------------------------------- */
 body:not([data-qa-stage="5"]) .tool-belt-banner {
-  background: rgba(239, 68, 68, 0.06) !important;
+  background: rgba(239, 68, 68, 0.05) !important;
+  border: 1px dashed rgba(239, 68, 68, 0.3) !important;
   box-shadow: none !important;
   overflow: hidden !important;
-  cursor: not-allowed !important;
 }
 
 body:not([data-qa-stage="5"]) .tool-belt-track {
   display: flex !important;
   flex-wrap: wrap !important;
   justify-content: center !important;
-  gap: 0 !important;
-  padding: 10px 0 !important;
+  gap: 8px !important;
+  padding: 10px 12px !important;
   animation: none !important;
 }
 
 body:not([data-qa-stage="5"]) .tool-chip {
-  margin-right: -26px !important;
-  margin-bottom: 8px !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  transform: none !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  color: #f87171 !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-size: 0.78rem !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
   pointer-events: none !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
 }
 
-body:not([data-qa-stage="5"]) .tool-chip:nth-child(4n+1) {
-  transform: rotate(-15deg) translateY(-8px) scale(0.94) !important;
-  background: rgba(239, 68, 68, 0.15) !important;
-  color: #ef4444 !important;
-  z-index: 4;
-}
-
-body:not([data-qa-stage="5"]) .tool-chip:nth-child(4n+2) {
-  transform: rotate(17deg) translateY(12px) scale(1.02) !important;
-  background: rgba(217, 119, 6, 0.15) !important;
-  color: #d97706 !important;
-  z-index: 3;
-}
-
-body:not([data-qa-stage="5"]) .tool-chip:nth-child(4n+3) {
-  transform: rotate(-10deg) translateY(-14px) scale(0.92) !important;
-  background: rgba(239, 68, 68, 0.15) !important;
-  color: #ef4444 !important;
-  z-index: 2;
-}
-
+body:not([data-qa-stage="5"]) .tool-chip:nth-child(4n+1),
+body:not([data-qa-stage="5"]) .tool-chip:nth-child(4n+2),
+body:not([data-qa-stage="5"]) .tool-chip:nth-child(4n+3),
 body:not([data-qa-stage="5"]) .tool-chip:nth-child(4n+4) {
-  transform: rotate(13deg) translateY(8px) scale(0.98) !important;
-  background: rgba(217, 119, 6, 0.15) !important;
-  color: #d97706 !important;
-  z-index: 1;
+  transform: none !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #f87171 !important;
 }
 
 body:not([data-qa-stage="5"]) .tool-chip .tool-svg {
   filter: none !important;
-  animation: textJitter 1.8s infinite ease-in-out;
+  animation: none !important;
 }
 
 /* --------------------------------------------------------------------------
    STAGE 0 to 4: BROKEN TILE DEFECT STATE (Active Until Stage 5 Release)
    -------------------------------------------------------------------------- */
-body:not([data-qa-stage="5"]) .project-card:nth-child(odd),
-body:not([data-qa-stage="5"]) .stat-card:nth-child(odd),
-body:not([data-qa-stage="5"]) .cert-card:nth-child(odd) {
-  transform: rotate(-2.8deg) translateY(6px) !important;
+body:not([data-qa-stage="5"]) .project-card,
+body:not([data-qa-stage="5"]) .stat-card,
+body:not([data-qa-stage="5"]) .cert-card {
+  transform: none !important;
+  border: 1px dashed rgba(239, 68, 68, 0.4) !important;
+  background: rgba(239, 68, 68, 0.03) !important;
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
-body:not([data-qa-stage="5"]) .project-card:nth-child(even),
-body:not([data-qa-stage="5"]) .stat-card:nth-child(even),
-body:not([data-qa-stage="5"]) .cert-card:nth-child(even) {
-  transform: rotate(3.2deg) translateY(-5px) !important;
+body:not([data-qa-stage="5"]) .project-card:hover,
+body:not([data-qa-stage="5"]) .stat-card:hover,
+body:not([data-qa-stage="5"]) .cert-card:hover {
+  border-color: rgba(239, 68, 68, 0.7) !important;
+  background: rgba(239, 68, 68, 0.06) !important;
 }
 
 body:not([data-qa-stage="5"]) .tech-chip {
-  transform: rotate(-2deg) !important;
+  transform: none !important;
   background: rgba(239, 68, 68, 0.08) !important;
 }
 
 body:not([data-qa-stage="5"]) .footer-profile-badge {
-  transform: rotate(-2deg);
+  transform: none !important;
   background: rgba(239, 68, 68, 0.12);
   border-color: rgba(239, 68, 68, 0.35);
 }
@@ -435,36 +455,34 @@ body:not([data-qa-stage="5"]) .footer-profile-badge:hover {
 
 body[data-qa-stage="0"] .hero-title,
 body[data-qa-stage="0"] .section-title {
-  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Times New Roman', cursive, sans-serif !important;
-  color: #dc2626 !important;
-  letter-spacing: -0.05em;
-  animation: textJitter 2.5s infinite ease-in-out;
+  font-family: 'IBM Plex Mono', monospace !important;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.02em;
+  animation: none !important;
 }
 
 body[data-qa-stage="0"] .brand-logo {
-  font-family: 'Comic Sans MS', cursive !important;
-  transform: rotate(-3deg);
+  font-family: var(--font-mono) !important;
+  transform: none !important;
 }
 
-body[data-qa-stage="0"] .nav-list li:nth-child(odd) {
-  transform: translateY(-5px) rotate(-2deg);
-}
-
+body[data-qa-stage="0"] .nav-list li:nth-child(odd),
 body[data-qa-stage="0"] .nav-list li:nth-child(even) {
-  transform: translateY(5px) rotate(2.5deg);
+  transform: none !important;
 }
 
 body[data-qa-stage="0"] .btn-primary,
 body[data-qa-stage="0"] .btn-secondary {
-  transform: rotate(-3deg) scale(0.96) !important;
+  transform: none !important;
 }
 
 body[data-qa-stage="0"] .hero-description {
-  background: rgba(239, 68, 68, 0.08) !important;
+  background: rgba(239, 68, 68, 0.06) !important;
   padding: 14px !important;
   border-radius: var(--radius-sm);
-  transform: rotate(-1.5deg) !important;
-  font-family: 'Comic Sans MS', cursive, sans-serif !important;
+  border: 1px dashed rgba(239, 68, 68, 0.3) !important;
+  transform: none !important;
+  font-family: var(--font-sans) !important;
 }
 
 body[data-qa-stage="1"] .hero-description {
@@ -531,7 +549,7 @@ body[data-qa-stage="1"] .site-header .brand-logo {
 
 body[data-qa-stage="1"] .hero-title,
 body[data-qa-stage="1"] .section-title {
-  font-family: 'Comic Sans MS', cursive, sans-serif !important;
+  font-family: 'IBM Plex Mono', monospace !important;
   color: #d97706 !important;
 }
 

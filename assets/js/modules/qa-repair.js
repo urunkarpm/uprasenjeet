@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    QA REPAIR MODULE - PROGRESSIVE SCROLL INTERACTION
    ========================================================================== */
 
@@ -496,6 +496,43 @@ export function initQaRepair() {
       if (consoleHud) consoleHud.classList.remove('minimized');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(updateStageUI, 300);
+    });
+  }
+
+  function executeInstantAutoFix() {
+    if (hasTriggeredCompletion) return;
+    isLockedToProd = true;
+    maxStageReached = 5;
+
+    let currentP = maxProgress;
+    const interval = setInterval(() => {
+      currentP += 15;
+      if (currentP >= 100) {
+        currentP = 100;
+        clearInterval(interval);
+        triggerCompletionSequence();
+        updateStageUI();
+      } else {
+        if (hudProgressFill) hudProgressFill.style.width = `${currentP}%`;
+        if (hudPercentEl) hudPercentEl.textContent = `${currentP}%`;
+      }
+    }, 25);
+  }
+
+  const quickFixBtn = document.getElementById('qa-quick-fix-btn');
+  const quickFixHudBtn = document.getElementById('qa-quick-fix-hud-btn');
+
+  if (quickFixBtn) {
+    quickFixBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      executeInstantAutoFix();
+    });
+  }
+
+  if (quickFixHudBtn) {
+    quickFixHudBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      executeInstantAutoFix();
     });
   }
 

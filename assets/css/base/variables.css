@@ -79,6 +79,7 @@
 
   /* Contrast Header & Footer Tokens (Dark Theme) */
   --header-bg: rgba(9, 11, 16, 0.82);
+  --header-bg-scrolled: rgba(9, 11, 16, 0.94);
   --header-border: rgba(255, 255, 255, 0.08);
   --header-text-primary: #F9FAFB;
   --header-text-secondary: #9CA3AF;
@@ -151,6 +152,7 @@
 
   /* Contrast Header & Footer Tokens (Light Theme) */
   --header-bg: rgba(245, 242, 236, 0.82);
+  --header-bg-scrolled: rgba(245, 242, 236, 0.94);
   --header-border: rgba(0, 0, 0, 0.08);
   --header-text-primary: #18191B;
   --header-text-secondary: #4B5563;
@@ -188,13 +190,13 @@ html {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color var(--transition-normal), color var(--transition-normal);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   min-height: 100vh;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   background-color: var(--bg-primary);
 }
