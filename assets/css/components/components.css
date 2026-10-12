@@ -127,12 +127,8 @@
 }
 
 .site-header.is-scrolled {
-  background: transparent;
-  border-bottom-color: transparent;
-  box-shadow: none;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  pointer-events: none;
+  background-color: var(--header-bg-scrolled);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
 .header-inner {
@@ -142,38 +138,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  pointer-events: auto;
-  transform: translateY(0);
-  transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease, border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-  will-change: max-width, padding, transform;
-}
-
-/* Kinetic Morphing Floating Dock when Scrolled */
-.site-header.is-scrolled .header-inner {
-  max-width: 840px;
-  margin: 0 auto;
-  transform: translateY(10px);
-  padding: 8px 18px;
-  border-radius: 40px;
-  background: var(--header-bg-scrolled);
-  border: 1px solid var(--border-main);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(229, 167, 55, 0.15);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-}
-
-.site-header .contact-trigger,
-.site-header .theme-btn {
-  transition: border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.site-header.is-scrolled .contact-trigger {
-  border-radius: 30px;
-  padding: 8px 18px;
-}
-
-.site-header.is-scrolled .theme-btn {
-  border-radius: 50%;
 }
 
 .brand-logo {
@@ -248,108 +212,43 @@
   50% { opacity: 0.4; transform: scale(0.85); }
 }
 
-/* Floating Capsule Navigation & Active Visualizer */
+/* Liquid Glass Navigation */
 .main-nav {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 4px;
-  background: var(--bg-card, rgba(255, 255, 255, 0.05));
-  border: 1px solid var(--border-main, rgba(255, 255, 255, 0.12));
-  padding: 4px;
-  border-radius: 30px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-.nav-active-pill {
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 0;
-  width: 0;
-  background: rgba(229, 167, 55, 0.18);
-  border: 1px solid rgba(229, 167, 55, 0.5);
-  border-radius: 20px;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: transform 0.25s ease-out, width 0.25s ease-out, opacity 0.2s ease, background 0.3s ease;
-  box-shadow: 0 2px 12px rgba(229, 167, 55, 0.25), 0 0 16px rgba(229, 167, 55, 0.15);
-}
-
-[data-theme="light"] .nav-active-pill {
-  background: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .nav-link {
-  position: relative;
-  z-index: 2;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: var(--header-text-secondary);
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: none;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease, opacity 0.25s ease;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  will-change: transform;
+  justify-content: center;
 }
 
-/* macOS Dock Kinetic Magnification Micro-Interactions */
 .nav-link:hover {
-  transform: translateY(-2px) scale(1.06);
+  color: var(--header-text-primary);
+  background: var(--header-link-hover-bg);
+  border-color: var(--header-link-hover-border);
 }
 
-.main-nav:hover .nav-link:not(:hover) {
-  opacity: 0.82;
-  transform: scale(0.97);
-}
-
-.nav-link-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-amber, #E5A737);
-  opacity: 0;
-  transform: scale(0);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-}
-
-[data-theme="light"] .nav-link-dot {
-  background: var(--accent-amber-text, #B45309);
-}
-
-/* Hover & Active text colors: BRIGHT & CRYSTAL CLEAR in both Dark and Light themes */
-[data-theme="dark"] .nav-link:hover,
-[data-theme="dark"] .nav-link.active,
-[data-theme="dark"] .nav-link.pill-active {
-  color: #FFFFFF !important;
+.nav-link.active {
+  color: var(--header-link-active-text);
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-[data-theme="light"] .nav-link:hover,
-[data-theme="light"] .nav-link.active,
-[data-theme="light"] .nav-link.pill-active {
-  color: #0F172A !important;
-  font-weight: 700;
-}
-
-.nav-link.active .nav-link-dot {
-  opacity: 1;
-  transform: scale(1);
-  animation: pulse-nav-dot 2s infinite ease-in-out;
-}
-
-@keyframes pulse-nav-dot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.7; }
+  background: var(--header-link-active-bg);
+  border-color: var(--header-link-active-border);
+  box-shadow: none; /* No halo ring */
 }
 
 .header-actions {
@@ -3242,22 +3141,22 @@ body.spotlight-active #project-card-holiday-api {
 
   .nav-link {
     font-size: 1.05rem;
-    padding: 12px 16px;
-    border-bottom: none;
+    padding: 10px 16px;
+    border-bottom: 1px dashed var(--border-light);
     width: 100%;
     position: relative;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
     justify-content: flex-start;
-    background: transparent;
   }
+
+  .nav-link:last-child { border-bottom: none; }
 
   .nav-link.active,
   .nav-link:hover {
-    background-color: rgba(229, 167, 55, 0.12);
-  }
-
-  .nav-active-pill {
-    display: none !important;
+    background: var(--header-link-active-bg);
+    color: var(--header-link-active-text);
+    border-color: var(--header-link-active-border);
+    box-shadow: none;
   }
 
   .content-wrapper { padding: 0 16px; }

@@ -8,78 +8,13 @@ export function initNavigation() {
   const navLinks = document.querySelectorAll('.nav-link');
   const siteHeader = document.querySelector('.site-header');
 
-  // Active Pill Visualizer element
-  let activePill = document.getElementById('nav-active-pill');
-  if (mainNav && !activePill) {
-    activePill = document.createElement('div');
-    activePill.id = 'nav-active-pill';
-    activePill.className = 'nav-active-pill';
-    activePill.setAttribute('aria-hidden', 'true');
-    mainNav.prepend(activePill);
-  }
-
-  function updatePillPosition(targetLink) {
-    if (!activePill || !mainNav || !targetLink) return;
-    const navRect = mainNav.getBoundingClientRect();
-    const linkRect = targetLink.getBoundingClientRect();
-
-    if (linkRect.width === 0) {
-      activePill.style.opacity = '0';
-      return;
-    }
-
-    const left = linkRect.left - navRect.left;
-    const width = linkRect.width;
-
-    activePill.style.transform = `translateX(${left}px)`;
-    activePill.style.width = `${width}px`;
-    activePill.style.opacity = '1';
-
-    navLinks.forEach(link => {
-      if (link === targetLink) {
-        link.classList.add('pill-active');
-      } else {
-        link.classList.remove('pill-active');
-      }
-    });
-  }
-
   function setActiveNav(sectionId) {
     if (!sectionId) return;
-    let activeLink = null;
     navLinks.forEach(link => {
       const isTarget = link.getAttribute('data-section') === sectionId;
       link.classList.toggle('active', isTarget);
-      if (isTarget) activeLink = link;
-    });
-    if (activeLink) {
-      updatePillPosition(activeLink);
-    }
-  }
-
-  // Hover magnetic effect for active pill
-  navLinks.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-      updatePillPosition(link);
-    });
-  });
-
-  if (mainNav) {
-    mainNav.addEventListener('mouseleave', () => {
-      const currentActive = mainNav.querySelector('.nav-link.active');
-      if (currentActive) {
-        updatePillPosition(currentActive);
-      }
     });
   }
-
-  // Window resize re-calculation
-  window.addEventListener('resize', () => {
-    const currentActive = mainNav ? mainNav.querySelector('.nav-link.active') : null;
-    if (currentActive) {
-      updatePillPosition(currentActive);
-    }
-  }, { passive: true });
 
   // Handle header scroll shrink & elevated glass shadow
   let isScrolling = false;
@@ -115,10 +50,6 @@ export function initNavigation() {
         mobileMenuToggle.classList.remove('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
       }
-      setTimeout(() => {
-        const currentActive = mainNav.querySelector('.nav-link.active');
-        if (currentActive) updatePillPosition(currentActive);
-      }, 50);
     };
 
     mobileMenuToggle.addEventListener('click', () => {
@@ -164,12 +95,6 @@ export function initNavigation() {
 
     sections.forEach(section => observer.observe(section));
   }
-
-  // Initial pill positioning after layout render
-  setTimeout(() => {
-    const currentActive = mainNav ? mainNav.querySelector('.nav-link.active') : null;
-    if (currentActive) updatePillPosition(currentActive);
-  }, 100);
 
   // Initialize Back to Top scroll behavior
   initBackToTop();
