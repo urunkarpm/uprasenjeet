@@ -105,6 +105,27 @@ test('Portfolio Sanity & Quality Assurance Suite', async (t) => {
       assert.ok(htmlContent.includes('data-scramble'), 'HTML must contain data-scramble attributes');
     });
   });
+
+  await t.test('Typography Configuration (Open Sans & Peace Sans)', () => {
+    const varsPath = path.join(rootDir, 'assets', 'css', 'base', 'variables.css');
+    const compPath = path.join(rootDir, 'assets', 'css', 'components', 'components.css');
+    const fontWoff2Path = path.join(rootDir, 'assets', 'fonts', 'peace-sans-latin-400-normal.woff2');
+
+    assert.ok(fs.existsSync(varsPath), 'variables.css should exist');
+    assert.ok(fs.existsSync(fontWoff2Path), 'Peace Sans woff2 font file must exist locally');
+
+    const varsContent = fs.readFileSync(varsPath, 'utf8');
+    const compContent = fs.readFileSync(compPath, 'utf8');
+
+    // Page font is Open Sans
+    assert.ok(htmlContent.includes('family=Open+Sans'), 'HTML must load Open Sans from Google Fonts');
+    assert.ok(varsContent.includes("--font-sans: 'Open Sans'"), "variables.css must set --font-sans to 'Open Sans'");
+
+    // uprasenjeet font is Peace Sans
+    assert.ok(varsContent.includes("font-family: 'Peace Sans'"), "variables.css must define @font-face for 'Peace Sans'");
+    assert.ok(varsContent.includes("--font-brand: 'Peace Sans'"), "variables.css must set --font-brand to 'Peace Sans'");
+    assert.ok(compContent.includes('var(--font-brand)'), 'components.css must apply var(--font-brand) to brand/logo');
+  });
 });
 
 

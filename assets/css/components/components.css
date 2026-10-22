@@ -149,6 +149,11 @@
   letter-spacing: -0.02em;
   color: var(--header-text-primary);
   text-decoration: none;
+  font-family: var(--font-brand);
+}
+
+.logo-text {
+  font-family: var(--font-brand);
 }
 
 .logo-symbol-svg {
@@ -2409,6 +2414,11 @@ body.spotlight-active #project-card-holiday-api {
 
 .site-footer *:not(i):not([class*="fa-"]):not([class*="fa"]) {
   font-family: var(--font-sans);
+}
+
+.site-footer .brand-logo,
+.site-footer .logo-text {
+  font-family: var(--font-brand) !important;
 }
 
 .footer-inner {
