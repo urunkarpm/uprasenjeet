@@ -2049,27 +2049,64 @@ body.spotlight-active #project-card-holiday-api {
 .about-skills-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .skill-category {
   background: var(--bg-card);
   border: 1px solid var(--border-main);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 20px 22px;
+  position: relative;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform 0.2s ease;
+}
+
+.skill-category:hover {
+  border-color: rgba(229, 167, 55, 0.4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
 }
 
 .skill-cat-title {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-family: var(--font-sans);
   font-weight: 700;
   color: var(--accent-amber-text);
-  margin-bottom: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  margin: 0;
+}
+
+.skill-cat-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-main);
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.skill-cat-desc {
+  font-size: 0.81rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin-bottom: 12px;
 }
 
 .skill-pills {
@@ -2086,12 +2123,98 @@ body.spotlight-active #project-card-holiday-api {
   border: 1px solid var(--border-main);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   transition: all var(--transition-fast);
 }
 
 .skill-pill:hover {
   border-color: var(--accent-amber);
   color: var(--accent-amber-text);
+  background: rgba(229, 167, 55, 0.08);
+  transform: translateY(-1px);
+}
+
+.skill-pill-highlight {
+  border-color: rgba(229, 167, 55, 0.35);
+  background: rgba(229, 167, 55, 0.08);
+  color: var(--accent-amber-text);
+  font-weight: 600;
+}
+
+.skill-pill-highlight:hover {
+  border-color: var(--accent-amber);
+  background: rgba(229, 167, 55, 0.16);
+  color: var(--accent-amber-text);
+}
+
+.skill-pill-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-amber);
+  flex-shrink: 0;
+}
+
+[data-theme="light"] .skill-pill-highlight {
+  background: rgba(229, 167, 55, 0.14);
+  border-color: rgba(143, 91, 13, 0.32);
+  color: var(--accent-amber-text);
+}
+
+.about-qa-principles {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-main);
+  border-left: 3px solid var(--accent-amber);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.qa-principles-title {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-amber-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.qa-principles-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.qa-principles-list li {
+  font-size: 0.83rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 14px;
+}
+
+.qa-principles-list li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: var(--accent-amber);
+  font-weight: bold;
+}
+
+.qa-principles-list li strong {
+  color: var(--text-primary);
 }
 
 @media (max-width: 900px) {
