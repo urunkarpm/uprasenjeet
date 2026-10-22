@@ -2,14 +2,14 @@
    BLUEPRINT STUDIO — DESIGN TOKENS & BASE VARIABLES
    ========================================================================== */
 
-/* Peace Sans Font Definition */
+/* Peace Sans Display Font Definition */
 @font-face {
   font-family: 'Peace Sans';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 100 900;
   font-display: swap;
   src: url('../../fonts/peace-sans-latin-400-normal.woff2') format('woff2');
-  /* ponytail: single latin woff2 loaded locally for uprasenjeet brand text; upgrade path: add cyrillic/extended subsets or woff fallback if legacy browsers needed */
+  /* ponytail: single latin woff2 loaded locally; upgrade path: add cyrillic/extended subsets or woff fallback if legacy browsers needed */
 }
 
 :root {
@@ -24,8 +24,8 @@
 
   /* Fonts */
   --font-sans: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Peace Sans', -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-  --font-brand: 'Peace Sans', sans-serif;
 
   /* Transition timings */
   --transition-fast: 0.15s ease;

@@ -121,10 +121,10 @@ test('Portfolio Sanity & Quality Assurance Suite', async (t) => {
     assert.ok(htmlContent.includes('family=Open+Sans'), 'HTML must load Open Sans from Google Fonts');
     assert.ok(varsContent.includes("--font-sans: 'Open Sans'"), "variables.css must set --font-sans to 'Open Sans'");
 
-    // uprasenjeet font is Peace Sans
+    // Peace Sans is loaded and applied as display font for major headlines
     assert.ok(varsContent.includes("font-family: 'Peace Sans'"), "variables.css must define @font-face for 'Peace Sans'");
-    assert.ok(varsContent.includes("--font-brand: 'Peace Sans'"), "variables.css must set --font-brand to 'Peace Sans'");
-    assert.ok(compContent.includes('var(--font-brand)'), 'components.css must apply var(--font-brand) to brand/logo');
+    assert.ok(varsContent.includes("--font-display: 'Peace Sans'"), "variables.css must set --font-display to 'Peace Sans'");
+    assert.ok(compContent.includes('var(--font-display)'), 'components.css must apply var(--font-display) to major headlines');
   });
 });
 

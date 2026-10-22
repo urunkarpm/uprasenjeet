@@ -146,14 +146,16 @@
   gap: 10px;
   font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: var(--header-text-primary);
   text-decoration: none;
-  font-family: var(--font-brand);
+  font-family: var(--font-sans);
 }
 
 .logo-text {
-  font-family: var(--font-brand);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .logo-symbol-svg {
@@ -308,10 +310,11 @@
 }
 
 .hero-title {
+  font-family: var(--font-display);
   font-size: 3.25rem;
   line-height: 1.15;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 .hero-side {
@@ -695,9 +698,10 @@
 }
 
 .section-title {
+  font-family: var(--font-display);
   font-size: 2.25rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   margin-bottom: 8px;
 }
 
@@ -2414,11 +2418,6 @@ body.spotlight-active #project-card-holiday-api {
 
 .site-footer *:not(i):not([class*="fa-"]):not([class*="fa"]) {
   font-family: var(--font-sans);
-}
-
-.site-footer .brand-logo,
-.site-footer .logo-text {
-  font-family: var(--font-brand) !important;
 }
 
 .footer-inner {

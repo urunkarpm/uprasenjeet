@@ -558,7 +558,7 @@ body[data-qa-stage="1"] .section-title {
    -------------------------------------------------------------------------- */
 body[data-qa-stage="2"] .hero-title,
 body[data-qa-stage="2"] .section-title {
-  font-family: var(--font-sans) !important;
+  font-family: var(--font-display, var(--font-sans)) !important;
   color: inherit !important;
 }
 
